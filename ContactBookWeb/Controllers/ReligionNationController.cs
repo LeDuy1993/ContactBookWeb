@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactBookWeb.Models.Nation;
+using ContactBookWeb.Models.Religion;
+using ContactBookWeb.Ultilities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,20 @@ namespace ContactBookWeb.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [Route("/ReligionNation/GetReligionAll")]
+        public JsonResult GetReligionAll()
+        {
+            var religionAll = new List<GetReligionAll>();
+            religionAll = ApiHelper<List<GetReligionAll>>.HttpGetAsync($"{Helper.ApiUrl}api/religion/GetReligionAll");
+            return Json(new { religionAll });
+        }
+        [Route("/ReligionNation/GetNationAll")]
+        public JsonResult GetNationnAll()
+        {
+            var nationAll = new List<NationView>();
+            nationAll = ApiHelper<List<NationView>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/gets");
+            return Json(new { nationAll });
         }
     }
 }

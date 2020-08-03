@@ -1,8 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Religion-Nation Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="main-container">
+    <div>
+        <div style="float:left; width:47%">
+            <table class="table table-borderless table-striped table-earning">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nation Name</th>
+                        <th>Students</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="nation">
+                   
+                </tbody>
+            </table>
+        </div>
+        <div style="float:right; width:47%">
+            <table class="table table-borderless table-striped table-earning">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Religion Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody  id="religion" >
+       
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/RelegionNation.js" asp-append-version="true"></script>
+}
