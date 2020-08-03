@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Nation\" />
+    <Folder Include="Models\Degree\" />
+    <Folder Include="Models\Course\" />
+    <Folder Include="Models\Grade\" />
+    <Folder Include="Models\Home\" />
+    <Folder Include="Models\Semester\" />
+    <Folder Include="Models\Religion\" />
+    <Folder Include="Models\Student\" />
+    <Folder Include="Models\Teacher\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>
