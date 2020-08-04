@@ -21,7 +21,9 @@ namespace ContactBookWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var nationAll = new List<NationView>();
+            nationAll = ApiHelper<List<NationView>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/gets");
+            return View(nationAll);
         }
         [Route("/ReligionNation/GetReligionAll")]
         public JsonResult GetReligionAll()
@@ -30,12 +32,12 @@ namespace ContactBookWeb.Controllers
             religionAll = ApiHelper<List<GetReligionAll>>.HttpGetAsync($"{Helper.ApiUrl}api/religion/GetReligionAll");
             return Json(new { religionAll });
         }
-        [Route("/ReligionNation/GetNationAll")]
+     /*   [Route("/ReligionNation/GetNationAll")]
         public JsonResult GetNationnAll()
         {
             var nationAll = new List<NationView>();
             nationAll = ApiHelper<List<NationView>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/gets");
             return Json(new { nationAll });
-        }
+        }*/
     }
 }
