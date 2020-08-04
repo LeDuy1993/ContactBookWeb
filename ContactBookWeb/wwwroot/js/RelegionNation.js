@@ -9,7 +9,7 @@ religionNation.showReligion = function () {
             $('#religion').empty();
             $.each(data.religionAll, function (i, v) {
                 $('#religion').append(
-                  `<tr>
+                    `<tr>
                     <td class="table-plus">${v.religionId}</td>
                     <td>${v.religionName}</td>           
                     <td>
@@ -24,9 +24,10 @@ religionNation.showReligion = function () {
                                     </div>
                                 </div>
                             </td>
-                </tr>`
+                    </tr>`
                 );
-            });
+            })
+
         }
     });
 }
@@ -38,4 +39,6 @@ religionNation.init = function () {
 
 $(document).ready(function () {
     religionNation.init();
+
+
 });

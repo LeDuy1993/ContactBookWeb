@@ -1,8 +1,84 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Student Page";
+    Layout = "_Layout Table";
+    var gradeAll = ViewBag.gradeAll as List<GetGradeAll>;
+    var courseAll = ViewBag.courseAll as List<GetCourseAll>;
+    var courseId = ViewBag.courseId != null ? int.Parse(ViewBag.courseId.ToString()) : 0;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="main-container">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+        <div class="pd-20 card-box">
+            <div class="tab">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+
+                        <label><h4> Select Course-Grade</h4></label>
+                        <select class="selectpicker form-control" data-size="5" data-style="btn-outline-secondary" multiple data-max-options="2"
+                                onchange="student.show()">
+                            <optgroup id="courseId" label="Course">
+                                @foreach (var cou in courseAll)
+                                {
+                                    <option value="@cou.CourseId">@cou.CourseName</option>
+                                }
+                            </optgroup>
+                            <optgroup id="gradeId" label="Grade">
+                                @foreach (var gra in gradeAll)
+                                {
+                                    <option value="@gra.GradeId">@gra.GradeName</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+                    <div class="pd-20 card-box">
+                        <h5 class="h4 text-blue mb-20">
+                            Student List
+                        </h5>
+                        <div class="tab">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-blue" data-toggle="tab" href="#home" role="tab" aria-selected="true">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-blue" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-blue" data-toggle="tab" href="#contact" role="tab" aria-selected="false">Contact</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel">
+                                    <div class="pd-20">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel">
+                                    <div class="pd-20">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel">
+                                    <div class="pd-20">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@section Scripts{
+    <script src="~/js/student.js" asp-append-version="true"></script>
+}
+
+
+
+
+

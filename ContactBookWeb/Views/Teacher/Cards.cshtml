@@ -1,0 +1,61 @@
+﻿@model List<GetTeacherBySubjectId>
+@{
+    ViewData["Title"] = "Teacher Page";
+    Layout = "_Layout Table";
+    var subjectAll = ViewBag.subjectAll as List<GetSubjectAll>;
+}
+<div class="main-container">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+        <div class="pd-20 card-box">
+            <h5 class="h4 text-blue mb-20">
+                <a asp-controller="Teacher" asp-action="Index">Teacher List</a>
+            </h5>
+            <div class="row clearfix">
+                <div class="col-md-3 col-sm-3">
+                    <ul class="nav flex-column vtabs nav-tabs customtab" role="tablist">
+                        @foreach (var subject in subjectAll)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-blue"
+                                   asp-controller="Teacher" asp-action="Cards" asp-route-id="@subject.SubjectId">
+                                    @subject.SubjectName
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <div class="row clearfix">
+                        @foreach (var teacher in Model)
+                        {
+
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+                                <div class="da-card">
+                                    <div class="da-card-photo">
+                                        <img src="~/vendors/images/photo3.jpg" alt="">
+                                        <div class="da-overlay da-slide-left">
+                                            <div class="da-social">
+                                                <ul class="clearfix">
+                                                    <li><a href="#"><i class="dw dw-eye"></i> </a></li>
+                                                    <li><a href="#"><i class="dw dw-edit2"></i></a></li>
+                                                    <li><a href="#"><i class="dw dw-delete-3"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="da-card-content">
+                                        <h5 class="h5 mb-10">@teacher.TeacherName</h5>
+                                        <p class="mb-0">@teacher.Phone</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
