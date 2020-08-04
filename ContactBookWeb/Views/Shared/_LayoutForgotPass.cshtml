@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="~/vendors/styles/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="~/vendors/styles/style.css">
 
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
     <script>
@@ -30,17 +32,19 @@
 		gtag('config', 'UA-119386393-1');
     </script>
 </head>
-<body class="login-page">
+
+<body>
+  
     <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-   
     <!-- js -->
-    <script src="~/endors/scripts/core.js"></script>
+    <script src="~/vendors/scripts/core.js"></script>
     <script src="~/vendors/scripts/script.min.js"></script>
     <script src="~/vendors/scripts/process.js"></script>
     <script src="~/vendors/scripts/layout-settings.js"></script>
 </body>
+
 </html>
