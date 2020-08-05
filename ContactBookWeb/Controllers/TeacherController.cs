@@ -38,5 +38,9 @@ namespace ContactBookWeb.Controllers
             teachers = ApiHelper<List<GetTeacherBySubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherBySubjectId/{id}");
             return View(teachers);
         }
+        public IActionResult AddTeacher()
+        {   
+            return View();
+        }
     }
 }
