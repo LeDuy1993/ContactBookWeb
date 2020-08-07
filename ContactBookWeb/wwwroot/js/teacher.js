@@ -48,8 +48,97 @@ teacher.cardTeacher = function (id) {
     });
 }
 
-teacher.init = function () {
 
+
+teacher.openAddEditTeacher = function () {
+    teacher.reset();
+    $('#addEditTeacher').modal('show');
+};
+
+
+teacher.reset = function () {
+    $('#TeacherName').val("");
+    $('#TeacherId').val(0);
+    $('#DayOfBirth').val("");
+    $('#PlaceOfBirth').val("");
+    $('#Gender').val("");
+    $('#Phone').val("");
+    $('#Address').val("");
+    $('#SubjectId').val("");
+    $('#DegreeId').val("");
+    $('#DayToWork').val("");
+    $('#AvatarPath').val("");
+}
+
+teacher.save = function () {
+    var saveTeacher = {};
+    saveTeacher.teacherName = $('#TeacherName').val();
+    saveTeacher.teacherId = 0;
+    saveTeacher.dayOfBirth = $('#DayOfBirth').val();
+    saveTeacher.placeOfBirth = $('#PlaceOfBirth').val();
+    saveTeacher.gender = $('#Gender').val();
+    saveTeacher.phone = $('#Phone').val();
+    saveTeacher.address = $('#Address').val();
+    saveTeacher.subjectId = parseInt($('#SubjectId').val());
+    saveTeacher.degreeId = parseInt($('#DegreeId').val());
+    saveTeacher.dayToWork = $('#DayToWork').val();
+    saveTeacher.avatarPath = $('#AvatarPath').val();
+
+    $.ajax({
+        url: `/Teacher/Save/`,
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(saveTeacher),
+        success: function (data) {
+            $('#addEditTeacher').modal('hide');
+           /* bootbox.alert(data.result.message);*/
+           /* teacher.drawTable();*/
+        }
+    });
+
+
+}
+
+teacher.initgender = function () {
+    $("#Gender").empty();
+    $("#Gender").append(`<option value = ${1} >${"Male"}</option>`)
+    $("#Gender").append(`<option value = ${0} >${"Female"}</option>`)
+
+}
+
+teacher.initSubject = function () {
+    $.ajax({
+        url: `/Subject/Gets`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#SubjectId').empty();
+            $.each(data.subjects, function (i, v) {
+                $('#SubjectId').append(`<option value=${v.subjectId} >${v.subjectName}</option>`)
+            });
+        }
+    });
+}
+
+teacher.initDegree = function () {
+    $.ajax({
+        url: `/Degree/Gets`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#DegreeId').empty();
+            $.each(data.degrees, function (i, v) {
+                $('#DegreeId').append(`<option value=${v.degreeId} >${v.degreeName}</option>`)
+            });
+        }
+    });
+}
+
+teacher.init = function () {
+    teacher.initgender();
+    teacher.initSubject();
+    teacher.initDegree();
 };
 
 $(document).ready(function () {

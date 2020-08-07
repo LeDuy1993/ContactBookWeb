@@ -28,7 +28,7 @@ namespace ContactBookWeb.Controllers
             ViewBag.teacherAll = teacherAll;
 
             return View(subjectAll);
-        }  
+        }
         public IActionResult Cards(int id)
         {
             var subjectAll = new List<GetSubjectAll>();
@@ -38,9 +38,20 @@ namespace ContactBookWeb.Controllers
             teachers = ApiHelper<List<GetTeacherBySubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherBySubjectId/{id}");
             return View(teachers);
         }
-        public IActionResult AddTeacher()
+        /*public IActionResult AddTeacher()
         {   
             return View();
+        }*/
+        [Route("/Teacher/Save")]
+        public JsonResult Save([FromBody] SaveTeacherRequest model)
+        {
+
+            var result = new SaveTeacherResult();
+            result = ApiHelper<SaveTeacherResult>.HttpPostAsync(
+                                                    $"{Helper.ApiUrl}api/teacher/save",
+                                                    model
+                                                );
+            return Json(new { result });
         }
     }
 }
