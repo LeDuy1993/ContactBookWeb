@@ -26,7 +26,7 @@ teacher.cardTeacher = function (id) {
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                 <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:;" onclick="teacher.get(${v.teacherId})"><i class="dw dw-edit2"></i> Edit</a>
                                                 <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
                                             </div>
                                         </div>
@@ -56,6 +56,28 @@ teacher.openAddEditTeacher = function () {
 };
 
 
+teacher.get = function (id) {
+    $.ajax({
+        url: `/Teacher/Get/${id}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#TeacherName').val(data.result.teacherName);
+            $('#TeacherId').val(id);
+            $('#DayOfBirth').val(data.result.dayOfBirth);
+            $('#PlaceOfBirth').val(data.result.placeOfBirth);
+            $('#Gender').val(data.result.gender = "true" ? 1:0);
+            $('#Phone').val(data.result.phone);
+            $('#Address').val(data.result.address);
+            $('#SubjectId').val(data.result.subjectId);
+            $('#DegreeId').val(data.result.degreeId);   
+            $('#DayToWork').val(data.result.dayToWork);
+            $('#AvatarPath').val(data.result.avatarPath);
+            $('#addEditTeacher').modal('show');
+        }
+    });
+}
+
 teacher.reset = function () {
     $('#TeacherName').val("");
     $('#TeacherId').val(0);
@@ -73,7 +95,7 @@ teacher.reset = function () {
 teacher.save = function () {
     var saveTeacher = {};
     saveTeacher.teacherName = $('#TeacherName').val();
-    saveTeacher.teacherId = 0;
+    saveTeacher.teacherId = parseInt($('#TeacherId').val());
     saveTeacher.dayOfBirth = $('#DayOfBirth').val();
     saveTeacher.placeOfBirth = $('#PlaceOfBirth').val();
     saveTeacher.gender = $('#Gender').val();
