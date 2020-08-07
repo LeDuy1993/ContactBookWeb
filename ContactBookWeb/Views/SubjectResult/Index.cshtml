@@ -1,44 +1,126 @@
 ﻿@{
     ViewData["Title"] = "Subject result Page";
     Layout = "_Layout Table";
+    var courseAll = ViewBag.courseAll as List<GetCourseAll>;
+    var gradeAll = ViewBag.gradeAll as List<GetGradeAll>;
+
 }
 
-    <div class="main-container">
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
-            <div class="pd-20 card-box">
-                <h5 class="h4 text-blue mb-20">
-                    Point list
-                </h5>
-                <div class="tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active text-blue" data-toggle="tab" href="#home" role="tab" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-blue" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-blue" data-toggle="tab" href="#contact" role="tab" aria-selected="false">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel">
-                            <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel">
-                            <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel">
-                            <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                        </div>
+<div class="main-container">
+    <div class="mb-30" style="width:auto; height:auto">
+        <div class="pd-20 card-box w-auto h-auto">
+            <h5 class="h4 text-blue mb-20">
+                Point list
+            </h5>
+            <div class="tab row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label>Select Course</label>
+                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="courseId"
+                            href="javascript:;" onchange="subjectResult.showClass()">
+                        @foreach (var cou in courseAll)
+                        {
+                            <option value="@cou.CourseId">@cou.CourseName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label>Select Grade</label>
+                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="gradeId"
+                            href="javascript:;" onchange="subjectResult.showClass()">
+                        @foreach (var gra in gradeAll)
+                        {
+                            <option value="@gra.GradeId">@gra.GradeName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label>Select Class</label>
+                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
+                            href="javascript:;" onchange="subjectResult.showSubject()" id="classId">
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label>Select Semester</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked>1st
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off">2st
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="pd-20 card-box w-auto h-auto mt-2">
+            <div class="pd-20 card-box">
+                <div class="tab">
+                    <ul class="nav nav-tabs" role="tablist" id="subjectId">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="background-color:aliceblue" class="mt-2">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Id</th>
+                        <th colspan="2">Student Name</th>
+                        <th colspan="4">Điểm Miệng</th>
+                        <th colspan="4">Điểm 15 phút</th>
+                        <th colspan="2">Điểm 1 tiết</th>
+                        <th rowspan="2">Điểm học kỳ</th>
+                        <th rowspan="2">Average</th>
+                    </tr>
+                    <tr>
+                        <th>Firt name</th>
+                        <th>Last name</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                    </tr>
+                </thead>
+                <tbody id="students">
+                </tbody>
+            </table>
+
+        </div>
     </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/lib/jquery-easing/jqBootstrapValidation.js"></script>
+    <!-- js -->
+    <script src="~/vendors/scripts/core.js"></script>
+    <script src="~/vendors/scripts/script.min.js"></script>
+    <script src="~/vendors/scripts/process.js"></script>
+    <script src="~/vendors/scripts/layout-settings.js"></script>
+
+    <script src="~/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="~/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <!-- buttons for Export datatable -->
+    <script src="~/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="~/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/src/plugins/datatables/js/buttons.print.min.js"></script>
+    <script src="~/src/plugins/datatables/js/buttons.html5.min.js"></script>
+    <script src="~/src/plugins/datatables/js/buttons.flash.min.js"></script>
+    <script src="~/src/plugins/datatables/js/pdfmake.min.js"></script>
+    <script src="~/src/plugins/datatables/js/vfs_fonts.js"></script>
+    <!-- Datatable Setting js -->
+    @*  <script src="~/vendors/scripts/datatable-setting.js"></script>*@
+    <script src="~/js/subjectResult.js" asp-append-version="true"></script>
+}
+
+
