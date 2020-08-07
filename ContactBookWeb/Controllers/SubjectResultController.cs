@@ -1,7 +1,9 @@
 ﻿using ContactBookWeb.Models.ClassRoom;
 using ContactBookWeb.Models.Course;
 using ContactBookWeb.Models.Grade;
+using ContactBookWeb.Models.Student;
 using ContactBookWeb.Models.Subject;
+using ContactBookWeb.Models.Teacher;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -43,10 +45,18 @@ namespace ContactBookWeb.Controllers
         [Route("/SubjectResult/ListSubject/{classId}")]
         public JsonResult ListSubject(int classId = 0)
         {
-            var subjectByClassIds = new List<GetSubjectByClassId>();
-            subjectByClassIds = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
+            var subjects = new List<GetSubjectByClassId>();
+            subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
+            var teacher = new GetTeacherByClassId();
+            teacher = ApiHelper<GetTeacherByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherByClassId/{classId}");
+            var getResultClass = new GetResultClass();
+            var students = new List<GetStudentByClassId>();
+            students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
 
-            return Json(new { subjectByClassIds });
+            getResultClass.TeacherName = teacher.TeacherName;
+            getResultClass.GetSubjectByClassId = subjects;
+            getResultClass.GetStudentByClassId = students;
+            return Json(new { getResultClass });
         }
     }
 }
