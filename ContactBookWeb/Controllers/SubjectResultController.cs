@@ -3,6 +3,7 @@ using ContactBookWeb.Models.Course;
 using ContactBookWeb.Models.Grade;
 using ContactBookWeb.Models.Student;
 using ContactBookWeb.Models.Subject;
+using ContactBookWeb.Models.SubjectResult;
 using ContactBookWeb.Models.Teacher;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
@@ -47,16 +48,24 @@ namespace ContactBookWeb.Controllers
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-            var teacher = new GetTeacherByClassId();
-            teacher = ApiHelper<GetTeacherByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherByClassId/{classId}");
             var getResultClass = new GetResultClass();
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
-
-            getResultClass.TeacherName = teacher.TeacherName;
             getResultClass.GetSubjectByClassId = subjects;
             getResultClass.GetStudentByClassId = students;
             return Json(new { getResultClass });
         }
+       /* [HttpGet]
+        [Route("/SubjectResult/SubjectResult/{courseId}/{semesterId}/{subjectId}")]
+        public JsonResult SubjectResult(int courseId = 0, int semesterId = 0, int subjectId=0)
+        {
+            var subjects = new List<GetSubjectCourseSemesterSubjectId>();
+            subjects = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}");
+        
+
+            return Json(new { subjects });
+        }*/
+
+
     }
 }
