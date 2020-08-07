@@ -53,5 +53,17 @@ namespace ContactBookWeb.Controllers
                                                 );
             return Json(new { result });
         }
+
+        [Route("Teacher/Get/{id}")]
+        public JsonResult Get(int id)
+        {
+            var result = new GetTeacherbyTeacherId();
+            result = ApiHelper<GetTeacherbyTeacherId>.HttpGetAsync(
+                                                    $"{Helper.ApiUrl}api/teacher/GetTeacherById/{id}"
+                                                );
+           
+            return Json(new { result });
+        }
+
     }
 }
