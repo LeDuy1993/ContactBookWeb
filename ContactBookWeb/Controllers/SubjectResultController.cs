@@ -32,25 +32,30 @@ namespace ContactBookWeb.Controllers
             return View();
         }
         [HttpGet]
-        [Route("/SubjectResult/ListClass/{courseId}/{gradeid}")]
-        public JsonResult ListClass(int courseId = 0, int gradeid = 0)
+        [Route("/SubjectResult/ListClass/{courseId}/{gradeId}")]
+        public JsonResult ListClass(int courseId = 0, int gradeId = 0)
         {
             var classRoomAll = new List<GetClassAll>();
             classRoomAll = ApiHelper<List<GetClassAll>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
             var classAll = (from c in classRoomAll
-                            where c.CourseId == courseId && c.GradeId == gradeid
+                            where c.CourseId == courseId && c.GradeId == gradeId
                             select c).ToList();
             return Json(new { classAll });
         }
         [HttpGet]
-        [Route("/SubjectResult/ListSubject/{classId}")]
-        public JsonResult ListSubject(int classId = 0)
+        [Route("/SubjectResult/ListSubject/{classId}/{courseId}/{semesterId}/{subjectId}")]
+        public JsonResult ListSubject(int classId = 0, int courseId =0, int subjectId = 0, int semesterId=0)
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-            var getResultClass = new GetResultClass();
+           
+            var points = new List<GetSubjectCourseSemesterSubjectId>();
+            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}");
+       
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
+           
+            var getResultClass = new GetResultClass();
             getResultClass.GetSubjectByClassId = subjects;
             getResultClass.GetStudentByClassId = students;
             return Json(new { getResultClass });

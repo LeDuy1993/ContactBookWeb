@@ -2,6 +2,7 @@
 var courseId = 0;
 var gradeId = 0;
 var classId = 0;
+var semesterId = 0;
 
 
 subjectResult.showClass = function () {
@@ -31,8 +32,10 @@ subjectResult.showSubject = function () {
     courseId = $('#courseId').val();
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
+    semesterId = $('#semesterId').val();
+    console.log(courseId); console.log(gradeId); console.log(classId); console.log(semesterId);
     $.ajax({
-        url: `/SubjectResult/ListSubject/${classId}`,
+        url: `/SubjectResult/ListSubject/${classId}/${courseId}/${semesterId}/${subjectId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -98,4 +101,5 @@ $(document).ready(function () {
     courseId = $('#courseId').val();
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
+    semesterId = $('#semesterId').val();
 });
