@@ -28,7 +28,7 @@ namespace ContactBookWeb.Controllers
         {
             ViewBag.courseAll = ApiHelper<List<GetCourseAll>>.HttpGetAsync($"{Helper.ApiUrl}api/course/GetCourseAll");
             ViewBag.gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
-           
+
             return View();
         }
         [HttpGet]
@@ -43,34 +43,103 @@ namespace ContactBookWeb.Controllers
             return Json(new { classAll });
         }
         [HttpGet]
-        [Route("/SubjectResult/ListSubject/{classId}/{courseId}/{semesterId}/{subjectId}")]
-        public JsonResult ListSubject(int classId = 0, int courseId =0, int subjectId = 0, int semesterId=0)
+        [Route("/SubjectResult/ListSubject/{courseId}/{semesterId}/{classId}/{subjectId}")]
+        public JsonResult ListSubject(int classId = 0, int courseId=0, int semesterId=0, int subjectId=0)
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-           
-            var points = new List<GetSubjectCourseSemesterSubjectId>();
-            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}");
+            return Json(new { subjects });
+        }
        
+        
+        /// <summary>
+        /// Phương thức tự động tạo bảng điểm của dùng 2 vòng lặp (student and loại điểm)
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="semesterId"></param>
+        /// <param name="classId"></param>
+        /// <param name="gradeId"></param>
+        /// <param name="subjectId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/SubjectResult/Create/{courseId}/{gradeId}/{classId}/{semesterId}/{subjectId}")]
+        public JsonResult Create(int courseId = 0, int semesterId = 0, int classId = 0, int gradeId = 0, int subjectId = 0)
+        {
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
-           
-            var getResultClass = new GetResultClass();
-            getResultClass.GetSubjectByClassId = subjects;
-            getResultClass.GetStudentByClassId = students;
-            return Json(new { getResultClass });
+
+            var typePoints = new List<GetAllTypePoint>();
+            typePoints = ApiHelper<List<GetAllTypePoint>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetAllTypePoint");
+
+
+            var createSubjectResult = new CreateSubjectResult();
+            foreach (var sub in students)
+            {
+                foreach (var type in typePoints)
+                {
+                    createSubjectResult.StudentId = sub.StudentId;
+                    createSubjectResult.TypePointId = type.TypePointId;
+
+                    createSubjectResult.SemesterId = semesterId;
+                    createSubjectResult.CourseId = courseId;
+                    createSubjectResult.SubjectId = subjectId;
+                    createSubjectResult.ClassId = classId;
+
+                    ApiHelper<SaveTeacherResult>.HttpPostAsync(
+                                                   $"{Helper.ApiUrl}api/subjectResutl/Create",
+                                                   createSubjectResult);
+                }
+
+            }
+            string mes = "Create Table point suscess";
+            return Json(new { mes });
         }
-       /* [HttpGet]
-        [Route("/SubjectResult/SubjectResult/{courseId}/{semesterId}/{subjectId}")]
-        public JsonResult SubjectResult(int courseId = 0, int semesterId = 0, int subjectId=0)
+        [HttpGet]
+        [Route("/SubjectResult/ShowTablePoint/{courseId}/{semesterId}/{classId}/{subjectId}")]
+        public JsonResult ShowTablePoint(int classId = 0, int courseId = 0, int semesterId = 0, int subjectId = 0)
         {
-            var subjects = new List<GetSubjectCourseSemesterSubjectId>();
-            subjects = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}");
-        
+            var students = new List<GetStudentByClassId>();
+            students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
 
-            return Json(new { subjects });
-        }*/
+            var points = new List<GetSubjectCourseSemesterSubjectId>();
+            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}/{classId}");
+            var tablePoints = new TablePoint();
+            tablePoints.students = students;
+            tablePoints.studentPoints = new List<StudentPoint>();
+       
+            foreach(var stu in students)
+            {
+                var studentPoint = new StudentPoint();
+                studentPoint.StudentId = stu.StudentId;
+                studentPoint.FirstName = stu.FirstName;
+                studentPoint.LastName = stu.LastName;  
+                foreach(var point in points)
+                {
+                    if (stu.StudentId == point.StudentId)
+                    {
+                        switch (point.TypePointId)
+                        {
+                            case 1: studentPoint.Point1st = point.Point == null ? " ": point.Point; break;
+                            case 2: studentPoint.Point2st = point.Point == null ? " " : point.Point; break;
+                            case 3: studentPoint.Point3st = point.Point == null ? " " : point.Point; break;
+                            case 4: studentPoint.Point4st = point.Point == null ? " " : point.Point; break;
+                            case 5: studentPoint.Point5st = point.Point == null ? " " : point.Point; break;
 
+                            case 7: studentPoint.Point6st = point.Point == null ? " " : point.Point; break;
+                            case 8: studentPoint.Point7st = point.Point == null ? " " : point.Point; break;
+                            case 9: studentPoint.Point8st = point.Point == null ? " " : point.Point; break;
+
+                            case 11: studentPoint.Point9st = point.Point == null ? " " : point.Point; break;
+                            case 12: studentPoint.Point10st = point.Point == null ? " " : point.Point; break;
+                            case 13: studentPoint.Point11st = point.Point == null ? " " : point.Point; break;
+                        }
+                    }
+
+                }
+                tablePoints.studentPoints.Add(studentPoint);
+            }
+            return Json(new { tablePoints });
+        }
 
     }
 }
