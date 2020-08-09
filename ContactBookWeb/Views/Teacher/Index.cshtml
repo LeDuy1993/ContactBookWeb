@@ -15,8 +15,13 @@
                         </h5>
                     </a>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <a class="dropdown-item btn btn-success" asp-controller="Teacher" asp-action="AddTeacher">
+                @*<div class="col-lg-6 col-md-6 col-sm-6">
+                        <a class="dropdown-item btn btn-success" asp-controller="Teacher" asp-action="AddTeacher">
+                            <i class="dw dw-edit2"></i>Add Teacher
+                        </a>
+                    </div>*@
+                <div class="col-12 mb-3">
+                    <a href="javascript:void(0);" onclick="teacher.openAddEditTeacher()" class="dropdown-item btn btn-success">
                         <i class="dw dw-edit2"></i>Add Teacher
                     </a>
                 </div>
@@ -63,7 +68,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                 <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:;" onclick="teacher.get(@teacher.TeacherId)"><i class="dw dw-edit2"></i> Edit</a>
                                                 <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
                                             </div>
                                         </div>
@@ -79,10 +84,106 @@
         </div>
     </div>
 </div>
+
+<div id="addEditTeacher" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <form id="fromAddEditTeacher">
+            @*Modal content*@
+            <input hidden id="TeacherId" name="TeacherId" value="0">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Teacher</h4>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>FullName :</label>
+                                <input type="text" class="form-control" id="TeacherName" name="FullName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Date of Birth :</label>
+                                <input class="form-control" type="date" placeholder="Select Date" id="DayOfBirth" name="DoB">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Place of birth :</label>
+                                <input type="text" class="form-control" id="PlaceOfBirth" name="PoB">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Gender :</label>
+                                <select class="custom-select form-control" id="Gender" name="Gender">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Phone Number :</label>
+                                <input type="text" class="form-control" id="Phone" name="Phone">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Address :</label>
+                                <input type="text" class="form-control" id="Address" name="Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Subject :</label>
+                                <select class="custom-select form-control" id="SubjectId" name="SubjectId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Degree :</label>
+                                <select class="custom-select form-control" id="DegreeId" name="DegreeId">
+                                    <option value="">Select Degree</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>DayToWork :</label>
+                                <input class="form-control" type="date" placeholder="Select Date" id="DayToWork" name="DtW">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Avatar</label>
+                                <input type="text" class="form-control" id="AvatarPath" name="AvatarPath">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="teacher.save()">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 @section Scripts{
 
-    
-    <script src="~/js/student.js" asp-append-version="true"></script>
+
+    <script src="~/js/teacher.js" asp-append-version="true"></script>
 }
 
 <!-- The Modal -->

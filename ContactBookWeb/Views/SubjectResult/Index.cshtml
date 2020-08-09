@@ -13,7 +13,7 @@
                 Point list
             </h5>
             <div class="tab row">
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <label>Select Course</label>
                     <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="courseId"
                             href="javascript:;" onchange="subjectResult.showClass()">
@@ -23,7 +23,7 @@
                         }
                     </select>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <label>Select Grade</label>
                     <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="gradeId"
                             href="javascript:;" onchange="subjectResult.showClass()">
@@ -33,31 +33,33 @@
                         }
                     </select>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <label>Select Class</label>
                     <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
                             href="javascript:;" onchange="subjectResult.showSubject()" id="classId">
                     </select>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+
                     <label>Select Semester</label>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-outline-secondary active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked>1st
-                        </label>
-                        <label class="btn btn-outline-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off">2st
-                        </label>
-                    </div>
+                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
+                            href="javascript:;" onchange="subjectResult.showTablePoint()" id="semesterId">
+                        <option value="1">1st</option>
+                        <option value="2">2st</option>
+                    </select>
                 </div>
-            </div>
-        </div>
-        <div class="pd-20 card-box w-auto h-auto mt-2">
-            <div class="pd-20 card-box">
-                <div class="tab">
-                    <ul class="nav nav-tabs" role="tablist" id="subjectId">
-                    </ul>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>Select Subject</label>
+                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
+                            href="javascript:;" onchange="subjectResult.showTablePoint()" id="subjectId">
+                    </select>
+
                 </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>Add table</label>
+                    <button href="javascript:;" onclick="subjectResult.addTablePoint()" type="button" class="btn btn-success">Click here</button>
+                </div>
+
             </div>
         </div>
         <div style="background-color:aliceblue" class="mt-2">
@@ -87,7 +89,7 @@
                         <th>2st</th>
                     </tr>
                 </thead>
-                <tbody id="students">
+                <tbody id="studentPoints">
                 </tbody>
             </table>
 
