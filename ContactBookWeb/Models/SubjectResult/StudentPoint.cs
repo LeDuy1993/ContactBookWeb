@@ -21,6 +21,17 @@ namespace ContactBookWeb.Models.SubjectResult
         public string Point9st { get; set; }
         public string Point10st { get; set; }
         public string Point11st { get; set; }
-      
+        public int Poin1stId { get; set; }
+        public int Poin2stId { get; set; }
+        public int Poin3stId { get; set; }
+        public int Poin4stId { get; set; }
+        public int Poin5stId { get; set; }
+        public int Poin6stId { get; set; }
+        public int Poin7stId { get; set; }
+        public int Poin8stId { get; set; }
+        public int Poin9stId { get; set; }
+        public int Poin10stId { get; set; }
+        public int Poin11stId { get; set; }
+
     }
 }

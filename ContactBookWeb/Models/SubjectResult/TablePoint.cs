@@ -8,7 +8,7 @@ namespace ContactBookWeb.Models.SubjectResult
 {
     public class TablePoint
     {
-        public List<GetStudentByClassId> students { get; set; }
-        public List<StudentPoint> studentPoints { get; set; }
+        public List<GetStudentByClassId> Students { get; set; }
+        public List<StudentPoint> StudentPoints { get; set; }
     }
 }
