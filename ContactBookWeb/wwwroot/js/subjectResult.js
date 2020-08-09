@@ -3,6 +3,7 @@ var courseId = 0;
 var gradeId = 0;
 var classId = 0;
 var semesterId = 0;
+var subjectId = 0;
 
 
 subjectResult.showClass = function () {
@@ -33,68 +34,85 @@ subjectResult.showSubject = function () {
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
     semesterId = $('#semesterId').val();
-    console.log(courseId); console.log(gradeId); console.log(classId); console.log(semesterId);
+    subjectId = $('#subjectId').val();
     $.ajax({
-        url: `/SubjectResult/ListSubject/${classId}/${courseId}/${semesterId}/${subjectId}`,
+        url: `/SubjectResult/ListSubject/${courseId}/${semesterId}/${classId}/${subjectId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
             $('#subjectId').empty();
-            $('#students').empty();
-            $.each(data.getResultClass.getSubjectByClassId, function (i, v) {
-                if (v.subjectId == 1) {
-                    $('#subjectId').append(
-                        `
-                      <li class="nav-item">
-                         <a class="nav-link active text-blue" data-toggle="tab" role="tab" aria-selected="true"
-                            href="javascript:;"  onclick="subjectResult.showPoint(${v.subjectId})"> ${v.subjectName}</a>
-                     </li>
+            $.each(data.subjects, function (i, v) {
+                $('#subjectId').append(
                     `
-                    );
-                }
-                else {
-                    $('#subjectId').append(
-                        `
-                     <li class="nav-item">
-						<a class="nav-link text-blue" data-toggle="tab" role="tab" aria-selected="false"
-                            href="javascript:;" onclick="student.showStudent(${v.subjectId})">${v.subjectName}</a>
-					</li>
-                    `
-                    );
-                }
-            });
-            $.each(data.getResultClass.getStudentByClassId, function (i, v) {
-                $('#students').append(
-                    `
-                       <tr>
-                        <td>${v.studentId}</td>
-                        <td>${v.firstName}</td>
-                        <td> ${v.lastName}</td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" /></td>
-                        <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" /></td>
-                        <td style="padding: 0px;" ></td>
-                    </tr>
-                    `
+                       <option value="${v.subjectId}">${v.subjectName}</option>        	
+                     `
                 );
             });
-
+            subjectResult.showTablePoint();
         }
     });
 }
+subjectResult.showTablePoint = function () {
+    courseId = $('#courseId').val();
+    gradeId = $('#gradeId').val();
+    classId = $('#classId').val();
+    semesterId = $('#semesterId').val();
+    subjectId = $('#subjectId').val();
+    console.log(subjectId);
+    $.ajax({
+        url: `/SubjectResult/ShowTablePoint/${courseId}/${semesterId}/${classId}/${subjectId}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#studentPoints').empty();
+            $.each(data.tablePoints.studentPoints, function (i, v) {
+                  $('#studentPoints').append(
+                      `
+                         <tr>
+                          <td>${v.studentId}</td>
+                          <td>${v.firstName}</td>
+                          <td> ${v.lastName}</td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" value="${v.point1st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point2st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point3st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point4st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point5st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point6st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point7st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:100%" value="${v.point8st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" value="${v.point9st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" value="${v.point10st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ><input style="width:100%; height:20px" value="${v.point11st}" /></td>
+                          <td style="padding: 0px; width: 5%;" ></td>
+                  
+                      </tr>
+                      `
+                  );
+              });
+        }
+    });
+}
+subjectResult.addTablePoint = function () {
+    courseId = $('#courseId').val();
+    gradeId = $('#gradeId').val();
+    classId = $('#classId').val();
+    semesterId = $('#semesterId').val();
+    subjectId = $('#subjectId').val();
+    $.ajax({
+        url: `/SubjectResult/Create/${courseId}/${gradeId}/${classId}/${semesterId}/${subjectId}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
 
+        }
+    });
+
+}
 subjectResult.init = function () {
     subjectResult.showClass();
     subjectResult.showSubject();
 };
+
 
 $(document).ready(function () {
     subjectResult.init();
@@ -102,4 +120,5 @@ $(document).ready(function () {
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
     semesterId = $('#semesterId').val();
+    subjectId = $('#subjectId').val();
 });
