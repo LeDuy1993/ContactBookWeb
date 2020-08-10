@@ -52,21 +52,21 @@ namespace ContactBookWeb.Controllers
         }
 
 
-       /// <summary>
-       /// Create and save Point
-       /// </summary>
-       /// <param name="courseId"></param>
-       /// <param name="semesterId"></param>
-       /// <param name="classId"></param>
-       /// <param name="studentId"></param>
-       /// <param name="subjectId"></param>
-       /// <param name="subjectResultId"></param>
-       /// <param name="typePointId"></param>
-       /// <param name="point"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// Create and save Point
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="semesterId"></param>
+        /// <param name="classId"></param>
+        /// <param name="studentId"></param>
+        /// <param name="subjectId"></param>
+        /// <param name="subjectResultId"></param>
+        /// <param name="typePointId"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("SubjectResult/SaveResultPoint/{courseId}/{classId}/{semesterId}/{studentId}/{subjectId}/{subjectResultId}/{typePointId}/{point}")]
-        public JsonResult SaveResultPoint(int courseId = 0, int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId =0, int typePointId = 0,float point=0)
+        public JsonResult SaveResultPoint(int courseId = 0, int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId = 0, int typePointId = 0, float point = 0)
         {
             var saveResultPoint = new SaveResultPoint();
             saveResultPoint.ClassId = classId;
@@ -102,95 +102,128 @@ namespace ContactBookWeb.Controllers
             var tablePoints = new TablePoint();
             tablePoints.Students = students;
             tablePoints.StudentPoints = new List<StudentPoint>();
+            tablePoints.StudentPoints = (from stu in students
+                                         select new StudentPoint()
+                                         {
+                                             StudentId = stu.StudentId,
+                                             LastName = stu.LastName,
+                                             FirstName = stu.FirstName,
+                                             Point1st = "",
+                                             Point2st = "",
+                                             Point3st = "",
+                                             Point4st = "",
+                                             Point5st = "",
+                                             Point6st = "",
+                                             Point7st = "",
+                                             Point8st = "",
+                                             Point9st = "",
+                                             Point10st = "",
+                                             Point11st = "",
+                                             Poin1stId = 0,
+                                             Poin2stId = 0,
+                                             Poin3stId = 0,
+                                             Poin4stId = 0,
+                                             Poin5stId = 0,
+                                             Poin6stId = 0,
+                                             Poin7stId = 0,
+                                             Poin8stId = 0,
+                                             Poin9stId = 0,
+                                             Poin10stId = 0,
+                                             Poin11stId = 0,
+                                             Avg = 0,
+                                         }).ToList();
 
-            foreach (var stu in students)
+            foreach (var stu in tablePoints.StudentPoints)
             {
-                var studentPoint = new StudentPoint();
-                studentPoint.StudentId = stu.StudentId;
-                studentPoint.FirstName = stu.FirstName;
+
                 float sum = 0; var count = 0;
                 foreach (var point in points)
                 {
                     if (stu.StudentId == point.StudentId)
                     {
-                    
                         switch (point.TypePointId)
                         {
                             case 1:
-                                studentPoint.Point1st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin1stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point1st = point.Point;
+                                stu.Poin1stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
                             case 2:
-                                studentPoint.Point2st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin2stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point2st = point.Point;
+                                stu.Poin2stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
                             case 3:
-                                studentPoint.Point3st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin3stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point3st = point.Point;
+                                stu.Poin3stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
 
                             case 4:
-                                studentPoint.Point4st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin4stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point4st = point.Point;
+                                stu.Poin4stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
                             case 5:
-                                studentPoint.Point5st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin5stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point5st = point.Point;
+                                stu.Poin5stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
 
                             case 7:
-                                studentPoint.Point6st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin6stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point6st = point.Point;
+                                stu.Poin6stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
                             case 8:
-                                studentPoint.Point7st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin7stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point7st = point.Point;
+                                stu.Poin7stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
                             case 9:
-                                studentPoint.Point8st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin8stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                stu.Point8st = point.Point;
+                                stu.Poin8stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point);
                                 count += 1;
                                 break;
 
                             case 11:
-                                studentPoint.Point9st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin9stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point)*2; }
+                                stu.Point9st = point.Point;
+                                stu.Poin9stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point)* 2;
                                 count += 2;
                                 break;
                             case 12:
-                                studentPoint.Point10st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin10stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point) * 2; }
+                                stu.Point10st = point.Point;
+                                stu.Poin10stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point) * 2;
                                 count += 2;
                                 break;
                             case 13:
-                                studentPoint.Point11st = point.Point == null ? " " : point.Point;
-                                studentPoint.Poin11stId = point.SubjectResultId;
-                                if (point.Point != null) { sum += float.Parse(point.Point) * 3; }
+                                stu.Point11st = point.Point;
+                                stu.Poin11stId = point.SubjectResultId;
+                                sum += float.Parse(point.Point) * 3;
                                 count += 3;
                                 break;
                         }
-                      
                     }
-                    studentPoint.Avg = sum / count;
+
                 }
-                tablePoints.StudentPoints.Add(studentPoint);
+                if (sum == 0 || count == 0)
+                {
+                    stu.Avg = 0.0f;
+                }
+                else
+                {
+                    stu.Avg = (float)Math.Round(sum / count, 2);
+                }
             }
             return Json(new { tablePoints });
         }

@@ -65,7 +65,6 @@ subjectResult.showTablePoint = function () {
         success: function (data) {
             $('#studentPoints').empty();
             $.each(data.tablePoints.studentPoints, function (i, v) {
-         
                 $('#studentPoints').append(
                     `
                          <tr>
@@ -105,7 +104,7 @@ subjectResult.showTablePoint = function () {
                           <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.point11st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin11stId},$('#${v.studentId}point11').val(),${13},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" >${v.avg.toFixed(2)}
+                          <td style="padding: 0px; width: 5%;" type="number" min="0" max="10" required="true"  >${v.avg}
                             </td >
                   
                       </tr>
@@ -115,22 +114,7 @@ subjectResult.showTablePoint = function () {
         }
     });
 }
-/*subjectResult.addTablePoint = function () {
-    courseId = $('#courseId').val();
-    gradeId = $('#gradeId').val();
-    classId = $('#classId').val();
-    semesterId = $('#semesterId').val();
-    subjectId = $('#subjectId').val();
-    $.ajax({
-        url: `/SubjectResult/Create/${courseId}/${gradeId}/${classId}/${semesterId}/${subjectId}`,
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
 
-        }
-    });
-
-}*/
 subjectResult.SaveResultPoint = function (id1, id2, id3, id4) {
     courseId = $('#courseId').val();
     classId = $('#classId').val();
