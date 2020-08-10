@@ -52,15 +52,18 @@ namespace ContactBookWeb.Controllers
         }
 
 
-        /// <summary>
-        /// Phương thức tự động tạo bảng điểm của dùng 2 vòng lặp (student and loại điểm)
-        /// </summary>
-        /// <param name="courseId"></param>
-        /// <param name="semesterId"></param>
-        /// <param name="classId"></param>
-        /// <param name="gradeId"></param>
-        /// <param name="subjectId"></param>
-        /// <returns></returns>
+       /// <summary>
+       /// Create and save Point
+       /// </summary>
+       /// <param name="courseId"></param>
+       /// <param name="semesterId"></param>
+       /// <param name="classId"></param>
+       /// <param name="studentId"></param>
+       /// <param name="subjectId"></param>
+       /// <param name="subjectResultId"></param>
+       /// <param name="typePointId"></param>
+       /// <param name="point"></param>
+       /// <returns></returns>
         [HttpGet]
         [Route("SubjectResult/SaveResultPoint/{courseId}/{classId}/{semesterId}/{studentId}/{subjectId}/{subjectResultId}/{typePointId}/{point}")]
         public JsonResult SaveResultPoint(int courseId = 0, int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId =0, int typePointId = 0,float point=0)
@@ -79,6 +82,14 @@ namespace ContactBookWeb.Controllers
                                                   saveResultPoint);
             return Json(new { result });
         }
+        /// <summary>
+        /// Get Point theo năm, lớp, học kì và môn nào
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <param name="courseId"></param>
+        /// <param name="semesterId"></param>
+        /// <param name="subjectId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("/SubjectResult/ShowTablePoint/{courseId}/{semesterId}/{classId}/{subjectId}")]
         public JsonResult ShowTablePoint(int classId = 0, int courseId = 0, int semesterId = 0, int subjectId = 0)
@@ -97,62 +108,87 @@ namespace ContactBookWeb.Controllers
                 var studentPoint = new StudentPoint();
                 studentPoint.StudentId = stu.StudentId;
                 studentPoint.FirstName = stu.FirstName;
-                studentPoint.LastName = stu.LastName;
+                float sum = 0; var count = 0;
                 foreach (var point in points)
                 {
-
                     if (stu.StudentId == point.StudentId)
                     {
+                    
                         switch (point.TypePointId)
                         {
                             case 1:
                                 studentPoint.Point1st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin1stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
                             case 2:
                                 studentPoint.Point2st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin2stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
                             case 3:
                                 studentPoint.Point3st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin3stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
+
                             case 4:
                                 studentPoint.Point4st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin4stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
                             case 5:
                                 studentPoint.Point5st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin5stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
 
                             case 7:
                                 studentPoint.Point6st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin6stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
                             case 8:
                                 studentPoint.Point7st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin7stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
                             case 9:
                                 studentPoint.Point8st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin8stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point); }
+                                count += 1;
                                 break;
 
                             case 11:
                                 studentPoint.Point9st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin9stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point)*2; }
+                                count += 2;
                                 break;
                             case 12:
                                 studentPoint.Point10st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin10stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point) * 2; }
+                                count += 2;
                                 break;
                             case 13:
                                 studentPoint.Point11st = point.Point == null ? " " : point.Point;
                                 studentPoint.Poin11stId = point.SubjectResultId;
+                                if (point.Point != null) { sum += float.Parse(point.Point) * 3; }
+                                count += 3;
                                 break;
                         }
+                      
                     }
+                    studentPoint.Avg = sum / count;
                 }
                 tablePoints.StudentPoints.Add(studentPoint);
             }

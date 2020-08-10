@@ -65,46 +65,48 @@ subjectResult.showTablePoint = function () {
         success: function (data) {
             $('#studentPoints').empty();
             $.each(data.tablePoints.studentPoints, function (i, v) {
+         
                 $('#studentPoints').append(
                     `
                          <tr>
                           <td>${v.studentId}</td>
                           <td>${v.firstName}</td>
                           <td>${v.lastName}</td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:20px" id="${v.studentId}point1" value="${v.point1st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point1" value="${v.point1st}"
                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin1stId},$('#${v.studentId}point1').val(),${1},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point2"  value="${v.point2st}" 
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin2stId},$('#${v.studentId}point2').val(),${2},${v.studentId}})"
+                         <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point2" value="${v.point2st}"
+                            href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin2stId},$('#${v.studentId}point2').val(),${2},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point3"  value="${v.point3st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point3"  value="${v.point3st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin3stId},$('#${v.studentId}point3').val(),${3},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point4"  value="${v.point4st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point4"  value="${v.point4st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin4stId},$('#${v.studentId}point4').val(),${4},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point5"  value="${v.point5st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point5"  value="${v.point5st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin5stId},$('#${v.studentId}point5').val(),${5},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point6"  value="${v.point6st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point6"  value="${v.point6st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin6stId},$('#${v.studentId}point6').val(),${7},${v.studentId})"
                              /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point7"  value="${v.point7st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point7"  value="${v.point7st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin7stId},$('#${v.studentId}point7').val(),${8},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:100%" id="${v.studentId}point8"  value="${v.point8st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point8"  value="${v.point8st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin8stId},$('#${v.studentId}point8').val(),${9},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:20px" id="${v.studentId}point9"  value="${v.point9st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point9"  value="${v.point9st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin9stId},$('#${v.studentId}point9').val(),${11},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:20px" id="${v.studentId}point10"  value="${v.point10st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point10"  value="${v.point10st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin10stId},$('#${v.studentId}point10').val(),${12},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.point11st}"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.point11st}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin11stId},$('#${v.studentId}point11').val(),${13},${v.studentId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" >${parseFloat(v.point1st) + parseFloat(v.point2st)}</td >
+                          <td style="padding: 0px; width: 5%;" >${v.avg.toFixed(2)}
+                            </td >
                   
                       </tr>
                       `

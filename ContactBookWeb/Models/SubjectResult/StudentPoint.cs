@@ -31,7 +31,8 @@ namespace ContactBookWeb.Models.SubjectResult
         public int Poin8stId { get; set; }
         public int Poin9stId { get; set; }
         public int Poin10stId { get; set; }
-        public int Poin11stId { get; set; }
+        public int Poin11stId { get; set; }  
+        public float Avg { get; set; }
 
     }
 }
