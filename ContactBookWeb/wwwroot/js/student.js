@@ -86,6 +86,7 @@ student.uploadAvatar = function (input) {
             $('#AvatarPath').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
+        $('#FileUpload').hide();
     }
 }
 

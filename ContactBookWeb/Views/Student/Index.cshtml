@@ -4,7 +4,6 @@
     Layout = "_LayoutStudent";
     var gradeAll = ViewBag.gradeAll as List<GetGradeAll>;
     var courseAll = ViewBag.courseAll as List<GetCourseAll>;
-    var courseId = ViewBag.courseId != null ? int.Parse(ViewBag.courseId.ToString()) : 0;
 }
 
     <div class="main-container">
@@ -328,8 +327,8 @@
                             </div>*@
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <img src="/src/images/layout/noavatar.png" id="AvatarPath" width="200" height="210" />
-                                    <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="student.uploadAvatar(this)" />
+                                    <img  src="/src/images/layout/noavatar.png" id="AvatarPath" width="200" height="210" />
+                                    <input type="text" id="FileUpload" class="custom-file" accept="image/*" onchange="student.uploadAvatar(this)" />
                                 </div>
                             </div>
                         </div>
