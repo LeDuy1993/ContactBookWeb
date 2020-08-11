@@ -69,5 +69,28 @@ namespace ContactBookWeb.Controllers
                     gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
                     return Json(new { gradeAll });
                 }*/
+
+
+        [Route("/Student/Save")]
+        public JsonResult Save([FromBody] SaveStudentRequest model)
+        {
+
+            var result = new SaveStudentResult();
+            result = ApiHelper<SaveStudentResult>.HttpPostAsync(
+                                                    $"{Helper.ApiUrl}api/student/save",
+                                                    model
+                                                );
+            return Json(new { result });
+        }
+
+        [Route("/Student/Get/{id}")]
+        public JsonResult Get(int id)
+        {
+            var result = new GetStudentDetail();
+            result = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{id}");
+
+            return Json(new { result });
+        }
+
     }
 }

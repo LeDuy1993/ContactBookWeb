@@ -32,5 +32,13 @@ namespace ContactBookWeb.Controllers
             religionAll = ApiHelper<List<GetReligionAll>>.HttpGetAsync($"{Helper.ApiUrl}api/religion/GetReligionAll");
             return Json(new { religionAll });
         }
+
+        [Route("/ReligionNation/GetNationAll")]
+        public JsonResult GetNationAll()
+        {
+            var nationAll = new List<GetNationAll>();
+            nationAll = ApiHelper<List<GetNationAll>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/getnationall");
+            return Json(new { nationAll });
+        }
     }
 }
