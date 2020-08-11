@@ -76,13 +76,21 @@ teacher.get = function (id) {
             $('#TeacherId').val(id);
             $('#DayOfBirth').val(data.result.dayOfBirth);
             $('#PlaceOfBirth').val(data.result.placeOfBirth);
-            $('#Gender').val(data.result.gender = "true" ? 1:0);
+          
             $('#Phone').val(data.result.phone);
             $('#Address').val(data.result.address);
             $('#SubjectId').val(data.result.subjectId);
             $('#DegreeId').val(data.result.degreeId);   
             $('#DayToWork').val(data.result.dayToWork);
             $('#AvatarPath').attr("src", data.result.avatarPath);
+            $('#addEditTeacher').modal('show');
+            if (data.result.gender == "1") {
+                $('#customRadio4').prop('checked', true);
+
+            }
+            else {
+                $('#customRadio5').prop('checked', true);
+            }
           
         }
     });
@@ -93,7 +101,7 @@ teacher.reset = function () {
     $('#TeacherId').val(0);
     $('#DayOfBirth').val("");
     $('#PlaceOfBirth').val("");
-    $('#Gender').val("");
+    $('#customRadio4').prop('checked', true);
     $('#Phone').val("");
     $('#Address').val("");
     $('#SubjectId').val("");
@@ -108,7 +116,7 @@ teacher.save = function () {
     saveTeacher.teacherId = parseInt($('#TeacherId').val());
     saveTeacher.dayOfBirth = $('#DayOfBirth').val();
     saveTeacher.placeOfBirth = $('#PlaceOfBirth').val();
-    saveTeacher.gender = $('#Gender').val();
+    saveTeacher.gender = $("input[name='customRadio']:checked").val();
     saveTeacher.phone = $('#Phone').val();
     saveTeacher.address = $('#Address').val();
     saveTeacher.subjectId = parseInt($('#SubjectId').val());
@@ -129,13 +137,6 @@ teacher.save = function () {
         }
     });
 
-
-}
-
-teacher.initgender = function () {
-    $("#Gender").empty();
-    $("#Gender").append(`<option value = ${1} >${"Male"}</option>`)
-    $("#Gender").append(`<option value = ${0} >${"Female"}</option>`)
 
 }
 
@@ -168,7 +169,7 @@ teacher.initDegree = function () {
 }
 
 teacher.init = function () {
-    teacher.initgender();
+   
     teacher.initSubject();
     teacher.initDegree();
 };
