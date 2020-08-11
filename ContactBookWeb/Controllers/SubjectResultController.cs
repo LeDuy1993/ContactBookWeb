@@ -104,7 +104,7 @@ namespace ContactBookWeb.Controllers
             var points = new List<GetSubjectCourseSemesterSubjectId>();
             points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}/{classId}");
             var tablePoints = new TablePoint();
-            tablePoints.Students = students;
+    
             tablePoints.StudentPoints = new List<StudentPoint>();
             tablePoints.StudentPoints = (from stu in students
                                          select new StudentPoint()
