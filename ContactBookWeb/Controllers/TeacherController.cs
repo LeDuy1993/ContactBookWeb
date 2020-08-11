@@ -26,22 +26,33 @@ namespace ContactBookWeb.Controllers
             var teacherAll = new List<TeacherView>();
             teacherAll = ApiHelper<List<TeacherView>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/getAllTeacher");
             ViewBag.teacherAll = teacherAll;
-
             return View(subjectAll);
         }
-        public IActionResult Cards(int id)
+
+        //public IActionResult Index()
+        //{
+        //    ViewBag.Title = "Teacher List";
+        //    return View();
+        //}
+
+
+        //public IActionResult Cards(int id)
+        //{
+        //    var subjectAll = new List<GetSubjectAll>();
+        //    subjectAll = ApiHelper<List<GetSubjectAll>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectAll");
+        //    ViewBag.subjectAll = subjectAll;
+        //    var teachers = new List<GetTeacherBySubjectId>();
+        //    teachers = ApiHelper<List<GetTeacherBySubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherBySubjectId/{id}");
+        //    return View(teachers);
+        //}
+
+        public JsonResult GetAllTeacher()
         {
-            var subjectAll = new List<GetSubjectAll>();
-            subjectAll = ApiHelper<List<GetSubjectAll>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectAll");
-            ViewBag.subjectAll = subjectAll;
-            var teachers = new List<GetTeacherBySubjectId>();
-            teachers = ApiHelper<List<GetTeacherBySubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/GetTeacherBySubjectId/{id}");
-            return View(teachers);
+            var teacherAll = new List<TeacherView>();
+            teacherAll = ApiHelper<List<TeacherView>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/getAllTeacher");
+            return Json(new { teacherAll });
         }
-        /*public IActionResult AddTeacher()
-        {   
-            return View();
-        }*/
+
         [Route("/Teacher/Save")]
         public JsonResult Save([FromBody] SaveTeacherRequest model)
         {
@@ -65,5 +76,11 @@ namespace ContactBookWeb.Controllers
             return Json(new { result });
         }
 
+        //public JsonResult Get(int departId)
+        //{
+        //    var employees = new List<TeacherView>();
+        //    employees = ApiHelper<List<TeacherView>>.HttpGetAsync($"{Helper.ApiUrl}api/teacher/gets/{departId}");
+        //    return Json(new { employees });
+        //}
     }
 }

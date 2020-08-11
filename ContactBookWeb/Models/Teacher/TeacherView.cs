@@ -20,5 +20,7 @@ namespace ContactBookWeb.Models.Teacher
         public int DegreeId { get; set; }
         public string DegreeName { get; set; }
         public string DayToWork { get; set; }
+        public int PositionId { get; set; }
+        public string PositionName { get; set; }
     }
 }

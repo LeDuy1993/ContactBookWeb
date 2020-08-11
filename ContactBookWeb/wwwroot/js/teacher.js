@@ -49,6 +49,46 @@ teacher.cardTeacher = function (id) {
 }
 
 
+teacher.drawTable = function () {
+
+    $.ajax({
+        url: `/Teacher/GetAllTeacher`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#tbTeacher tbody').empty();
+            $.each(data.teacherAll, function (i, v) {
+                $('#tbTeacher tbody').append(
+                    `
+                    <tr>
+                        <td>${v.teacherId}</td>
+                        <td>${v.teacherName}</td>
+                        <td>${v.address}</td>
+                        <td>${v.subjectName}</td>
+                        <td>${v.positionName}</td>
+                        <td>${v.phone}</td>
+                        <td>
+                             <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                    <a class="dropdown-item" href="#"><i class="dw dw-eye"></i></a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="teacher.get(${v.teacherId})"><i class="dw dw-edit2"></i></a>
+                                    <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i></a>
+                                </div>
+                              </div>
+                        </td>
+                    </tr>
+                    `
+                );
+            });
+        }
+    });
+
+};
+
+
 
 teacher.openAddEditTeacher = function () {
     teacher.reset();
@@ -114,8 +154,8 @@ teacher.save = function () {
         data: JSON.stringify(saveTeacher),
         success: function (data) {
             $('#addEditTeacher').modal('hide');
-           /* bootbox.alert(data.result.message);*/
-           /* teacher.drawTable();*/
+            bootbox.alert(data.result.message);
+            teacher.drawTable();
         }
     });
 

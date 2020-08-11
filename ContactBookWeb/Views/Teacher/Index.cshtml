@@ -15,11 +15,6 @@
                         </h5>
                     </a>
                 </div>
-                @*<div class="col-lg-6 col-md-6 col-sm-6">
-                        <a class="dropdown-item btn btn-success" asp-controller="Teacher" asp-action="AddTeacher">
-                            <i class="dw dw-edit2"></i>Add Teacher
-                        </a>
-                    </div>*@
                 <div class="col-12 mb-3">
                     <a href="javascript:void(0);" onclick="teacher.openAddEditTeacher()" class="dropdown-item btn btn-success">
                         <i class="dw dw-edit2"></i>Add Teacher
@@ -39,21 +34,20 @@
                     </ul>
                 </div>
                 <div class="col-md-9 col-sm-9" id="cards">
-                    <table class="data-table table stripe hover nowrap">
+                    <table class="data-table table stripe hover nowrap" id="tbTeacher">
                         <thead>
                             <tr>
                                 <th class="table-plus datatable-nosort">Id</th>
-                                <th>Name</th>
-                                <th>DOB</th>
+                                <th>Full Name</th>
+                                <th>Address</th>
+                                <th>Subject</th>
+                                <th>Position</th>
                                 <th>Phone</th>
-
-                                <th>Day to work</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
-
                         </thead>
                         <tbody>
-                            @foreach (var teacher in teacherAll)
+                            @*@foreach (var teacher in teacherAll)
                             {
                                 <tr>
                                     <td class="table-plus">@teacher.TeacherId</td>
@@ -74,8 +68,8 @@
                                         </div>
                                     </td>
                                 </tr>
-                                // Model Edit
-                            }
+                             
+                            }*@
                         </tbody>
                     </table>
                 </div>
