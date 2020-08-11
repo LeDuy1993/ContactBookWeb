@@ -163,9 +163,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Avatar</label>
-                                <input type="text" class="form-control" id="AvatarPath" name="AvatarPath">
+                            <div class="col-6">
+                                <img src="~/src/images/layout/noavatar.png" id="AvatarPath" width="200" height="210" />
+                                <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="teacher.uploadAvatar(this)" />
                             </div>
                         </div>
                     </div>

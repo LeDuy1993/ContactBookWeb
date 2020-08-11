@@ -56,6 +56,16 @@ teacher.openAddEditTeacher = function () {
 };
 
 
+teacher.uploadAvatar = function (input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#AvatarPath').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 teacher.get = function (id) {
     $.ajax({
         url: `/Teacher/Get/${id}`,
@@ -72,8 +82,8 @@ teacher.get = function (id) {
             $('#SubjectId').val(data.result.subjectId);
             $('#DegreeId').val(data.result.degreeId);   
             $('#DayToWork').val(data.result.dayToWork);
-            $('#AvatarPath').val(data.result.avatarPath);
-            $('#addEditTeacher').modal('show');
+            $('#AvatarPath').attr("src", data.result.avatarPath);
+          
         }
     });
 }
@@ -104,7 +114,7 @@ teacher.save = function () {
     saveTeacher.subjectId = parseInt($('#SubjectId').val());
     saveTeacher.degreeId = parseInt($('#DegreeId').val());
     saveTeacher.dayToWork = $('#DayToWork').val();
-    saveTeacher.avatarPath = $('#AvatarPath').val();
+    saveTeacher.AvatarPath = $('#AvatarPath').attr('src');
 
     $.ajax({
         url: `/Teacher/Save/`,

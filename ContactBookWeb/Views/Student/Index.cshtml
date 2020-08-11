@@ -16,6 +16,11 @@
                 <div class="tab">
                     <div class="row clearfix">
                         <div class="col-md-3 col-sm-3">
+                            <div class="col-12 mb-3">
+                                <a href="javascript:void(0);" onclick="student.openAddEditStudent()" class="dropdown-item btn btn-success">
+                                    <i class="dw dw-edit2"></i>Add Student
+                                </a>
+                            </div>
                             <div>
                                 <label><h5>Select Grade</h5></label>
                                 <ul class="nav flex-column vtabs nav-tabs customtab" role="tablist">
@@ -231,6 +236,140 @@
             </div>
         </div>
     </div>
+
+
+    <div id="addEditStudent" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <form id="fromAddEditStudent">
+                @*Modal content*@
+                <input hidden id="StudentId" name="StudentId" value="0">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Student</h4>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>FirstName :</label>
+                                    <input type="text" class="form-control form-control-lg" id="FirstName" name="FirstName">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>LastName :</label>
+                                    <input type="text" class="form-control form-control-lg" id="LastName" name="LastName">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @*<label>Gender :</label>
+                                        <select class="custom-select form-control" id="Gender" name="Gender">
+                                    </select>*@
+                                    <label>Gender</label>
+                                    <div class="d-flex">
+                                        <div class="custom-control custom-radio mb-5 mr-20" >
+                                            <input  type="radio" value="1" id="customRadio4"  name="customRadio" class="custom-control-input" >
+                                            <label  class="custom-control-label weight-400" for="customRadio4">Male</label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-5">
+                                            <input  type="radio" value="0" id="customRadio5" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label weight-400" for="customRadio5">Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Place of birth :</label>
+                                    <input type="text" class="form-control form-control-lg" id="PlaceOfBirth" name="PoB">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Date of Birth :</label>
+                                    <input class="form-control form-control-lg" type="date" placeholder="Select Date" id="DayOfBirth" name="DoB">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nation :</label>
+                                    <select class="custom-select form-control" id="NationId" name="NationId">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address :</label>
+                                    <input type="text" class="form-control" id="Address" name="Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Religion :</label>
+                                    <select class="custom-select form-control" id="ReligionId" name="ReligionId">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>FartherName :</label>
+                                    <input type="text" class="form-control" id="FartherName" name="Phone">
+                                </div>
+                            </div>
+                           @* <div class="row form-group">
+                                <div class="col-6">
+                                    <img src="/src/images/layout/noavatar.png" id="AvatarPath" width="200" height="210" />
+                                    <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="student.uploadAvatar(this)" />
+                                </div>
+                            </div>*@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <img src="/src/images/layout/noavatar.png" id="AvatarPath" width="200" height="210" />
+                                    <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="student.uploadAvatar(this)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>MortherName :</label>
+                                    <input type="text" class="form-control" id="MortherName" name="Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>PhoneNumber :</label>
+                                    <input type="text" class="form-control" id="PhoneNumber" name="Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>JobName :</label>
+                                    <input type="text" class="form-control" id="JobName" name="Phone">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="student.save()">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
 @section Scripts{
