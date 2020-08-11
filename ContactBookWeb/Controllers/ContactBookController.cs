@@ -23,8 +23,10 @@ namespace ContactBookWeb.Controllers
         {
             ViewBag.courseAll = ApiHelper<List<GetCourseAll>>.HttpGetAsync($"{Helper.ApiUrl}api/course/GetCourseAll");
             ViewBag.gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
+
             return View();
         }
+        
         [HttpGet]
         [Route("/ContactBook/ListClass/{courseId}/{gradeId}")]
         public JsonResult ListClass(int courseId = 0, int gradeId = 0)
@@ -34,14 +36,17 @@ namespace ContactBookWeb.Controllers
             var classAll = (from c in classRoomAll
                             where c.CourseId == courseId && c.GradeId == gradeId
                             select c).ToList();
+
             return Json(new { classAll });
         }
+       
         [HttpGet]
         [Route("/ContactBook/ListStudent/{classId}")]
         public JsonResult ListStudent(int classId = 0)
         {
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
+            
             return Json(new { students });
         }
     }

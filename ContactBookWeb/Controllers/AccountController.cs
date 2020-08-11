@@ -21,11 +21,13 @@ namespace ContactBookWeb.Controllers
             return View();
         }
         public IActionResult ForgotPass()
-        {
+        { 
+
             return View();
         }
         public IActionResult Register()
         {
+
             return View();
         }
     }

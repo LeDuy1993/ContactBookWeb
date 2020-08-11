@@ -32,8 +32,10 @@ namespace ContactBookWeb.Controllers
             ViewBag.gradeAll = gradeAll;
             ViewBag.courseAll = courseAll;
             ViewBag.courseId = courseId;
+
             return View();
         }
+
         [Route("/Student/ListClass/{courseId}/{gradeid}")]
         public JsonResult ListClass(int courseId = 0, int gradeid = 0)
         {
@@ -42,8 +44,10 @@ namespace ContactBookWeb.Controllers
             var classAll = (from c in classRoomAll
                             where c.CourseId == courseId && c.GradeId == gradeid
                             select c).ToList();
+
             return Json(new { classAll });
         }
+
         [Route("/Student/ListStudent/{classId}")]
         public JsonResult ListStudent(int classId = 0)
         {
@@ -74,12 +78,11 @@ namespace ContactBookWeb.Controllers
         [Route("/Student/Save")]
         public JsonResult Save([FromBody] SaveStudentRequest model)
         {
-
             var result = new SaveStudentResult();
             result = ApiHelper<SaveStudentResult>.HttpPostAsync(
                                                     $"{Helper.ApiUrl}api/student/save",
-                                                    model
-                                                );
+                                                    model);
+
             return Json(new { result });
         }
 

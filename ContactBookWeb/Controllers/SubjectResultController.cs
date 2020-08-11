@@ -31,6 +31,7 @@ namespace ContactBookWeb.Controllers
 
             return View();
         }
+
         [HttpGet]
         [Route("/SubjectResult/ListClass/{courseId}/{gradeId}")]
         public JsonResult ListClass(int courseId = 0, int gradeId = 0)
@@ -40,14 +41,17 @@ namespace ContactBookWeb.Controllers
             var classAll = (from c in classRoomAll
                             where c.CourseId == courseId && c.GradeId == gradeId
                             select c).ToList();
+
             return Json(new { classAll });
         }
+
         [HttpGet]
         [Route("/SubjectResult/ListSubject/{courseId}/{semesterId}/{classId}/{subjectId}")]
         public JsonResult ListSubject(int classId = 0, int courseId = 0, int semesterId = 0, int subjectId = 0)
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
+            
             return Json(new { subjects });
         }
 
@@ -80,6 +84,7 @@ namespace ContactBookWeb.Controllers
             var result = ApiHelper<SaveResult>.HttpPostAsync(
                                                   $"{Helper.ApiUrl}api/subjectResutl/SaveSubjectResult",
                                                   saveResultPoint);
+
             return Json(new { result });
         }
         /// <summary>
@@ -96,7 +101,6 @@ namespace ContactBookWeb.Controllers
         {
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
-
             var points = new List<GetSubjectCourseSemesterSubjectId>();
             points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}/{classId}");
             var tablePoints = new TablePoint();
@@ -135,7 +139,6 @@ namespace ContactBookWeb.Controllers
 
             foreach (var stu in tablePoints.StudentPoints)
             {
-
                 float sum = 0; var count = 0;
                 foreach (var point in points)
                 {
@@ -225,8 +228,8 @@ namespace ContactBookWeb.Controllers
                     stu.Avg = (float)Math.Round(sum / count, 2);
                 }
             }
+
             return Json(new { tablePoints });
         }
-
     }
 }

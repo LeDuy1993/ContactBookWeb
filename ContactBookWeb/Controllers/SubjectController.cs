@@ -17,11 +17,13 @@ namespace ContactBookWeb.Controllers
         {
             _logger = logger;
         }
+
         [Route("/Subject/Gets")]
         public JsonResult Gets()
         {
             var subjects = new List<GetSubjectAll>();
             subjects = ApiHelper<List<GetSubjectAll>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectAll");
+
             return Json(new { subjects });
         }
     }
