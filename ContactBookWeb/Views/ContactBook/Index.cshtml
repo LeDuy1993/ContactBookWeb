@@ -40,39 +40,66 @@
 
         </div>
     </div>
-    <div class="pd-20 card-box" style="height:auto">
-        <div class="tab row">
-            <div class="col-lg-3 col-md-3 col-sm-3">
 
-                <ul class="nav flex-column nav-pills vtabs" role="tablist" id="studentId">
-                </ul>
-
-
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-9">
-                <div class="card-box mb-30">
-
-                    <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">
-                    <table id="testTable">
-                        <thead>
-                            <tr>
-                                <th class="table-plus datatable-nosort">Name</th>
-                                <th>Age</th>
-                                <th>Office</th>
-                                <th>Address</th>
-                                <th>Start Date</th>
-                                <th>Salart</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
+    <div class="tab row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <ul class="nav flex-column nav-pills vtabs" role="tablist" id="studentId">
+            </ul>
         </div>
-
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">
+            <table class="table table-bordered" id="testTable">
+                <thead class="thead-light">
+                    <tr>
+                        <th rowspan="2">Id</th>
+                        <th rowspan="2">Subject</th>
+                        <th colspan="4">Điểm Miệng</th>
+                        <th colspan="4">Điểm 15 phút</th>
+                        <th colspan="2">Điểm 1 tiết</th>
+                        <th rowspan="2">Điểm học kỳ</th>
+                        <th rowspan="2">Avg</th>
+                    </tr>
+                    <tr>
+                        
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Id</th>
+                        <th rowspan="2">Subject</th>
+                        <th colspan="4">Điểm Miệng</th>
+                        <th colspan="4">Điểm 15 phút</th>
+                        <th colspan="2">Điểm 1 tiết</th>
+                        <th rowspan="2">Điểm học kỳ</th>
+                        <th rowspan="2">Avg</th>
+                    </tr>
+                    <tr>
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                        <th>3st</th>
+                        <th>4st</th>
+                        <th>1st</th>
+                        <th>2st</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
 @section Scripts{
