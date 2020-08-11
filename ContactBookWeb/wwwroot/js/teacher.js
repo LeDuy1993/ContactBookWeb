@@ -66,6 +66,34 @@ teacher.uploadAvatar = function (input) {
     }
 }
 
+teacher.delete = function (id) {
+    bootbox.confirm({
+        title: "Delete teacher?",
+        message: "Do you want to delete this teacher.",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> No'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Yes'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                $.ajax({
+                    url: `/Teacher/Delete/${id}`,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        bootbox.alert(data.result.message);
+                        /*teacher.drawTable();*/
+                    }
+                });
+            }
+        }
+    });
+}
+
 teacher.get = function (id) {
     $.ajax({
         url: `/Teacher/Get/${id}`,
@@ -76,7 +104,6 @@ teacher.get = function (id) {
             $('#TeacherId').val(id);
             $('#DayOfBirth').val(data.result.dayOfBirth);
             $('#PlaceOfBirth').val(data.result.placeOfBirth);
-          
             $('#Phone').val(data.result.phone);
             $('#Address').val(data.result.address);
             $('#SubjectId').val(data.result.subjectId);
