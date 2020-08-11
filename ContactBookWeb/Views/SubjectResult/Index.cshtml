@@ -19,7 +19,7 @@
                             href="javascript:;" onchange="subjectResult.showClass()">
                         @foreach (var cou in courseAll)
                         {
-                            <option  value="@cou.CourseId">@cou.CourseName</option>
+                            <option value="@cou.CourseId">@cou.CourseName</option>
                         }
                     </select>
                 </div>
@@ -55,12 +55,13 @@
                     </select>
 
                 </div>
-             
+
 
             </div>
         </div>
         <div style="background-color:aliceblue" class="mt-2">
-            <table class="table table-bordered">
+            <button id="cmd">Submit</button>
+            <table class="table table-bordered" id="StudentInfoListTable">
                 <thead>
                     <tr>
                         <th rowspan="2">Id</th>
@@ -96,9 +97,60 @@
 
 @section Scripts{
 
-    
-    @*  <script src="~/vendors/scripts/datatable-setting.js"></script>*@
     <script src="~/js/subjectResult.js" asp-append-version="true"></script>
+    <script>
+        $(function () {
+            var doc = new jsPDF();
+            var specialElementHandlers = {
+                '#editor': function (element, renderer) {
+                    return true;
+                }
+            };
+
+            $('#cmd').click(function () {
+
+                var table = tableToJson($('#StudentInfoListTable').get(0))
+                var doc = new jsPDF('p', 'pt', 'a4', true);
+                doc.cellInitialize();
+                $.each(table, function (i, row) {
+                    console.debug(row);
+                    $.each(row, function (j, cell) {
+                        doc.cell(10, 50, 120, 50, cell, i);  // 2nd parameter=top margin,1st=left margin 3rd=row cell width 4th=Row height
+                    })
+                })
+
+
+                doc.save('sample-file.pdf');
+            });
+            function tableToJson(table) {
+                var data = [];
+
+                // first row needs to be headers
+                var headers = [];
+                for (var i = 0; i < table.rows[0].cells.length; i++) {
+                    headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+                }
+
+
+                // go through cells
+                for (var i = 0; i < table.rows.length; i++) {
+
+                    var tableRow = table.rows[i];
+                    var rowData = {};
+
+                    for (var j = 0; j < tableRow.cells.length; j++) {
+
+                        rowData[headers[j]] = tableRow.cells[j].innerHTML;
+
+                    }
+
+                    data.push(rowData);
+                }
+
+                return data;
+            }
+        });
+    </script>
 }
 
 
