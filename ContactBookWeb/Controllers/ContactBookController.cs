@@ -57,8 +57,8 @@ namespace ContactBookWeb.Controllers
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-            var points = new List<GetSubjectResultByCourseIdStudentId>();
-            points = ApiHelper<List<GetSubjectResultByCourseIdStudentId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{courseId}/{studentId}");
+            var points = new List<GetSubjectResultByClassIdStudentId>();
+            points = ApiHelper<List<GetSubjectResultByClassIdStudentId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{classId}/{studentId}");
             var point1st = (from po in points
                            where po.SemesterId.Equals(1)
                            select po).ToList();
