@@ -47,8 +47,8 @@
             </ul>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9">
-            <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">
-            <table class="table table-bordered" id="testTable">
+            <input type="button" onclick="tableToExcel('tablePoint', 'W3C Example Table')" value="Export to Excel">
+            <table class="table table-bordered" id="tablePoint">
                 <thead class="thead-light">
                     <tr>
                         <th rowspan="2">Id</th>
@@ -60,7 +60,7 @@
                         <th rowspan="2">Avg</th>
                     </tr>
                     <tr>
-                        
+
                         <th>1st</th>
                         <th>2st</th>
                         <th>3st</th>
@@ -73,7 +73,7 @@
                         <th>2st</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="point1st">
                 </tbody>
                 <thead>
                     <tr>
@@ -98,6 +98,8 @@
                         <th>2st</th>
                     </tr>
                 </thead>
+                <tbody id="point2st">
+                </tbody>
             </table>
         </div>
     </div>
