@@ -70,12 +70,11 @@ namespace ContactBookWeb.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("SubjectResult/SaveResultPoint/{courseId}/{classId}/{semesterId}/{studentId}/{subjectId}/{subjectResultId}/{typePointId}/{point}")]
-        public JsonResult SaveResultPoint(int courseId = 0, int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId = 0, int typePointId = 0, float point = 0)
+        public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId = 0, int typePointId = 0, float point = 0)
         {
             var saveResultPoint = new SaveResultPoint();
             saveResultPoint.ClassId = classId;
             saveResultPoint.SemesterId = semesterId;
-            saveResultPoint.CourseId = courseId;
             saveResultPoint.StudentId = studentId;
             saveResultPoint.TypePointId = typePointId;
             saveResultPoint.Point = point;
@@ -97,12 +96,12 @@ namespace ContactBookWeb.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/SubjectResult/ShowTablePoint/{courseId}/{semesterId}/{classId}/{subjectId}")]
-        public JsonResult ShowTablePoint(int classId = 0, int courseId = 0, int semesterId = 0, int subjectId = 0)
+        public JsonResult ShowTablePoint(int classId = 0, int semesterId = 0, int subjectId = 0)
         {
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
             var points = new List<GetSubjectCourseSemesterSubjectId>();
-            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{courseId}/{semesterId}/{subjectId}/{classId}");
+            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{semesterId}/{subjectId}/{classId}");
             var tablePoints = new TablePoint();
     
             tablePoints.StudentPoints = new List<StudentPoint>();
