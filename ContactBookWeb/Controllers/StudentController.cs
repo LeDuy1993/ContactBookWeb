@@ -89,10 +89,10 @@ namespace ContactBookWeb.Controllers
         [Route("/Student/Get/{id}")]
         public JsonResult Get(int id)
         {
-            var result = new GetStudentDetail();
-            result = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{id}");
+            var students = new GetStudentDetail();
+            students = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{id}");
 
-            return Json(new { result });
+            return Json(new { students });
         }
 
     }
