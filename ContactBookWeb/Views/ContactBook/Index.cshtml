@@ -37,21 +37,23 @@
                         href="javascript:;" onchange="contactBook.showStudent()" id="classId">
                 </select>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label>Select Student</label>
+                <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
+                        href="javascript:;" onchange="contactBook.showPoint()" id="studentId">
+                </select>
+            </div>
 
         </div>
     </div>
 
-    <div class="tab row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
-            <ul class="nav flex-column nav-pills vtabs" role="tablist" id="studentId">
-            </ul>
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-9">
-            <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel">
-            <table class="table table-bordered" id="testTable">
-                <thead class="thead-light">
+    <div class="pd-20 card-box mt-3" style="background-color:aliceblue">
+   
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color:aliceblue">
+            <input type="button" onclick="tableToExcel('tablePoint', 'W3C Example Table')" value="Export to Excel">
+            <table class="table table-bordered " id="tablePoint" style=" border-radius: 5px">
+                <thead>
                     <tr>
-                        <th rowspan="2">Id</th>
                         <th rowspan="2">Subject</th>
                         <th colspan="4">Điểm Miệng</th>
                         <th colspan="4">Điểm 15 phút</th>
@@ -60,7 +62,7 @@
                         <th rowspan="2">Avg</th>
                     </tr>
                     <tr>
-                        
+
                         <th>1st</th>
                         <th>2st</th>
                         <th>3st</th>
@@ -73,11 +75,11 @@
                         <th>2st</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="point1st">
                 </tbody>
                 <thead>
                     <tr>
-                        <th rowspan="2">Id</th>
+
                         <th rowspan="2">Subject</th>
                         <th colspan="4">Điểm Miệng</th>
                         <th colspan="4">Điểm 15 phút</th>
@@ -98,6 +100,8 @@
                         <th>2st</th>
                     </tr>
                 </thead>
+                <tbody id="point2st">
+                </tbody>
             </table>
         </div>
     </div>

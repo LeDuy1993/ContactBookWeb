@@ -7,6 +7,7 @@ namespace ContactBookWeb.Models.ContactBook
 {
     public class TableContactBook
     {
-        public List<SubjectPoint> subjectPoints { get; set; }
+        public List<SubjectPoint> subjectPoint1st { get; set; }
+        public List<SubjectPoint> subjectPoint2st { get; set; }
     }
 }

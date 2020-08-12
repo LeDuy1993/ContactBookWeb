@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ContactBookWeb.Models.ContactBook
 {
-    public class GetSubjectResultByCourseIdStudentId
+    public class GetSubjectResultByClassIdStudentId
     {
         public int SubjectResultId { get; set; }
         public int StudentId { get; set; }
