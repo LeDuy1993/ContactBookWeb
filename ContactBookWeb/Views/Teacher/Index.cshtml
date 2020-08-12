@@ -15,11 +15,6 @@
                         </h5>
                     </a>
                 </div>
-                @*<div class="col-lg-6 col-md-6 col-sm-6">
-                        <a class="dropdown-item btn btn-success" asp-controller="Teacher" asp-action="AddTeacher">
-                            <i class="dw dw-edit2"></i>Add Teacher
-                        </a>
-                    </div>*@
                 <div class="col-12 mb-3">
                     <a href="javascript:void(0);" onclick="teacher.openAddEditTeacher()" class="dropdown-item btn btn-success">
                         <i class="dw dw-edit2"></i>Add Teacher
@@ -67,7 +62,7 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                                <a class="dropdown-item" href="javascript:void(0);" onclick="teacher.getProfile(@teacher.TeacherId)"><i class="dw dw-eye"></i> View</a>
                                                 <a class="dropdown-item" href="javascript:;" onclick="teacher.get(@teacher.TeacherId)"><i class="dw dw-edit2"></i> Edit</a>
                                                 <a class="dropdown-item" href="javascript:;" onclick="teacher.delete(@teacher.TeacherId)"><i class="dw dw-delete-3"></i> Delete</a>
                                             </div>
@@ -89,7 +84,6 @@
     <div class="modal-dialog modal-lg">
         <form id="fromAddEditTeacher">
             @*Modal content*@
-            <input hidden id="TeacherId" name="TeacherId" value="0">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Teacher</h4>
@@ -188,10 +182,170 @@
 </div>
 
 
-@section Scripts{
+<div id="profileTeacher" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xl" >
+        <div class="modal-content" style="background-color:rgba(0,0,0,0.1)" !impotant>
+            <div class="min-height-200px">
+                <div class="row"  id="desteacher">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+                            <div class="pd-20 card-box height-100-p" >
+                                <div>
+                                    <div class="profile-photo">
+                                        <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="icon-copy ion-arrow-expand"></i></a>
+                                        <img src="~/src/images/layout/noavatar.png" id="AvatarPath" style="width:135px;height:155px" />
+                                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body pd-5">
+                                                        <div class="img-container">
+                                                            <img src="~/src/images/layout/noavatar.png" id="AvatarPath">
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="modal-footer">
+                                                        <input type="submit" value="Update" class="btn btn-primary">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="text-center h5 mb-0" id="teachername"></h5>
+                                    <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
+                                    <div class="profile-info">
+                                        <h5 class="mb-20 h5 text-blue">Contact Information</h5>
+                                        <ul>
+                                            <li>
+                                                <span>Phone Number:</span>
+                                                <p id="Phone"></p>
+                                            </li>
+                                            <li>
+                                                <span>Address:</span>
+                                                <p id="Address"></p>
+                                            </li>
+                                            <li>
+                                                <span>Date of birth:</span>
+                                                <p id="DayOfBirth"></p>
+                                            </li>
+                                            <li>
+                                                <span>Place of birth:</span>
+                                                <p id="PlaceOfBirth"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="profile-social">
+                                        <h5 class="mb-20 h5 text-blue">Social Links</h5>
+                                        <ul class="clearfix">
+                                            <li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff"><i class="fa fa-instagram"></i></a></li>
+                                            <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff"><i class="fa fa-skype"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+                            <div class="card-box height-100-p overflow-hidden">
+                                <div class="profile-tab height-100-p">
+                                    <div class="tab height-100-p">
+                                        <ul class="nav nav-tabs customtab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Settings</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <!-- Timeline Tab start -->
+                                           
+                                            <!-- Timeline Tab End -->
+                                            <!-- Tasks Tab start -->
+                                            
+                                            <!-- Tasks Tab End -->
+                                            <!-- Setting Tab start -->
+                                            <div  class="tab-pane fade show active" id="timeline" role="tabpanel">
+                                                <div class="profile-setting">
+                                                    <form>
+                                                        <ul class="profile-edit-list row">
+                                                            <li class="weight-500 col-md-12">
+                                                                <h4 class="text-blue h5 mb-20">Your Personal</h4>
+                                                                <div class="form-group">
+                                                                    <label>Subject</label>
+                                                                    <input class="form-control form-control-lg" id="SubjectId">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Degree</label>
+                                                                    <input class="form-control form-control-lg" id="DegreeId">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Day to work</label>
+                                                                    <input class="form-control form-control-lg" id="DayToWork">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Gender :</label>
+                                                                    <div class="d-flex">
+                                                                        <div class="custom-control custom-radio mb-5 mr-20">
+                                                                            <input type="radio" value="1" id="customRadio4" name="customRadio" class="custom-control-input">
+                                                                            <label class="custom-control-label weight-400" for="customRadio4">Male</label>
+                                                                        </div>
+                                                                        <div class="custom-control custom-radio mb-5">
+                                                                            <input type="radio" value="0" id="customRadio5" name="customRadio" class="custom-control-input">
+                                                                            <label class="custom-control-label weight-400" for="customRadio5">Female</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- Setting Tab End -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    <script src="~/js/teacher.js" asp-append-version="true"></script>
-}
 
-<!-- The Modal -->
+
+    @section Scripts{
+
+
+        <script src="~/js/teacher.js" asp-append-version="true"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+                var image = document.getElementById('AvatarPath');
+                var cropBoxData;
+                var canvasData;
+                var cropper;
+
+                $('#modal').on('shown.bs.modal', function () {
+                    cropper = new Cropper(image, {
+                        autoCropArea: 0.5,
+                        dragMode: 'move',
+                        aspectRatio: 3 / 3,
+                        restore: false,
+                        guides: false,
+                        center: false,
+                        highlight: false,
+                        cropBoxMovable: false,
+                        cropBoxResizable: false,
+                        toggleDragModeOnDblclick: false,
+                        ready: function () {
+                            cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+                        }
+                    });
+                }).on('hidden.bs.modal', function () {
+                    cropBoxData = cropper.getCropBoxData();
+                    canvasData = cropper.getCanvasData();
+                    cropper.destroy();
+                });
+            });
+        </script>
+    }
+
+    <!-- The Modal -->

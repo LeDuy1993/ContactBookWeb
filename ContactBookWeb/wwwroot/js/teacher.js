@@ -50,10 +50,50 @@ teacher.cardTeacher = function (id) {
 
 
 
+
+
+
+
 teacher.openAddEditTeacher = function () {
     teacher.reset();
     $('#addEditTeacher').modal('show');
 };
+
+
+/*teacher.openProfileTeacher = function () {
+ * teacher
+    $('#profileTeacher').modal('show');
+};*/
+
+
+teacher.getProfile = function (id) {
+    $.ajax({
+        url: `/Teacher/Get/${id}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#desteacher').find('#teachername').text(data.result.teacherName);
+            $('#desteacher').find('#PlaceOfBirth').text(data.result.placeOfBirth);
+            $('#desteacher').find('#TeacherId').text(id);
+            $('#desteacher').find('#DayOfBirth').text(data.result.dayOfBirth);
+            $('#desteacher').find('#Phone').text(data.result.phone);
+            $('#desteacher').find('#Address').text(data.result.address);
+            $('#desteacher').find('#SubjectId').val(data.result.subjectId);
+            $('#desteacher').find('#DegreeId').val(data.result.degreeId);
+            $('#desteacher').find('#DayToWork').val(data.result.dayToWork);
+            $('#desteacher').find('#AvatarPath').attr("src", data.result.avatarPath);
+            if ($('#desteacher').find(data.result.gender) == "1") {
+                $('#customRadio4').prop('checked', true);
+
+            }
+            else {
+                $('#customRadio5').prop('checked', true);
+            }
+            $('#profileTeacher').modal('show');
+
+        }
+    });
+}
 
 
 teacher.uploadAvatar = function (input) {
@@ -159,7 +199,7 @@ teacher.save = function () {
         data: JSON.stringify(saveTeacher),
         success: function (data) {
             $('#addEditTeacher').modal('hide');
-           /* bootbox.alert(data.result.message);*/
+            bootbox.alert(data.result.message);
            /* teacher.drawTable();*/
         }
     });
