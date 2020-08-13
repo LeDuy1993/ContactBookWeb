@@ -12,7 +12,6 @@ namespace ContactBookWeb.Models.ContactBook
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string DateInput { get; set; }
-        public int CourseId { get; set; }
         public int SemesterId { get; set; }
         public int SubjectId { get; set; }
         public string Point { get; set; }

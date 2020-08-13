@@ -52,9 +52,13 @@ namespace ContactBookWeb.Controllers
 
             return Json(new { students });
         }
-        [Route("/ContactBook/ShowTablePoint/{courseId}/{studentId}/{classId}")]
-        public JsonResult ShowTablePoint(int courseId = 0, int studentId = 0, int classId = 0)
+        [Route("/ContactBook/ShowTablePoint/{studentId}/{classId}")]
+        public JsonResult ShowTablePoint(int studentId = 0, int classId = 0)
         {
+            var classRoom = new GetClassByClassId();
+            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}");
+            var student = new GetStudentDetail();
+            student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{studentId}");
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
             var points = new List<GetSubjectResultByClassIdStudentId>();
@@ -67,6 +71,15 @@ namespace ContactBookWeb.Controllers
                             select po).ToList();
 
             var tableContactBook = new TableContactBook();
+            tableContactBook.LastName = student.LastName;
+            tableContactBook.FirstName = student.FirstName;
+            tableContactBook.DayOfBirth = student.DayOfBirth;
+            tableContactBook.Gender = student.Gender;
+            tableContactBook.PhoneNumber = student.PhoneNumber;
+            tableContactBook.Address = student.Address;
+            tableContactBook.ClassName = classRoom.ClassName;
+            tableContactBook.CourseName = classRoom.CourseName;
+            tableContactBook.TeacherName = classRoom.TeacherName;
             tableContactBook.subjectPoint1st = new List<SubjectPoint>();
             tableContactBook.subjectPoint2st = new List<SubjectPoint>();
             tableContactBook.subjectPoint1st = (from su in subjects
@@ -74,6 +87,7 @@ namespace ContactBookWeb.Controllers
                                               {
                                                   SubjectId = su.SubjectId,
                                                   SubjectName = su.SubjectName,
+                                                  TeacherName=su.TeacherName,
                                                   Point1st = "",
                                                   Point2st = "",
                                                   Point3st = "",
@@ -114,6 +128,7 @@ namespace ContactBookWeb.Controllers
                                                 {
                                                     SubjectId = su.SubjectId,
                                                     SubjectName = su.SubjectName,
+                                                    TeacherName=su.TeacherName,
                                                     Point1st = "",
                                                     Point2st = "",
                                                     Point3st = "",
@@ -148,7 +163,9 @@ namespace ContactBookWeb.Controllers
                                                     DateInput10st = "",
                                                     DateInput11st = "",
                                                     Avg = 0,
+                         
                                                 }).ToList();
+            
             foreach (var su in tableContactBook.subjectPoint1st)
             {
                 float sum = 0; var count = 0;
