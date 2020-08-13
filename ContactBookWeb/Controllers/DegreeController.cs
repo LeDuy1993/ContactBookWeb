@@ -17,11 +17,13 @@ namespace ContactBookWeb.Controllers
         {
             _logger = logger;
         }
+
         [Route("/Degree/Gets")]
         public JsonResult Gets()
         {
             var degrees = new List<DegreeView>();
             degrees = ApiHelper<List<DegreeView>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetDegreeAll");
+
             return Json(new { degrees });
         }
     }

@@ -86,6 +86,7 @@ student.uploadAvatar = function (input) {
             $('#AvatarPath').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
+        $('#FileUpload').hide();
     }
 }
 
@@ -112,21 +113,21 @@ student.get = function (id) {
         method: "GET",
         dataType: "json",
         success: function (data) {
-            $('#FirstName').val(data.result.firstName);
-            $('#LastName').val(data.result.lastName);
+            $('#FirstName').val(data.students.firstName);
+            $('#LastName').val(data.students.lastName);
             $('#StudentId').val(id);
-            $('#DayOfBirth').val(data.result.dayOfBirth);
-            $('#PlaceOfBirth').val(data.result.placeOfBirth);
-            $('#Address').val(data.result.address);
-            $('#NationId').val(data.result.nationId);
-            $('#ReligionId').val(data.result.religionId);
-            $('#FartherName').val(data.result.fartherName);
-            $('#MortherName').val(data.result.mortherName);
-            $('#JobName').val(data.result.jobName);
-            $('#PhoneNumber').val(data.result.phoneNumber);
-            $('#AvatarPath').attr("src", data.result.avatarPath);         
+            $('#DayOfBirth').val(data.students.dayOfBirth);
+            $('#PlaceOfBirth').val(data.students.placeOfBirth);
+            $('#Address').val(data.students.address);
+            $('#NationId').val(data.students.nationId);
+            $('#ReligionId').val(data.students.religionId);
+            $('#FartherName').val(data.students.fartherName);
+            $('#MortherName').val(data.students.mortherName);
+            $('#JobName').val(data.students.jobName);
+            $('#PhoneNumber').val(data.students.phoneNumber);
+            $('#AvatarPath').attr("src", data.students.avatarPath);         
             $('#addEditStudent').modal('show');
-            if (data.result.gender == "Male") {
+            if (data.students.gender == "Male") {
                 $('#customRadio4').prop('checked', true);
 
             }

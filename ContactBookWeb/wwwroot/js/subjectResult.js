@@ -1,5 +1,4 @@
 ﻿var subjectResult = {} || subjectResult;
-var courseId = 0;
 var gradeId = 0;
 var classId = 0;
 var semesterId = 0;
@@ -53,13 +52,12 @@ subjectResult.showSubject = function () {
     });
 }
 subjectResult.showTablePoint = function () {
-    courseId = $('#courseId').val();
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
     semesterId = $('#semesterId').val();
     subjectId = $('#subjectId').val();
     $.ajax({
-        url: `/SubjectResult/ShowTablePoint/${courseId}/${semesterId}/${classId}/${subjectId}`,
+        url: `/SubjectResult/ShowTablePoint/${semesterId}/${classId}/${subjectId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -71,42 +69,41 @@ subjectResult.showTablePoint = function () {
                           <td>${v.studentId}</td>
                           <td>${v.firstName}</td>
                           <td>${v.lastName}</td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point1" value="${v.point1st}"
-                            href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin1stId},$('#${v.studentId}point1').val(),${1},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point1" value="${v.listPoint[0]}"
+                            href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point1').val(),${0},${v.studentId},${v.subjectResultId})"
                             /></td>
-                         <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point2" value="${v.point2st}"
-                            href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin2stId},$('#${v.studentId}point2').val(),${2},${v.studentId})"
+                         <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point2" value="${v.listPoint[1]}"
+                            href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point2').val(),${1},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point3"  value="${v.point3st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin3stId},$('#${v.studentId}point3').val(),${3},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point3"  value="${v.listPoint[2]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point3').val(),${2},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point4"  value="${v.point4st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin4stId},$('#${v.studentId}point4').val(),${4},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point4"  value="${v.listPoint[3]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point4').val(),${3},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point5"  value="${v.point5st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin5stId},$('#${v.studentId}point5').val(),${5},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point5"  value="${v.listPoint[4]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point5').val(),${4},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point6"  value="${v.point6st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin6stId},$('#${v.studentId}point6').val(),${7},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point6"  value="${v.listPoint[5]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point6').val(),${5},${v.studentId},${v.subjectResultId})"
                              /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point7"  value="${v.point7st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin7stId},$('#${v.studentId}point7').val(),${8},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point7"  value="${v.listPoint[6]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point7').val(),${6},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point8"  value="${v.point8st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin8stId},$('#${v.studentId}point8').val(),${9},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:100%" id="${v.studentId}point8"  value="${v.listPoint[7]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point8').val(),${7},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point9"  value="${v.point9st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin9stId},$('#${v.studentId}point9').val(),${11},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point9"  value="${v.listPoint[8]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point9').val(),${8},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point10"  value="${v.point10st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin10stId},$('#${v.studentId}point10').val(),${12},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point10"  value="${v.listPoint[9]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point10').val(),${9},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.point11st}"
-                             href="javascript:;" onchange="subjectResult.SaveResultPoint(${v.poin11stId},$('#${v.studentId}point11').val(),${13},${v.studentId})"
+                          <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.listPoint[10]}"
+                             href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point11').val(),${10},${v.studentId},${v.subjectResultId})"
                             /></td>
                           <td style="padding: 0px; width: 5%;" type="number" min="0" max="10" required="true"  >${v.avg}
                             </td >
-                  
                       </tr>
                       `
                 );
@@ -115,34 +112,20 @@ subjectResult.showTablePoint = function () {
     });
 }
 
-subjectResult.SaveResultPoint = function (id1, id2, id3, id4) {
-    courseId = $('#courseId').val();
+subjectResult.SaveResultPoint = function (point, index, studentId, subjectResultId) {
     classId = $('#classId').val();
     semesterId = $('#semesterId').val();
     subjectId = $('#subjectId').val();
-    subjectResultId = id1;
-    point = id2;
-    typePointId = id3;
-    studentId = id4;
-    console.log(studentId);
-    console.log(courseId);
-    console.log(classId);
-    console.log(semesterId);
-    console.log(subjectId);
-    console.log(subjectResultId);
-    console.log(point);
-    console.log(typePointId);
-   
     $.ajax({
-        url: `/SubjectResult/SaveResultPoint/${courseId}/${classId}/${semesterId}/${studentId}/${subjectId}/${subjectResultId}/${typePointId}/${point}`,
+        url: `/SubjectResult/SaveResultPoint/${classId}/${semesterId}/${studentId}/${subjectId}/${point}/${index}/${subjectResultId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
             subjectResult.showTablePoint();
         }
     });
-
 }
+
 subjectResult.init = function () {
     subjectResult.showClass();
     subjectResult.showSubject();

@@ -23,13 +23,16 @@ namespace ContactBookWeb.Controllers
         {
             var nationAll = new List<NationView>();
             nationAll = ApiHelper<List<NationView>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/gets");
+
             return View(nationAll);
         }
+
         [Route("/ReligionNation/GetReligionAll")]
         public JsonResult GetReligionAll()
         {
             var religionAll = new List<GetReligionAll>();
             religionAll = ApiHelper<List<GetReligionAll>>.HttpGetAsync($"{Helper.ApiUrl}api/religion/GetReligionAll");
+
             return Json(new { religionAll });
         }
 
@@ -38,6 +41,7 @@ namespace ContactBookWeb.Controllers
         {
             var nationAll = new List<GetNationAll>();
             nationAll = ApiHelper<List<GetNationAll>>.HttpGetAsync($"{Helper.ApiUrl}api/nation/getnationall");
+
             return Json(new { nationAll });
         }
     }

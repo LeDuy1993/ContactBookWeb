@@ -1478,7 +1478,7 @@ pre code {
   color: #212529; }
 
 .table td, .table th {
-  padding: .75rem;
+
   vertical-align: top;
   border-top: 1px solid #dee2e6; }
 
@@ -1489,8 +1489,7 @@ pre code {
 .table tbody + tbody {
   border-top: 2px solid #dee2e6; }
 
-.table-sm td, .table-sm th {
-  padding: .3rem; }
+
 
 .table-bordered {
   border: 1px solid #dee2e6; }
@@ -8292,8 +8291,14 @@ yx-axis
 .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_draggerRail,
 .mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_dragger_bar,
 .mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_draggerRail {
-  -webkit-transition: width .2s ease-out .2s, height .2s ease-out .2s,  margin-left .2s ease-out .2s, margin-right .2s ease-out .2s,  margin-top .2s ease-out .2s, margin-bottom .2s ease-out .2s, opacity .2s ease-in-out, background-color .2s ease-in-out;
-  transition: width .2s ease-out .2s, height .2s ease-out .2s,  margin-left .2s ease-out .2s, margin-right .2s ease-out .2s,  margin-top .2s ease-out .2s, margin-bottom .2s ease-out .2s, opacity .2s ease-in-out, background-color .2s ease-in-out; }
+  -webkit-transition: width .2s ease-out .2s, height .2s ease-out .2s, 
+ margin-left .2s ease-out .2s, margin-right .2s ease-out .2s, 
+ margin-top .2s ease-out .2s, margin-bottom .2s ease-out .2s,
+ opacity .2s ease-in-out, background-color .2s ease-in-out;
+  transition: width .2s ease-out .2s, height .2s ease-out .2s, 
+ margin-left .2s ease-out .2s, margin-right .2s ease-out .2s, 
+ margin-top .2s ease-out .2s, margin-bottom .2s ease-out .2s,
+ opacity .2s ease-in-out, background-color .2s ease-in-out; }
 
 /* 
 ------------------------------------------------------------------------------------------------------------------------
