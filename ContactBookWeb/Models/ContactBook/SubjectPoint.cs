@@ -9,7 +9,8 @@ namespace ContactBookWeb.Models.ContactBook
     {
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
-        public string ListPoint { get; set; }
-        public string ListDate { get; set; }
+        public string TeacherName { get; set; }
+        public string[] ListPoint { get; set; }
+        public string[] ListDate { get; set; }
     }
 }

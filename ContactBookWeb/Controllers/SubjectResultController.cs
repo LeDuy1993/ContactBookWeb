@@ -60,7 +60,7 @@ namespace ContactBookWeb.Controllers
         [Route("SubjectResult/SaveResultPoint/{classId}/{semesterId}/{studentId}/{subjectId}/{point}/{index}/{subjectResultId}")]
         public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int index = 0, int subjectId = 0, string point = " ", int subjectResultId = 0)
         {
-
+          
             var saveResultPoint = new SaveResultPoint();
             saveResultPoint.SubjectResultId = subjectResultId;
             saveResultPoint.ClassId = classId;
@@ -138,7 +138,6 @@ namespace ContactBookWeb.Controllers
                                              ListDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
                                              Avg = 0,
                                          }).ToList();
-
             foreach (var stu in tablePoints.StudentPoints)
             {
                 float sum = 0; var count = 0;

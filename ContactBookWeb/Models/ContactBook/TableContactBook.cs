@@ -16,7 +16,7 @@ namespace ContactBookWeb.Models.ContactBook
         public string Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public List<SubjectPoint> Semester1 { get; set; }
-        public List<SubjectPoint> Semester2 { get; set; }
+        public List<SubjectPoint> SubjectPoint1 { get; set; }
+        public List<SubjectPoint> SubjectPoint2 { get; set; }
     }
 }
