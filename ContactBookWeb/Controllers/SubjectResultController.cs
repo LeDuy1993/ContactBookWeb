@@ -52,13 +52,13 @@ namespace ContactBookWeb.Controllers
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-            
+
             return Json(new { subjects });
         }
 
         [HttpGet]
         [Route("SubjectResult/SaveResultPoint/{classId}/{semesterId}/{studentId}/{subjectId}/{point}/{index}/{subjectResultId}")]
-        public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int index = 0, int subjectId = 0,int point = 0, int subjectResultId=0)
+        public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int index = 0, int subjectId = 0, string point = " ", int subjectResultId = 0)
         {
 
             var saveResultPoint = new SaveResultPoint();
@@ -67,37 +67,56 @@ namespace ContactBookWeb.Controllers
             saveResultPoint.SemesterId = semesterId;
             saveResultPoint.StudentId = studentId;
             saveResultPoint.SubjectId = subjectId;
+            string[] listPoint = new string[] { };
+            string[] listDate = new string[] { };
             if (subjectResultId != 0)
             {
                 var subjectPoint = new GetSubjectResultBySubjectResultId();
                 subjectPoint = ApiHelper<GetSubjectResultBySubjectResultId>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultBySubjectResultId/{subjectResultId}");
-                string[] listPoint = new string[] { };
-                string[] listDate = new string[] { };
                 listPoint = subjectPoint.ListPoint.Split(',');
                 listPoint[index] = point.ToString();
-                subjectPoint.ListPoint = string.Join(",", listPoint);
                 listDate = subjectPoint.ListDate.Split(',');
                 listDate[index] = DateTime.Now.ToString("yyyy-MM-dd");
-                subjectPoint.ListDate = string.Join(",", listDate);
-                saveResultPoint.ListPoint = subjectPoint.ListPoint;
-                saveResultPoint.ListDate = subjectPoint.ListDate;
             }
             else
             {
-                var listPoint = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+                listPoint = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
                 listPoint[index] = point.ToString();
-                saveResultPoint.ListPoint = string.Join(",", listPoint);
-                var listDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
-                listDate[index]= DateTime.Now.ToString("yyyy-MM-dd");
-                saveResultPoint.ListDate = string.Join(",", listDate);
+                listDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+                listDate[index] = DateTime.Now.ToString("yyyy-MM-dd");
             }
+            float sum = 0; var count = 0;
+            for (var i = 0; i <= 10; i++)
+            {
+                if (listPoint[i] != " ")
+                {
+                    if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7)
+                    {
+                        sum += float.Parse(listPoint[i]);
+                        count += 1;
+                    }
+                    else if (i == 8 || i == 9)
+                    {
+                        sum += float.Parse(listPoint[i]) * 2;
+                        count += 2;
+                    }
+                    else
+                    {
+                        sum += float.Parse(listPoint[i]) * 3;
+                        count += 3;
+                    }
+                }
+            }
+            listPoint[11] = ((float)Math.Round(sum / count, 2)).ToString();
+            saveResultPoint.ListPoint = string.Join(",", listPoint);
+            saveResultPoint.ListDate = string.Join(",", listDate);
             var result = ApiHelper<SaveResult>.HttpPostAsync(
                                                   $"{Helper.ApiUrl}api/subjectResutl/SaveSubjectResult",
                                                   saveResultPoint);
 
             return Json(new { result });
         }
-            
+
         [HttpGet]
         [Route("/SubjectResult/ShowTablePoint/{semesterId}/{classId}/{subjectId}")]
         public JsonResult ShowTablePoint(int classId = 0, int semesterId = 0, int subjectId = 0)
@@ -110,13 +129,13 @@ namespace ContactBookWeb.Controllers
             tablePoints.StudentPoints = new List<StudentPoint>();
             tablePoints.StudentPoints = (from stu in students
                                          select new StudentPoint()
-                                         {  
-                                             SubjectResultId=0,
+                                         {
+                                             SubjectResultId = 0,
                                              StudentId = stu.StudentId,
                                              LastName = stu.LastName,
                                              FirstName = stu.FirstName,
-                                             ListPoint = new string[] {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                             ListDate = new string[] {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+                                             ListPoint = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+                                             ListDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
                                              Avg = 0,
                                          }).ToList();
 
@@ -124,13 +143,13 @@ namespace ContactBookWeb.Controllers
             {
                 float sum = 0; var count = 0;
                 foreach (var point in points)
-                {                  
-                    if (stu.StudentId == point.StudentId && point!=null)
+                {
+                    if (stu.StudentId == point.StudentId && point != null)
                     {
                         stu.SubjectResultId = point.SubjectResultId;
                         string[] listPoint = new string[] { };
                         listPoint = point.ListPoint.Split(',');
-                        for (var i = 0;i <= 10; i++)
+                        for (var i = 0; i <= 10; i++)
                         {
                             stu.ListPoint[i] = listPoint[i];
                             stu.ListDate[i] = listPoint[i];
@@ -143,26 +162,29 @@ namespace ContactBookWeb.Controllers
                                 }
                                 else if (i == 8 || i == 9)
                                 {
-                                    sum += float.Parse(stu.ListPoint[i])*2;
+                                    sum += float.Parse(stu.ListPoint[i]) * 2;
                                     count += 2;
                                 }
                                 else
                                 {
-                                    sum += float.Parse(stu.ListPoint[i])*3;
+                                    sum += float.Parse(stu.ListPoint[i]) * 3;
                                     count += 3;
-                                }    
+                                }
                             }
                         }
+                        stu.ListPoint[11] = listPoint[11];
                     }
 
                 }
                 if (sum == 0 || count == 0)
                 {
                     stu.Avg = 0.0f;
+                    stu.ListPoint[11] = "0";
                 }
                 else
                 {
                     stu.Avg = (float)Math.Round(sum / count, 2);
+                    stu.ListPoint[11] = stu.Avg.ToString();
                 }
             }
             return Json(new { tablePoints });

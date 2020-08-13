@@ -102,7 +102,7 @@ subjectResult.showTablePoint = function () {
                           <td style="padding: 0px; width: 5%;" ><input type="number" min="0" max="10" required="true" style="width:100%; height:20px" id="${v.studentId}point11"  value="${v.listPoint[10]}"
                              href="javascript:;" onchange="subjectResult.SaveResultPoint($('#${v.studentId}point11').val(),${10},${v.studentId},${v.subjectResultId})"
                             /></td>
-                          <td style="padding: 0px; width: 5%;" type="number" min="0" max="10" required="true"  >${v.avg}
+                          <td style="padding: 0px; width: 5%;" type="number" min="0" max="10" required="true">${v.listPoint[11]}
                             </td >
                       </tr>
                       `
