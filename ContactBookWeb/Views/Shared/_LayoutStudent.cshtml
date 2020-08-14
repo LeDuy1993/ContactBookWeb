@@ -34,19 +34,6 @@
     </script>
 </head>
 <body>
-    <div class="pre-loader">
-        <div class="pre-loader-box">
-            <div class="loader-logo"><img src="~/vendors/images/deskapp-logo.svg" alt=""></div>
-            <div class='loader-progress' id="progress_div">
-                <div class='bar' id='bar1'></div>
-            </div>
-            <div class='percent' id='percent1'>0%</div>
-            <div class="loading-text">
-                Loading...
-            </div>
-        </div>
-    </div>
-
     <div class="header">
         <div class="header-left">
             <div class="menu-icon dw dw-menu"></div>
@@ -298,7 +285,7 @@
 
                     </li>
                     <li>
-                        <a href="calendar.html" class="dropdown-toggle no-arrow">
+                        <a asp-controller="CourseGradeClass" asp-action="Index" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-calendar1"></span><span class="mtext">Course-Grade-Class</span>
                         </a>
                     </li>

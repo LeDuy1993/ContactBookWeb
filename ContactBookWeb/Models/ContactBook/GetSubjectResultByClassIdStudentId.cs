@@ -9,15 +9,12 @@ namespace ContactBookWeb.Models.ContactBook
     {
         public int SubjectResultId { get; set; }
         public int StudentId { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string DateInput { get; set; }
-        public int CourseId { get; set; }
+        public int ClassId { get; set; }
         public int SemesterId { get; set; }
         public int SubjectId { get; set; }
-        public string Point { get; set; }
-        public int TypePointId { get; set; }
-        public int ClassId { get; set; }
-        public int Coefficient { get; set; }
+        public string SubjectName { get; set; }
+        public string ListPoint { get; set; }
+        public string ListDate { get; set; }
+        public string TeacherName { get; set; }
     }
 }

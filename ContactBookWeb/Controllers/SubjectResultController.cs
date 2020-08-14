@@ -7,6 +7,7 @@ using ContactBookWeb.Models.SubjectResult;
 using ContactBookWeb.Models.Teacher;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -51,183 +52,140 @@ namespace ContactBookWeb.Controllers
         {
             var subjects = new List<GetSubjectByClassId>();
             subjects = ApiHelper<List<GetSubjectByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subject/GetSubjectByClassId/{classId}");
-            
+
             return Json(new { subjects });
         }
 
-
-        /// <summary>
-        /// Create and save Point
-        /// </summary>
-        /// <param name="courseId"></param>
-        /// <param name="semesterId"></param>
-        /// <param name="classId"></param>
-        /// <param name="studentId"></param>
-        /// <param name="subjectId"></param>
-        /// <param name="subjectResultId"></param>
-        /// <param name="typePointId"></param>
-        /// <param name="point"></param>
-        /// <returns></returns>
         [HttpGet]
-        [Route("SubjectResult/SaveResultPoint/{courseId}/{classId}/{semesterId}/{studentId}/{subjectId}/{subjectResultId}/{typePointId}/{point}")]
-        public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int subjectId = 0, int subjectResultId = 0, int typePointId = 0, float point = 0)
+        [Route("SubjectResult/SaveResultPoint/{classId}/{semesterId}/{studentId}/{subjectId}/{point}/{index}/{subjectResultId}")]
+        public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int index = 0, int subjectId = 0, string point = " ", int subjectResultId = 0)
         {
+          
             var saveResultPoint = new SaveResultPoint();
+            saveResultPoint.SubjectResultId = subjectResultId;
             saveResultPoint.ClassId = classId;
             saveResultPoint.SemesterId = semesterId;
             saveResultPoint.StudentId = studentId;
-            saveResultPoint.TypePointId = typePointId;
-            saveResultPoint.Point = point;
             saveResultPoint.SubjectId = subjectId;
-            saveResultPoint.SubjectResultId = subjectResultId;
+            string[] listPoint = new string[] { };
+            string[] listDate = new string[] { };
+            if (subjectResultId != 0)
+            {
+                var subjectPoint = new GetSubjectResultBySubjectResultId();
+                subjectPoint = ApiHelper<GetSubjectResultBySubjectResultId>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultBySubjectResultId/{subjectResultId}");
+                listPoint = subjectPoint.ListPoint.Split(',');
+                listPoint[index] = point.ToString();
+                listDate = subjectPoint.ListDate.Split(',');
+                listDate[index] = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                listPoint = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+                listPoint[index] = point.ToString();
+                listDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+                listDate[index] = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+            float sum = 0; var count = 0;
+            for (var i = 0; i <= 10; i++)
+            {
+                if (listPoint[i] != " ")
+                {
+                    if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7)
+                    {
+                        sum += float.Parse(listPoint[i]);
+                        count += 1;
+                    }
+                    else if (i == 8 || i == 9)
+                    {
+                        sum += float.Parse(listPoint[i]) * 2;
+                        count += 2;
+                    }
+                    else
+                    {
+                        sum += float.Parse(listPoint[i]) * 3;
+                        count += 3;
+                    }
+                }
+            }
+            listPoint[11] = ((float)Math.Round(sum / count, 2)).ToString();
+            saveResultPoint.ListPoint = string.Join(",", listPoint);
+            saveResultPoint.ListDate = string.Join(",", listDate);
             var result = ApiHelper<SaveResult>.HttpPostAsync(
                                                   $"{Helper.ApiUrl}api/subjectResutl/SaveSubjectResult",
                                                   saveResultPoint);
 
             return Json(new { result });
         }
-        /// <summary>
-        /// Get Point theo năm, lớp, học kì và môn nào
-        /// </summary>
-        /// <param name="classId"></param>
-        /// <param name="courseId"></param>
-        /// <param name="semesterId"></param>
-        /// <param name="subjectId"></param>
-        /// <returns></returns>
+
         [HttpGet]
-        [Route("/SubjectResult/ShowTablePoint/{courseId}/{semesterId}/{classId}/{subjectId}")]
+        [Route("/SubjectResult/ShowTablePoint/{semesterId}/{classId}/{subjectId}")]
         public JsonResult ShowTablePoint(int classId = 0, int semesterId = 0, int subjectId = 0)
         {
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
-            var points = new List<GetSubjectCourseSemesterSubjectId>();
-            points = ApiHelper<List<GetSubjectCourseSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectCourseSemesterSubjectId/{semesterId}/{subjectId}/{classId}");
+            var points = new List<GetSubjectResultClassIdSemesterSubjectId>();
+            points = ApiHelper<List<GetSubjectResultClassIdSemesterSubjectId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultClassIdSemesterSubjectId/{semesterId}/{subjectId}/{classId}");
             var tablePoints = new TablePoint();
-    
             tablePoints.StudentPoints = new List<StudentPoint>();
             tablePoints.StudentPoints = (from stu in students
                                          select new StudentPoint()
                                          {
+                                             SubjectResultId = 0,
                                              StudentId = stu.StudentId,
                                              LastName = stu.LastName,
                                              FirstName = stu.FirstName,
-                                             Point1st = "",
-                                             Point2st = "",
-                                             Point3st = "",
-                                             Point4st = "",
-                                             Point5st = "",
-                                             Point6st = "",
-                                             Point7st = "",
-                                             Point8st = "",
-                                             Point9st = "",
-                                             Point10st = "",
-                                             Point11st = "",
-                                             Poin1stId = 0,
-                                             Poin2stId = 0,
-                                             Poin3stId = 0,
-                                             Poin4stId = 0,
-                                             Poin5stId = 0,
-                                             Poin6stId = 0,
-                                             Poin7stId = 0,
-                                             Poin8stId = 0,
-                                             Poin9stId = 0,
-                                             Poin10stId = 0,
-                                             Poin11stId = 0,
+                                             ListPoint = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+                                             ListDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
                                              Avg = 0,
                                          }).ToList();
-
             foreach (var stu in tablePoints.StudentPoints)
             {
                 float sum = 0; var count = 0;
                 foreach (var point in points)
                 {
-                    if (stu.StudentId == point.StudentId)
+                    if (stu.StudentId == point.StudentId && point != null)
                     {
-                        switch (point.TypePointId)
+                        stu.SubjectResultId = point.SubjectResultId;
+                        string[] listPoint = new string[] { };
+                        listPoint = point.ListPoint.Split(',');
+                        for (var i = 0; i <= 10; i++)
                         {
-                            case 1:
-                                stu.Point1st = point.Point;
-                                stu.Poin1stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-                            case 2:
-                                stu.Point2st = point.Point;
-                                stu.Poin2stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-                            case 3:
-                                stu.Point3st = point.Point;
-                                stu.Poin3stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-
-                            case 4:
-                                stu.Point4st = point.Point;
-                                stu.Poin4stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-                            case 5:
-                                stu.Point5st = point.Point;
-                                stu.Poin5stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-
-                            case 7:
-                                stu.Point6st = point.Point;
-                                stu.Poin6stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-                            case 8:
-                                stu.Point7st = point.Point;
-                                stu.Poin7stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-                            case 9:
-                                stu.Point8st = point.Point;
-                                stu.Poin8stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point);
-                                count += 1;
-                                break;
-
-                            case 11:
-                                stu.Point9st = point.Point;
-                                stu.Poin9stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point)* 2;
-                                count += 2;
-                                break;
-                            case 12:
-                                stu.Point10st = point.Point;
-                                stu.Poin10stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point) * 2;
-                                count += 2;
-                                break;
-                            case 13:
-                                stu.Point11st = point.Point;
-                                stu.Poin11stId = point.SubjectResultId;
-                                sum += float.Parse(point.Point) * 3;
-                                count += 3;
-                                break;
+                            stu.ListPoint[i] = listPoint[i];
+                            stu.ListDate[i] = listPoint[i];
+                            if (stu.ListPoint[i] != " ")
+                            {
+                                if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7)
+                                {
+                                    sum += float.Parse(stu.ListPoint[i]);
+                                    count += 1;
+                                }
+                                else if (i == 8 || i == 9)
+                                {
+                                    sum += float.Parse(stu.ListPoint[i]) * 2;
+                                    count += 2;
+                                }
+                                else
+                                {
+                                    sum += float.Parse(stu.ListPoint[i]) * 3;
+                                    count += 3;
+                                }
+                            }
                         }
+                        stu.ListPoint[11] = listPoint[11];
                     }
 
                 }
                 if (sum == 0 || count == 0)
                 {
                     stu.Avg = 0.0f;
+                    stu.ListPoint[11] = "0";
                 }
                 else
                 {
                     stu.Avg = (float)Math.Round(sum / count, 2);
+                    stu.ListPoint[11] = stu.Avg.ToString();
                 }
             }
-
             return Json(new { tablePoints });
         }
     }

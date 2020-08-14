@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /*==============================================================
 
@@ -834,7 +834,7 @@ textarea.form-control{
 	font-weight: 600;
 	font-size: 15px;
 	border-bottom: 0;
-	padding-left: 1rem;
+
 }
 .table td, .table th{
 	vertical-align: middle;
@@ -842,7 +842,7 @@ textarea.form-control{
 .table td{
 	font-size: 14px;
 	font-weight: 500;
-	padding: 1rem
+
 }
 .table-striped tbody tr:nth-of-type(odd){background: #eaeef2;}
 
@@ -3972,7 +3972,7 @@ body.IE .register-page-wrap .container{
 	padding: 30px;
 }
 .table-badge{
-	padding: 8px 20px;
+/*	padding: 8px 20px;*/
 	font-size: 14px;
 	background: #1b00ff;
 	color: #ebecef;

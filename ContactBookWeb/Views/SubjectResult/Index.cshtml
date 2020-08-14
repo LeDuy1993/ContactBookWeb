@@ -1,11 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Subject result Page";
-    Layout = "_Layout Table";
+    Layout = "_LayoutContactBook";
     var courseAll = ViewBag.courseAll as List<GetCourseAll>;
     var gradeAll = ViewBag.gradeAll as List<GetGradeAll>;
-
 }
-
 <div class="main-container">
     <div class="mb-30" style="width:auto; height:auto">
         <div class="pd-20 card-box w-auto h-auto">
@@ -63,27 +61,27 @@
             <table class="table table-bordered" id="StudentInfoListTable">
                 <thead>
                     <tr>
-                        <th rowspan="2">Id</th>
-                        <th colspan="2">Student Name</th>
-                        <th colspan="4">Điểm Miệng</th>
-                        <th colspan="4">Điểm 15 phút</th>
-                        <th colspan="2">Điểm 1 tiết</th>
-                        <th rowspan="2">Điểm học kỳ</th>
-                        <th rowspan="2">Average</th>
+                        <th scope="col"rowspan="2">Id</th>
+                        <th scope="col" colspan="2">Student Name</th>
+                        <th scope="col" colspan="4">Điểm Miệng</th>
+                        <th scope="col" colspan="4">Điểm 15 phút</th>
+                        <th scope="col" colspan="2">Điểm 1 tiết</th>
+                        <th scope="col" rowspan="2">Điểm học kỳ</th>
+                        <th scope="col" rowspan="2">Average</th>
                     </tr>
                     <tr>
                         <th>Firt name</th>
                         <th>Last name</th>
-                        <th>1st</th>
-                        <th>2st</th>
-                        <th>3st</th>
-                        <th>4st</th>
-                        <th>1st</th>
-                        <th>2st</th>
-                        <th>3st</th>
-                        <th>4st</th>
-                        <th>1st</th>
-                        <th>2st</th>
+                        <th scope="col">1st</th>
+                        <th scope="col">2st</th>
+                        <th class="text-center">3st</th>
+                        <th class="text-center">4st</th>
+                        <th class="text-center">1st</th>
+                        <th class="text-center">2st</th>
+                        <th class="text-center">3st</th>
+                        <th class="text-center">4st</th>
+                        <th class="text-center">1st</th>
+                        <th class="text-center">2st</th>
                     </tr>
                 </thead>
                 <tbody id="studentPoints">
