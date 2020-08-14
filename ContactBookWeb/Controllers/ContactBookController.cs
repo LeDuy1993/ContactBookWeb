@@ -97,5 +97,18 @@ namespace ContactBookWeb.Controllers
             }
             return Json(new { tableContactBook });
         }
+        [Route("/ContactBook/ShowClassPoint}/{classId}")]
+        public JsonResult ShowClassPoint(int classId = 0)
+        {
+            var classRoom = new GetClassByClassId();
+            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}");
+            var students = new List<GetStudentByClassId>();
+            students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
+            var classPoints = new List<GetSubjectResultByClassId>();
+            classPoints = ApiHelper<List<GetSubjectResultByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{classId}");
+
+          
+            return Json(new {  });
+        }
     }
 }

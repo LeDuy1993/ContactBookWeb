@@ -133,7 +133,7 @@ contactBook.showPoint = function () {
                 )
             });
             $(`#avg1`).append((sum1 / count1).toFixed(2));
-            $.each(data.tableContactBook.subjectPoint1, function (i, v) {
+            $.each(data.tableContactBook.subjectPoint2, function (i, v) {
                 if (v.subjectId == 1 || v.subjectId == 2) {
                     sum2 += parseFloat(v.listPoint[11]) * 2;
                     count2 += 2
