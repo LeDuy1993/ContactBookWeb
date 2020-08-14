@@ -70,3 +70,67 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 /* Custom Select*/
+
+.banner_part {
+    background-image: url(../img/rmit1.jpg);
+    background-size:100% 70%;
+    background-position:center;
+}
+
+header {
+    background: #080d5d;
+    width: 100%;
+    display: table;
+}
+
+.menuu{
+    width:1450px;
+    float:left;
+    height:63px;
+}
+
+nav{
+    float:right;
+}
+
+nav ul{
+    padding:0;
+    margin:0;
+}
+
+nav ul li{
+    list-style:none;
+    float:left;
+    margin-left:75px;
+    padding:12px 0;
+    position:relative;
+}
+
+    nav ul li a {
+        text-decoration: none;
+        color: #f4f1eb;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        width: 0%;
+        background-color: #e9930c;
+        top: 0;
+        position: absolute;
+    }
+
+nav a:hover::before{
+    width:100%;
+}
+
+h2{
+    font-family:'Times New Roman', Times, serif;
+}
+
+.login{
+    margin-left:210px;
+}
