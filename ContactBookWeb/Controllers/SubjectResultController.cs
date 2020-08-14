@@ -60,13 +60,13 @@ namespace ContactBookWeb.Controllers
         [Route("SubjectResult/SaveResultPoint/{classId}/{semesterId}/{studentId}/{subjectId}/{point}/{index}/{subjectResultId}")]
         public JsonResult SaveResultPoint(int semesterId = 0, int classId = 0, int studentId = 0, int index = 0, int subjectId = 0, string point = " ", int subjectResultId = 0)
         {
-          
+            var classSubject = ApiHelper<GetClassSubjectIdByClassIdSubjectId>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetClassSubjectIdByClassIdSubjectId/{classId}/{subjectId}");
+            var classStudent = ApiHelper<GetClassStudentIdByClassIdStudentId>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetClassStudentIdByClassIdStudentId/{classId}/{studentId}");
             var saveResultPoint = new SaveResultPoint();
             saveResultPoint.SubjectResultId = subjectResultId;
-            saveResultPoint.ClassId = classId;
             saveResultPoint.SemesterId = semesterId;
-            saveResultPoint.StudentId = studentId;
-            saveResultPoint.SubjectId = subjectId;
+            saveResultPoint.ClassStudentId = classStudent.ClassStudentId;
+            saveResultPoint.ClassSubjectId = classSubject.ClassSubjectId;
             string[] listPoint = new string[] { };
             string[] listDate = new string[] { };
             if (subjectResultId != 0)
@@ -186,6 +186,7 @@ namespace ContactBookWeb.Controllers
                     stu.ListPoint[11] = stu.Avg.ToString();
                 }
             }
+
             return Json(new { tablePoints });
         }
     }
