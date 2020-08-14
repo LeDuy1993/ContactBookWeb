@@ -42,11 +42,11 @@ contactBook.showStudent = function () {
                     `
                 );
             });
-            contactBook.showPoint();
+            contactBook.showClassPoint();
         }
     });
 }
-contactBook.showPoint = function () {
+/*contactBook.showPoint = function () {
     courseId = $('#courseId').val();
     classId = $('#classId').val();
     studentId = $('#studentId').val();
@@ -165,6 +165,19 @@ contactBook.showPoint = function () {
             });
             $(`#avg2`).append((sum2 / count2).toFixed(2));
             $(`#semesterAvg`).append((((sum2 / count2) * 2 + (sum1 / count1)) / 3).toFixed(2));
+        }
+    });
+}*/
+contactBook.showClassPoint = function () {
+    courseId = $('#courseId').val();
+    gradeId = $('#gradeId').val();
+    classId = $('#classId').val();
+    studentId = $('#studentId').val();
+    $.ajax({
+        url: `/ContactBook/ShowClassPoint/${classId}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
         }
     });
 }
