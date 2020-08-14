@@ -10,6 +10,7 @@ namespace ContactBookWeb.Models.ContactBook
         public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string[] ListPoint { get; set; }
+        public string[] ListPoint1 { get; set; }
+        public string[] ListPoint2 { get; set; }
     }
 }
