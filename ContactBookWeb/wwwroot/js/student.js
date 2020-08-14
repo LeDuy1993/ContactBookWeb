@@ -1,43 +1,30 @@
 ﻿var student = {} || student;
 var courseId = 0;
 var gradeId = 0;
+var classId = 0;
 
 
 student.show = function (gradeId) {
-    courseId = $('#selectCourseID').val();
+    courseId = $('#courseId').val();
+    gradeId = $('#gradeId').val();
     $.ajax({
         url: `/Student/ListClass/${courseId}/${gradeId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
-            $('#classRoom').empty();
+            $('#classId').empty();
             $('#mytable').empty();
             $.each(data.classAll, function (i, v) {
-                if (v.classId == 1) {
-                    $('#classRoom').append(
-                    `
-                      <li class="nav-item">
-                         <a class="nav-link active text-blue" data-toggle="tab" role="tab" aria-selected="true"  href="javascript:;"  onclick="student.showStudent(${v.classId})">Class ${v.className}</a>
-                     </li>
-                    `
-                    );
-                }
-                else {
-                    $('#classRoom').append(
-                    `
-                     <li class="nav-item">
-						<a class="nav-link text-blue" data-toggle="tab" role="tab" aria-selected="false"  href="javascript:;" onclick="student.showStudent(${v.classId})">Class ${v.className}</a>
-					</li>
-                    `
-                    );
-                }
-               
-                
-        });
-}
+                $('#classId').append(
+                    `<option href="javascript:;" onchange="student.showStudent()"  value="${v.classId}">${v.className}</option>`
+                )
+            });
+            student.showStudent();
+        }
     });
 }
-student.showStudent = function (classId) {
+student.showStudent = function () {
+    classId = $(`#classId`).val();
     $.ajax({
         url: `/Student/ListStudent/${classId}`,
         method: "GET",
@@ -125,7 +112,7 @@ student.get = function (id) {
             $('#MortherName').val(data.students.mortherName);
             $('#JobName').val(data.students.jobName);
             $('#PhoneNumber').val(data.students.phoneNumber);
-            $('#AvatarPath').attr("src", data.students.avatarPath);         
+            $('#AvatarPath').attr("src", data.students.avatarPath);
             $('#addEditStudent').modal('show');
             if (data.students.gender == "Male") {
                 $('#customRadio4').prop('checked', true);
@@ -134,7 +121,7 @@ student.get = function (id) {
             else {
                 $('#customRadio5').prop('checked', true);
             }
-        
+
         }
     });
 }
@@ -205,9 +192,9 @@ student.initNation = function () {
 }
 
 student.detailStudent = function (studentId) {
-   /* employee.reset();*/
+    /* employee.reset();*/
     $('#viewStudent').appendTo("body").modal('show');
-};  
+};
 student.init = function () {
     student.show();
     student.initReligion();
@@ -216,6 +203,7 @@ student.init = function () {
 
 $(document).ready(function () {
     student.init();
-    courseId = $('#selectCourseID').val();
-
+    courseId = $('#courseId').val();
+    gradeId = $('#gradeId').val();
+    classId = $(`#classId`).val();
 });
