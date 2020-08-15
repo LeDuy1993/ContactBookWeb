@@ -140,7 +140,6 @@ namespace ContactBookWeb.Controllers
                                          }).ToList();
             foreach (var stu in tablePoints.StudentPoints)
             {
-                float sum = 0; var count = 0;
                 foreach (var point in points)
                 {
                     if (stu.StudentId == point.StudentId && point != null)
@@ -148,45 +147,15 @@ namespace ContactBookWeb.Controllers
                         stu.SubjectResultId = point.SubjectResultId;
                         string[] listPoint = new string[] { };
                         listPoint = point.ListPoint.Split(',');
-                        for (var i = 0; i <= 10; i++)
+                        for (var i = 0; i <= 11; i++)
                         {
                             stu.ListPoint[i] = listPoint[i];
                             stu.ListDate[i] = listPoint[i];
-                            if (stu.ListPoint[i] != " ")
-                            {
-                                if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7)
-                                {
-                                    sum += float.Parse(stu.ListPoint[i]);
-                                    count += 1;
-                                }
-                                else if (i == 8 || i == 9)
-                                {
-                                    sum += float.Parse(stu.ListPoint[i]) * 2;
-                                    count += 2;
-                                }
-                                else
-                                {
-                                    sum += float.Parse(stu.ListPoint[i]) * 3;
-                                    count += 3;
-                                }
-                            }
-                        }
-                        stu.ListPoint[11] = listPoint[11];
-                    }
 
-                }
-                if (sum == 0 || count == 0)
-                {
-                    stu.Avg = 0.0f;
-                    stu.ListPoint[11] = "0";
-                }
-                else
-                {
-                    stu.Avg = (float)Math.Round(sum / count, 2);
-                    stu.ListPoint[11] = stu.Avg.ToString();
+                        }
+                    }
                 }
             }
-
             return Json(new { tablePoints });
         }
     }
