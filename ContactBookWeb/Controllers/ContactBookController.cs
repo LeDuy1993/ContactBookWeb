@@ -118,8 +118,8 @@ namespace ContactBookWeb.Controllers
                                                  StudentId = stu.StudentId,
                                                  FirstName = stu.FirstName,
                                                  LastName = stu.LastName,
-                                                 ListPoint1 = new string[13],
-                                                 ListPoint2 = new string[13]
+                                                 ListPoint1 = new string[12],
+                                                 ListPoint2 = new string[12]
                                              }).ToList();
             foreach (var point in classPoints)
             {
@@ -144,7 +144,7 @@ namespace ContactBookWeb.Controllers
                                 case 14: student.ListPoint1[9] = listPoints[11]; break;
                                 case 15: student.ListPoint1[10] = listPoints[11]; break;
                                 case 16: student.ListPoint1[11] = listPoints[11]; break;
-                                case 17: student.ListPoint1[12] = listPoints[11]; break;
+                             
 
                             }
 
@@ -165,7 +165,7 @@ namespace ContactBookWeb.Controllers
                                 case 14: student.ListPoint2[9] = listPoints[11]; break;
                                 case 15: student.ListPoint2[10] = listPoints[11]; break;
                                 case 16: student.ListPoint2[11] = listPoints[11]; break;
-                                case 17: student.ListPoint1[12] = listPoints[11]; break;
+                               
                             }
                         }
                     }

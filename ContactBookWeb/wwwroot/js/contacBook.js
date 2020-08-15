@@ -178,6 +178,50 @@ contactBook.showClassPoint = function () {
         method: "GET",
         dataType: "json",
         success: function (data) {
+            $('#tablePoint').empty();
+
+            $.each(data.tableClassPoint.studentPoints, function (i, v) {
+                $('#classPoint1st').append(
+                    `
+                     <tr>
+                          <td style="padding: 0.4rem"><b>${v.firstName} ${v.lastName}</b></td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[0]}</td>
+                          <td style="padding: 0.4rem;" class="text-center" >${v.listPoint1[1]}</td>
+                          <td style="padding: 0.4rem;" class="text-center" >${v.listPoint1[2]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[3]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[4]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[5]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[6]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[7]}</td>
+                          <td style="padding: 0.4rem  " class="text-center" >${v.listPoint1[8]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[9]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[10]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[11]}</td>
+                          <td style="padding: 0.4rem; " class="text-center"> <b></b></td >  
+                      </tr>
+                 `
+                )
+                $('#classPoint2st').append(
+                    `
+                    <tr>
+                          <td style="padding: 0.4rem"><b>${v.firstName} ${v.lastName}</b></td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[0]}</td>
+                          <td style="padding: 0.4rem;" class="text-center" >${v.listPoint2[1]}</td>
+                          <td style="padding: 0.4rem;" class="text-center" >${v.listPoint2[2]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[3]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[4]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[5]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[6]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[7]}</td>
+                          <td style="padding: 0.4rem  " class="text-center" >${v.listPoint2[8]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[9]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[10]}</td>
+                          <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[11]}</td>
+                          <td style="padding: 0.4rem; " class="text-center"> <b></b></td >  
+                      </tr>
+                 `
+                )
+            })
         }
     });
 }
