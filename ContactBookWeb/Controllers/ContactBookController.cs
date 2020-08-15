@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace ContactBookWeb.Controllers
 {
@@ -118,58 +119,162 @@ namespace ContactBookWeb.Controllers
                                                  StudentId = stu.StudentId,
                                                  FirstName = stu.FirstName,
                                                  LastName = stu.LastName,
-                                                 ListPoint1 = new string[12],
-                                                 ListPoint2 = new string[12]
+                                                 ListPoint1 = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+                                                 ListPoint2 = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " }
                                              }).ToList();
-            foreach (var point in classPoints)
+
+            foreach (var student in tableClassPoint.StudentPoints)
             {
-                foreach (var student in tableClassPoint.StudentPoints)
+                float sum1 = 0; float sum2 = 0;
+                var count1 = 0; var count2 = 0;
+                foreach (var point in classPoints)
                 {
                     if (point.StudentId == student.StudentId)
                     {
                         var listPoints = point.ListPoint.Split(',');
                         if (point.SemesterId == 1)
                         {
-                            switch (point.SubjectId)
+                            if (listPoints[11] != " ")
                             {
-                                case 1: student.ListPoint1[0] = listPoints[11]; break;
-                                case 2: student.ListPoint1[1] = listPoints[11]; break;
-                                case 3: student.ListPoint1[2] = listPoints[11]; break;
-                                case 4: student.ListPoint1[3] = listPoints[11]; break;
-                                case 5: student.ListPoint1[4] = listPoints[11]; break;
-                                case 6: student.ListPoint1[5] = listPoints[11]; break;
-                                case 7: student.ListPoint1[6] = listPoints[11]; break;
-                                case 8: student.ListPoint1[7] = listPoints[11]; break;
-                                case 13: student.ListPoint1[8] = listPoints[11]; break;
-                                case 14: student.ListPoint1[9] = listPoints[11]; break;
-                                case 15: student.ListPoint1[10] = listPoints[11]; break;
-                                case 16: student.ListPoint1[11] = listPoints[11]; break;
-                             
-
+                                switch (point.SubjectId)
+                                {
+                                    case 1:
+                                        student.ListPoint1[0] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]) * 2;
+                                        count1 += 2;
+                                        break;
+                                    case 2:
+                                        student.ListPoint1[1] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]) * 2;
+                                        count1 += 2;
+                                        break;
+                                    case 3:
+                                        student.ListPoint1[2] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 4:
+                                        student.ListPoint1[3] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 5:
+                                        student.ListPoint1[4] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 6:
+                                        student.ListPoint1[5] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 7:
+                                        student.ListPoint1[6] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 8:
+                                        student.ListPoint1[7] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 13:
+                                        student.ListPoint1[8] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 14:
+                                        student.ListPoint1[9] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 15:
+                                        student.ListPoint1[10] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 16:
+                                        student.ListPoint1[11] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                }
                             }
 
                         }
                         else
                         {
-                            switch (point.SubjectId)
+                            if (listPoints[11] != " ")
                             {
-                                case 1: student.ListPoint2[0] = listPoints[11]; break;
-                                case 2: student.ListPoint2[1] = listPoints[11]; break;
-                                case 3: student.ListPoint2[2] = listPoints[11]; break;
-                                case 4: student.ListPoint2[3] = listPoints[11]; break;
-                                case 5: student.ListPoint2[4] = listPoints[11]; break;
-                                case 6: student.ListPoint2[5] = listPoints[11]; break;
-                                case 7: student.ListPoint2[6] = listPoints[11]; break;
-                                case 8: student.ListPoint2[7] = listPoints[11]; break;
-                                case 13: student.ListPoint2[8] = listPoints[11]; break;
-                                case 14: student.ListPoint2[9] = listPoints[11]; break;
-                                case 15: student.ListPoint2[10] = listPoints[11]; break;
-                                case 16: student.ListPoint2[11] = listPoints[11]; break;
-                               
+                                switch (point.SubjectId)
+                                {
+                                    case 1:
+                                        student.ListPoint2[0] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]) * 2;
+                                        count2 += 2;
+                                        break;
+                                    case 2:
+                                        student.ListPoint2[1] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]) * 2;
+                                        count2 += 2;
+                                        break;
+                                    case 3:
+                                        student.ListPoint2[2] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 4:
+                                        student.ListPoint2[3] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 5:
+                                        student.ListPoint2[4] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 6:
+                                        student.ListPoint2[5] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 7:
+                                        student.ListPoint2[6] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 8:
+                                        student.ListPoint2[7] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 13:
+                                        student.ListPoint2[8] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 14:
+                                        student.ListPoint2[9] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 15:
+                                        student.ListPoint2[10] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 16:
+                                        student.ListPoint2[11] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                }
                             }
                         }
                     }
                 }
+                student.ListPoint1[12] = (Math.Round(sum1 / count1, 2)).ToString();
+                student.ListPoint2[12] = (Math.Round(sum2 / count2, 2)).ToString();
             }
 
             return Json(new { tableClassPoint });

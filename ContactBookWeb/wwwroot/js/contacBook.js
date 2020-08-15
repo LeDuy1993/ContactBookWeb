@@ -197,7 +197,7 @@ contactBook.showClassPoint = function () {
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[9]}</td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[10]}</td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[11]}</td>
-                          <td style="padding: 0.4rem; " class="text-center"> <b></b></td >  
+                          <td style="padding: 0.4rem; " class="text-center"> <b>${v.listPoint1[12]}</b></td >  
                       </tr>
                  `
                 )
@@ -217,7 +217,7 @@ contactBook.showClassPoint = function () {
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[9]}</td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[10]}</td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[11]}</td>
-                          <td style="padding: 0.4rem; " class="text-center"> <b></b></td >  
+                          <td style="padding: 0.4rem; " class="text-center"> <b>${v.listPoint2[12]}</b></td >  
                       </tr>
                  `
                 )
