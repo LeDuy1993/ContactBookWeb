@@ -1,4 +1,5 @@
-﻿var contactBook = {} || contactBook;
+﻿
+var contactBook = {} || contactBook;
 var courseId = 0;
 var gradeId = 0;
 var classId = 0;
@@ -46,33 +47,99 @@ contactBook.showStudent = function () {
         }
     });
 }
-/*contactBook.showPoint = function () {
+contactBook.showStudentPoint = function (Id) {
     courseId = $('#courseId').val();
     classId = $('#classId').val();
-    studentId = $('#studentId').val();
-    if (studentId == null) {
-        $('#point1st').empty();
-        $('#point2st').empty();
-        $('#avg1').empty();
-        $('#avg2').empty();
-        $(`#information`).empty();
-        $(`#semesterAvg`).empty();
-    }
+    studentId = Id;
+
     $.ajax({
         url: `/ContactBook/ShowTablePoint/${studentId}/${classId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
-            $('#point1st').empty();
-            $('#point2st').empty();
-            $('#avg1').empty();
-            $('#avg2').empty();
-            $(`#information`).empty();
-            $(`#semesterAvg`).empty();
+            $('#table').empty();
+            $(`#export`).empty();
+            $('#table').append(
+                `
+                <p>Class:<a href="javascript:;" onclick="contactBook.showClassPoint()">${data.tableContactBook.className}</a>-${data.tableContactBook.firstName} ${data.tableContactBook.lastName}</p>
+                <table class="table table-bordered text-center" id="tablePoint" style=" border-radius: 5px">
+                    <thead class="text-center">
+                        <tr>
+                            <th colspan="13" style="font-size:25px" class="text-center">Contact Book</th>
+                        </tr>
+                        <tr>
+                            <th colspan="13" id="informationStudent">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="width:15%" rowspan="2">Subject</th>
+                            <th class="text-center" colspan="4">Điểm Miệng</th>
+                            <th class="text-center" colspan="4">Điểm 15 phút</th>
+                            <th class="text-center" colspan="2">Điểm 1 tiết</th>
+                            <th class="text-center" rowspan="2">Point master</th>
+                            <th class="text-center" rowspan="2">Average</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                            <th class="text-center">3st</th>
+                            <th class="text-center">4st</th>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                            <th class="text-center">3st</th>
+                            <th class="text-center">4st</th>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                        </tr>
+                    </thead>
+                    <tbody id="point1st">
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="12">Semester 1</th>
+                            <th class="text-center" id="avg1"></th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" rowspan="2">Subject</th>
+                            <th class="text-center" colspan="4">Điểm Miệng</th>
+                            <th class="text-center" colspan="4">Điểm 15 phút</th>
+                            <th class="text-center" colspan="2">Điểm 1 tiết</th>
+                            <th class="text-center" rowspan="2">Point master</th>
+                            <th class="text-center" rowspan="2">Average</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                            <th class="text-center">3st</th>
+                            <th class="text-center">4st</th>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                            <th class="text-center">3st</th>
+                            <th class="text-center">4st</th>
+                            <th class="text-center">1st</th>
+                            <th class="text-center">2st</th>
+                        </tr>
+                    </thead>
+                    <tbody id="point2st">
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="12" class="text-center">Semester 2</th>
+                            <th id="avg2" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th colspan="12" class="text-center">Summarize the year</th>
+                            <th id="semesterAvg" class="text-center"></th>
+                        </tr>
+                    </thead>
+                </table>`
+            )
             var sum1 = 0;var sum2 = 0;
             var count1 = 0; var count2 = 0;
             var semesterAvg1 = 0; var semesterAvg2 = 0;
-            $(`#information`).append(
+            $(`#informationStudent`).append(
                 `<table style="width:100%">
                     <tr>
                         <td style="width:25%">Course: ${data.tableContactBook.courseName}</td>
@@ -165,26 +232,92 @@ contactBook.showStudent = function () {
             });
             $(`#avg2`).append((sum2 / count2).toFixed(2));
             $(`#semesterAvg`).append((((sum2 / count2) * 2 + (sum1 / count1)) / 3).toFixed(2));
+            $(`#export`).append(`<button type="button" class="btn btn-dark" onclick="tableToExcel('table', 'W3C Example Table')" value="Export to Excel">Export to Excel</button>`)
         }
     });
-}*/
+}
 contactBook.showClassPoint = function () {
     courseId = $('#courseId').val();
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
     studentId = $('#studentId').val();
+00
     $.ajax({
         url: `/ContactBook/ShowClassPoint/${classId}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
-            $('#tablePoint').empty();
-
+            $('#table').empty();
+            $(`#export`).empty();
+            $('#table').append(
+               ` 
+                <table class="table table-bordered" id="classPoint" style=" border-radius: 5px">
+                    <thead class="text-center">
+                        <tr>
+                            <th colspan="15" style="font-size:25px" class="text-center">Contact Book</th>
+                        </tr>
+                        <tr>
+                            <th colspan="15" id="informationClass">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Semester 1</th>
+                            <th style="padding:0">Toán</th>
+                            <th style="padding:0">Văn</th>
+                            <th style="padding:0">Anh</th>
+                            <th style="padding:0">Lý</th>
+                            <th style="padding:0">Hóa</th>
+                            <th style="padding:0">Sinh</th>
+                            <th style="padding:0">Sử</th>
+                            <th style="padding:0">Địa</th>
+                            <th style="padding:0">GDCD</th>
+                            <th style="padding:0">Công Nghê</th>
+                            <th style="padding:0">Tin Học</th>
+                            <th style="padding:0">Ngoại Ngữ</th>
+                            <th style="padding:0">AVG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classPoint1st">
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Semester 2</th>
+                            <th class="text-center">Toán</th>
+                            <th class="text-center">Văn</th>
+                            <th class="text-center">Anh</th>
+                            <th class="text-center">Lý</th>
+                            <th class="text-center">Hóa</th>
+                            <th class="text-center">Sinh</th>
+                            <th class="text-center">Sử</th>
+                            <th class="text-center">Địa</th>
+                            <th class="text-center">GDCD</th>
+                            <th class="text-center">Công Nghê</th>
+                            <th class="text-center">Tin Học</th>
+                            <th class="text-center">Ngoại Ngữ</th>
+                            <th class="text-center">AVG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classPoint2st">
+                    </tbody>
+                </table>`
+            )
+            $('#informationClass').append(
+                `<table style="width:100%">
+                    <tr>
+                        <td style="width:25%">Course: ${data.tableClassPoint.courseName}</td>
+                        <td>Class: ${data.tableClassPoint.className}</td>
+                        <td>Teacher master: ${data.tableClassPoint.teacherName}</td>
+                    </tr>
+                </table>
+                 `
+            )
             $.each(data.tableClassPoint.studentPoints, function (i, v) {
                 $('#classPoint1st').append(
                     `
                      <tr>
-                          <td style="padding: 0.4rem"><b>${v.firstName} ${v.lastName}</b></td>
+                          <td style="padding: 0.4rem">
+                         <a href="javascript:;" onclick="contactBook.showStudentPoint(${v.studentId})"><b>${v.firstName} ${v.lastName}</b></a>
+                          </td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint1[0]}</td>
                           <td style="padding: 0.4rem;" class="text-center" >${v.listPoint1[1]}</td>
                           <td style="padding: 0.4rem;" class="text-center" >${v.listPoint1[2]}</td>
@@ -204,7 +337,9 @@ contactBook.showClassPoint = function () {
                 $('#classPoint2st').append(
                     `
                     <tr>
-                          <td style="padding: 0.4rem"><b>${v.firstName} ${v.lastName}</b></td>
+                          <td style="padding: 0.4rem">
+                         <a href="javascript:;" onclick="contactBook.showStudentPoint(${v.studentId})"><b>${v.firstName} ${v.lastName}</b></a>
+                          </td>
                           <td style="padding: 0.4rem; " class="text-center" >${v.listPoint2[0]}</td>
                           <td style="padding: 0.4rem;" class="text-center" >${v.listPoint2[1]}</td>
                           <td style="padding: 0.4rem;" class="text-center" >${v.listPoint2[2]}</td>
@@ -222,6 +357,7 @@ contactBook.showClassPoint = function () {
                  `
                 )
             })
+            $(`#export`).append(`<button type="button" class="btn btn-dark" onclick="tableToExcel('classPoint', 'W3C Example Table')" value="Export to Excel">Export to Excel</button>`)
         }
     });
 }
