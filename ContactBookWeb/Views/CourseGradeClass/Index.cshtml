@@ -5,68 +5,72 @@
     var gradeAll = ViewBag.gradeAll as List<GetGradeAll>;
 }
 
-    <div class="main-container">
-        <div class="pd-20 card-box" style="height:auto">
-            <div class="tab row">
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <label>Select Course</label>
-                    <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="courseId"
-                            href="javascript:;" onchange="contactBook.showClass()">
-                        @foreach (var cou in courseAll)
-                        {
-                            <option value="@cou.CourseId">@cou.CourseName</option>
-                        }
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="pd-20 card-box mt-15" style="height:auto">
-            <div class="tab row">
-                <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center" id="grade10">
-                    <label><b>Grade 10</b></label>
-                    <ul class="nav flex-column nav-pills vtabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center"  id="grade11">
-                    <label><b>Grade 11</b></label>
-                    <ul class="nav flex-column nav-pills vtabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center"  id="grade12">
-                    <label><b>Grade 12</b></label>
-                    <ul class="nav flex-column nav-pills vtabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
-                        </li>
-                    </ul>
-
-                </div>
+<div class="main-container">
+    <div class="pd-20 card-box" style="height:auto">
+        <div class="tab row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label>Select Course</label>
+                <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;" id="courseId"
+                        href="javascript:;" onchange="courseGradeClass.showClass()">
+                    @foreach (var cou in courseAll)
+                    {
+                        <option value="@cou.CourseId">@cou.CourseName</option>
+                    }
+                </select>
             </div>
         </div>
     </div>
+    <div class="pd-20 card-box mt-15" style="height:auto">
+        <div class="tab row">
+            <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center">
+                <label><b>Grade 10</b></label>
+                <ul class="nav flex-column nav-pills vtabs" role="tablist"  id="grade10">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center" >
+                <label><b>Grade 11</b></label>
+                <ul class="nav flex-column nav-pills vtabs" role="tablist" id="grade11">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 pd-20 card-box text-center">
+                <label><b>Grade 12</b></label>
+                <ul class="nav flex-column nav-pills vtabs" role="tablist" id="grade12">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home7" role="tab" aria-selected="true"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false"><i class="fa fa-users"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact7" role="tab" aria-selected="false"><i class="fa fa-envelope-o"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/courseGradeClass.js" asp-append-version="true"></script>
+
+}
