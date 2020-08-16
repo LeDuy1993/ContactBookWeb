@@ -14,9 +14,9 @@ student.show = function (gradeId) {
         success: function (data) {
             $('#classId').empty();
             $('#mytable').empty();
-            $.each(data.classAll, function (i, v) {
+            $.each(data.classRoomAll, function (i, v) {
                 $('#classId').append(
-                    `<option href="javascript:;" onchange="student.showStudent()"  value="${v.classId}">${v.className}</option>`
+                    `<option href="javascript:;" onchange="student.showStudent()" value="${v.classId}">${v.className}-${v.teacherName}</option>`
                 )
             });
             student.showStudent();
