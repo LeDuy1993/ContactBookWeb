@@ -61,7 +61,13 @@ contactBook.showStudentPoint = function (Id) {
             $(`#export`).empty();
             $('#table').append(
                 `
-                <p>Class:<a href="javascript:;" onclick="contactBook.showClassPoint()">${data.tableContactBook.className}</a>-${data.tableContactBook.firstName} ${data.tableContactBook.lastName}</p>
+		         <nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:;" onclick="contactBook.showClassPoint()">Class: ${data.tableContactBook.className}</a></li>
+					    <li class="breadcrumb-item active" aria-current="page">${data.tableContactBook.firstName} ${data.tableContactBook.lastName}</li>
+				    </ol>
+				</nav>
+              
                 <table class="table table-bordered text-center" id="tablePoint" style=" border-radius: 5px">
                     <thead class="text-center">
                         <tr>
