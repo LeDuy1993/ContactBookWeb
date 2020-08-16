@@ -35,5 +35,12 @@ namespace ContactBookWeb.Controllers
             classRoomAll = ApiHelper<List<GetClassByCourseId>>.HttpGetAsync($"{Helper.ApiUrl}api/class/getClassByCourseId/{courseId}");
             return Json(new { classRoomAll });
         }
+        [HttpGet]
+        [Route("/CourseGradeClass/Class/{classId}")]
+        public IActionResult AddStudent(int classId)
+        {
+            
+            return View();
+        }
     }
 }

@@ -16,7 +16,7 @@ courseGradeClass.showClass = function () {
                     $('#grade10').append(
                         `
                         <li class="nav-item text-left ml-4">
-                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"   aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
+                        <a class="nav-link"  href="courseGradeClass/AddStudent/${v.classId}"   aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  	
                         `
                     );
@@ -25,7 +25,7 @@ courseGradeClass.showClass = function () {
                     $('#grade11').append(
                         `
                         <li class="nav-item text-left ml-4">
-                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
+                        <a class="nav-link"  href="courseGradeClass/AddStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  	 	
                     `
                     );
@@ -34,7 +34,7 @@ courseGradeClass.showClass = function () {
                     $('#grade12').append(
                         `
                          <li class="nav-item text-left ml-4">
-                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
+                        <a class="nav-link"  href="Student/AddStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  		
                         `
                     );
