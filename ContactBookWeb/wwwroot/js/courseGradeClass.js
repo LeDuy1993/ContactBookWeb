@@ -15,8 +15,8 @@ courseGradeClass.showClass = function () {
                 if (v.gradeId == 1) {
                     $('#grade10').append(
                         `
-                        <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false">${v.className}</a>
+                        <li class="nav-item text-left ml-4">
+                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"   aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  	
                         `
                     );
@@ -24,8 +24,8 @@ courseGradeClass.showClass = function () {
                 else if (v.gradeId == 2) {
                     $('#grade11').append(
                         `
-                        <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false">${v.className}</a>
+                        <li class="nav-item text-left ml-4">
+                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  	 	
                     `
                     );
@@ -33,8 +33,8 @@ courseGradeClass.showClass = function () {
                 else {
                     $('#grade12').append(
                         `
-                         <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-selected="false">${v.className}</a>
+                         <li class="nav-item text-left ml-4">
+                        <a class="nav-link"  href="Student/ListStudent/${v.classId}"  aria-selected="false"><span class="icon-copy ti-hand-point-right"></span> ${v.className} <i class="icon-copy ion-ios-people text-success"></i> ${v.students} - <b>${v.teacherName}</b></a> 
                         </li>  		
                         `
                     );
