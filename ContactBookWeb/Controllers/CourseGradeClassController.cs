@@ -1,4 +1,5 @@
-﻿using ContactBookWeb.Models.Course;
+﻿using ContactBookWeb.Models.ClassRoom;
+using ContactBookWeb.Models.Course;
 using ContactBookWeb.Models.Grade;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,14 @@ namespace ContactBookWeb.Controllers
             ViewBag.gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
 
             return View();
+        }
+        [HttpGet]
+        [Route("/CourseGradeClass/ListClass/{courseId}")]
+        public JsonResult ListClass(int courseId = 0)
+        {
+            var classRoomAll = new List<GetClassAll>();
+            classRoomAll = ApiHelper<List<GetClassAll>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
+            return Json(new { classRoomAll });
         }
     }
 }
