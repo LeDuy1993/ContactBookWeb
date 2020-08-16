@@ -78,9 +78,9 @@ teacher.getProfile = function (id) {
             $('#desteacher').find('#DayOfBirth').text(data.result.dayOfBirth);
             $('#desteacher').find('#Phone').text(data.result.phone);
             $('#desteacher').find('#Address').text(data.result.address);
-            $('#desteacher').find('#SubjectId').val(data.result.subjectId);
-            $('#desteacher').find('#DegreeId').val(data.result.degreeId);
-            $('#desteacher').find('#DayToWork').val(data.result.dayToWork);
+            $('#desteacher').find('#SubjectId').text(data.result.subjectId);
+            $('#desteacher').find('#DegreeId').text(data.result.degreeId);
+            $('#desteacher').find('#DayToWork').text(data.result.dayToWork);
             $('#desteacher').find('#AvatarPath').attr("src", data.result.avatarPath);
             if ($('#desteacher').find(data.result.gender) == "1") {
                 $('#customRadio4').prop('checked', true);
@@ -190,7 +190,6 @@ teacher.save = function () {
     saveTeacher.degreeId = parseInt($('#DegreeId').val());
     saveTeacher.dayToWork = $('#DayToWork').val();
     saveTeacher.AvatarPath = $('#AvatarPath').attr('src');
-
     $.ajax({
         url: `/Teacher/Save/`,
         method: "POST",
@@ -200,7 +199,6 @@ teacher.save = function () {
         success: function (data) {
             $('#addEditTeacher').modal('hide');
             bootbox.alert(data.result.message);
-           /* teacher.drawTable();*/
         }
     });
 

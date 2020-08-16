@@ -84,6 +84,7 @@
     <div class="modal-dialog modal-lg">
         <form id="fromAddEditTeacher">
             @*Modal content*@
+            <input hidden id="TeacherId" value="0"/>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Teacher</h4>
@@ -99,6 +100,8 @@
                             <div class="form-group">
                                 <label>FullName :</label>
                                 <input type="text" class="form-control" id="TeacherName" name="FullName">
+                                @*<span asp-validation-for="TeacherName" class="text-danger"></span>*@
+
                             </div>
                             <div class="form-group">
                                 <label>Date of Birth :</label>
@@ -178,7 +181,7 @@
 </div>
 
 
-<div id="profileTeacher" class="modal fade" role="dialog">
+<!--<div id="profileTeacher" class="modal fade" role="dialog">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content" style="background-color:rgba(0,0,0,0.1)" !impotant>
             <div class="min-height-200px">
@@ -197,10 +200,6 @@
                                                             <img src="~/src/images/layout/noavatar.png" id="AvatarPath">
                                                         </div>
                                                     </div>
-                                                    @*<div class="modal-footer">
-                                                        <input type="submit" value="Update" class="btn btn-primary">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    </div>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -249,7 +248,7 @@
                                                 <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Settings</a>
                                             </li>
                                         </ul>
-                                        <div class="tab-content">
+                                        <div class="tab-content">-->
                                             <!-- Timeline Tab start -->
                                            
                                             <!-- Timeline Tab End -->
@@ -257,7 +256,7 @@
                                             
                                             <!-- Tasks Tab End -->
                                             <!-- Setting Tab start -->
-                                            <div  class="tab-pane fade show active" id="timeline" role="tabpanel">
+                                            <!--<div  class="tab-pane fade show active" id="timeline" role="tabpanel">
                                                 <div class="profile-setting">
                                                     <form>
                                                         <ul class="profile-edit-list row">
@@ -293,7 +292,6 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <!-- Setting Tab End -->
                                         </div>
                                     </div>
                                 </div>
@@ -303,45 +301,125 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
+
+<div id="profileTeacher" class="modal fade" role="dialog">
+                    <div class="wrapper"  id="desteacher">
+                        <div class="left">
+                            <img src="~/src/images/layout/noavatar.png" id="AvatarPath">
+                          @*  <img src="https://i.imgur.com/cMy8V5j.png"
+                                 alt="user" width="100">*@
+                            <h4  id="teachername"></h4>
+                            <p>UI Developer</p>
+                            <div class="profile-social">
+                                <ul class="clearfix">
+                                    <li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff"><i class="fa fa-skype"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Information</h3>
+                                <div class="info_data">
+                                    <div class="data">
+                                        <h4>Phone number</h4>
+                                        <p id="Phone"></p>
+                                    </div>
+                                    <div class="data">
+                                        <h4>Address</h4>
+                                        <p id="Address"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="info_data">
+                                    <div class="data">
+                                        <h4>Date of birth</h4>
+                                        <p id="DayOfBirth"></p>
+                                    </div>
+                                    <div class="data">
+                                        <h4>Place of birth</h4>
+                                        <p id="PlaceOfBirth">></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="projects">
+                                <h3>Job</h3>
+                                <div class="projects_data">
+                                    <div class="data">
+                                        <h4>Subject</h4>
+                                        <p id="SubjectId"></p>
+                                    </div>
+                                    <div class="data">
+                                        <h4>Degree</h4>
+                                        <p id="DegreeId"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="projects">
+                                <div class="projects_data">
+                                    <div class="data">
+                                        <h4>Day to work</h4>
+                                        <p  id="DayToWork"></p>
+                                    </div>
+                                    <div class="data">
+                                        <h4>Degree</h4>
+                                        <p id="DegreeId"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="social_media">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                               @* <ul>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                </ul>*@
+                            </div>
+                        </div>
+                    </div>
+    </div>
 
 
 
+                    @section Scripts{
 
-    @section Scripts{
 
+                        <script src="~/js/teacher.js" asp-append-version="true"></script>
+                        <script>
+                            window.addEventListener('DOMContentLoaded', function () {
+                                var image = document.getElementById('AvatarPath');
+                                var cropBoxData;
+                                var canvasData;
+                                var cropper;
 
-        <script src="~/js/teacher.js" asp-append-version="true"></script>
-        <script>
-            window.addEventListener('DOMContentLoaded', function () {
-                var image = document.getElementById('AvatarPath');
-                var cropBoxData;
-                var canvasData;
-                var cropper;
+                                $('#modal').on('shown.bs.modal', function () {
+                                    cropper = new Cropper(image, {
+                                        autoCropArea: 0.5,
+                                        dragMode: 'move',
+                                        aspectRatio: 3 / 3,
+                                        restore: false,
+                                        guides: false,
+                                        center: false,
+                                        highlight: false,
+                                        cropBoxMovable: false,
+                                        cropBoxResizable: false,
+                                        toggleDragModeOnDblclick: false,
+                                        ready: function () {
+                                            cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+                                        }
+                                    });
+                                }).on('hidden.bs.modal', function () {
+                                    cropBoxData = cropper.getCropBoxData();
+                                    canvasData = cropper.getCanvasData();
+                                    cropper.destroy();
+                                });
+                            });
+                        </script>
+                    }
 
-                $('#modal').on('shown.bs.modal', function () {
-                    cropper = new Cropper(image, {
-                        autoCropArea: 0.5,
-                        dragMode: 'move',
-                        aspectRatio: 3 / 3,
-                        restore: false,
-                        guides: false,
-                        center: false,
-                        highlight: false,
-                        cropBoxMovable: false,
-                        cropBoxResizable: false,
-                        toggleDragModeOnDblclick: false,
-                        ready: function () {
-                            cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
-                        }
-                    });
-                }).on('hidden.bs.modal', function () {
-                    cropBoxData = cropper.getCropBoxData();
-                    canvasData = cropper.getCanvasData();
-                    cropper.destroy();
-                });
-            });
-        </script>
-    }
-
-    <!-- The Modal -->
+                    <!-- The Modal -->
