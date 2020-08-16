@@ -35,8 +35,8 @@ namespace ContactBookWeb.Controllers
         [Route("/ContactBook/ListClass/{courseId}/{gradeId}")]
         public JsonResult ListClass(int courseId = 0, int gradeId = 0)
         {
-            var classRoomAll = new List<GetClassAll>();
-            classRoomAll = ApiHelper<List<GetClassAll>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
+            var classRoomAll = new List<GetClassByCourseIdGradeId>();
+            classRoomAll = ApiHelper<List<GetClassByCourseIdGradeId>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
             var classAll = (from c in classRoomAll
                             where c.CourseId == courseId && c.GradeId == gradeId
                             select c).ToList();
