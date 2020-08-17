@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace ContactBookWeb.Controllers
 {
@@ -34,12 +35,9 @@ namespace ContactBookWeb.Controllers
         [Route("/ContactBook/ListClass/{courseId}/{gradeId}")]
         public JsonResult ListClass(int courseId = 0, int gradeId = 0)
         {
-            var classRoomAll = new List<GetClassAll>();
-            classRoomAll = ApiHelper<List<GetClassAll>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
-            var classAll = (from c in classRoomAll
-                            where c.CourseId == courseId && c.GradeId == gradeId
-                            select c).ToList();
-
+            var classAll = new List<GetClassByCourseIdGradeId>();
+            classAll = ApiHelper<List<GetClassByCourseIdGradeId>>.HttpGetAsync($"{Helper.ApiUrl}api/class/get/{gradeId}/{courseId}");
+           
             return Json(new { classAll });
         }
 
@@ -61,7 +59,7 @@ namespace ContactBookWeb.Controllers
             student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{studentId}");
             var points = new List<GetSubjectResultByClassIdStudentId>();
             points = ApiHelper<List<GetSubjectResultByClassIdStudentId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{classId}/{studentId}");
-               
+
             var tableContactBook = new TableContactBook();
             tableContactBook.SubjectPoint1 = new List<SubjectPoint>();
             tableContactBook.SubjectPoint2 = new List<SubjectPoint>();
@@ -84,6 +82,7 @@ namespace ContactBookWeb.Controllers
                 subjectPoint.SubjectName = po.SubjectName;
                 subjectPoint.TeacherName = po.TeacherName;
                 subjectPoint.ListPoint = po.ListPoint.Split(',');
+
                 subjectPoint.ListDate = po.ListDate.Split(',');
                 if (po.SemesterId == 1)
                 {
@@ -93,11 +92,11 @@ namespace ContactBookWeb.Controllers
                 {
                     tableContactBook.SubjectPoint2.Add(subjectPoint);
                 }
-               
+
             }
             return Json(new { tableContactBook });
         }
-        [Route("/ContactBook/ShowClassPoint}/{classId}")]
+        [Route("/ContactBook/ShowClassPoint/{classId}")]
         public JsonResult ShowClassPoint(int classId = 0)
         {
             var classRoom = new GetClassByClassId();
@@ -105,10 +104,177 @@ namespace ContactBookWeb.Controllers
             var students = new List<GetStudentByClassId>();
             students = ApiHelper<List<GetStudentByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentByClassId/{classId}");
             var classPoints = new List<GetSubjectResultByClassId>();
-            classPoints = ApiHelper<List<GetSubjectResultByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{classId}");
+            classPoints = ApiHelper<List<GetSubjectResultByClassId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByClassId/{classId}");
+            var tableClassPoint = new TableClassPoint();
+            tableClassPoint.StudentPoints = new List<StudentPoint>();
+            tableClassPoint.ClassName = classRoom.ClassName;
+            tableClassPoint.CourseName = classRoom.CourseName;
+            tableClassPoint.TeacherName = classRoom.TeacherName;
+            tableClassPoint.StudentPoints = (from stu in students
+                                             select new StudentPoint()
+                                             {
+                                                 StudentId = stu.StudentId,
+                                                 FirstName = stu.FirstName,
+                                                 LastName = stu.LastName,
+                                                 ListPoint1 = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+                                                 ListPoint2 = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " }
+                                             }).ToList();
 
-          
-            return Json(new {  });
+            foreach (var student in tableClassPoint.StudentPoints)
+            {
+                float sum1 = 0; float sum2 = 0;
+                var count1 = 0; var count2 = 0;
+                foreach (var point in classPoints)
+                {
+                    if (point.StudentId == student.StudentId)
+                    {
+                        var listPoints = point.ListPoint.Split(',');
+                        if (point.SemesterId == 1)
+                        {
+                            if (listPoints[11] != " ")
+                            {
+                                switch (point.SubjectId)
+                                {
+                                    case 1:
+                                        student.ListPoint1[0] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]) * 2;
+                                        count1 += 2;
+                                        break;
+                                    case 2:
+                                        student.ListPoint1[1] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]) * 2;
+                                        count1 += 2;
+                                        break;
+                                    case 3:
+                                        student.ListPoint1[2] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 4:
+                                        student.ListPoint1[3] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 5:
+                                        student.ListPoint1[4] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 6:
+                                        student.ListPoint1[5] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 7:
+                                        student.ListPoint1[6] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 8:
+                                        student.ListPoint1[7] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 13:
+                                        student.ListPoint1[8] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 14:
+                                        student.ListPoint1[9] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 15:
+                                        student.ListPoint1[10] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                    case 16:
+                                        student.ListPoint1[11] = listPoints[11];
+                                        sum1 += float.Parse(listPoints[11]);
+                                        count1 += 1;
+                                        break;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            if (listPoints[11] != " ")
+                            {
+                                switch (point.SubjectId)
+                                {
+                                    case 1:
+                                        student.ListPoint2[0] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]) * 2;
+                                        count2 += 2;
+                                        break;
+                                    case 2:
+                                        student.ListPoint2[1] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]) * 2;
+                                        count2 += 2;
+                                        break;
+                                    case 3:
+                                        student.ListPoint2[2] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 4:
+                                        student.ListPoint2[3] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 5:
+                                        student.ListPoint2[4] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 6:
+                                        student.ListPoint2[5] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 7:
+                                        student.ListPoint2[6] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 8:
+                                        student.ListPoint2[7] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 13:
+                                        student.ListPoint2[8] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 14:
+                                        student.ListPoint2[9] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 15:
+                                        student.ListPoint2[10] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                    case 16:
+                                        student.ListPoint2[11] = listPoints[11];
+                                        sum2 += float.Parse(listPoints[11]);
+                                        count2 += 1;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+                student.ListPoint1[12] = (Math.Round(sum1 / count1, 2)).ToString();
+                student.ListPoint2[12] = (Math.Round(sum2 / count2, 2)).ToString();
+            }
+
+            return Json(new { tableClassPoint });
         }
     }
 }

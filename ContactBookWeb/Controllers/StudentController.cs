@@ -23,29 +23,22 @@ namespace ContactBookWeb.Controllers
 
         public IActionResult Index(int courseId = 0, int gradeid = 0)
         {
-            var studentAll = new List<GetStudentAll>();
-            studentAll = ApiHelper<List<GetStudentAll>>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentAll");
             var courseAll = new List<GetCourseAll>();
             courseAll = ApiHelper<List<GetCourseAll>>.HttpGetAsync($"{Helper.ApiUrl}api/course/GetCourseAll");
             var gradeAll = new List<GetGradeAll>();
             gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
             ViewBag.gradeAll = gradeAll;
             ViewBag.courseAll = courseAll;
-            ViewBag.courseId = courseId;
-
             return View();
         }
 
-        [Route("/Student/ListClass/{courseId}/{gradeid}")]
-        public JsonResult ListClass(int courseId = 0, int gradeid = 0)
+        [Route("/Student/ListClass/{courseId}/{gradeId}")]
+        public JsonResult ListClass(int courseId = 0, int gradeId = 0)
         {
-            var classRoomAll = new List<GetClassAll>();
-            classRoomAll = ApiHelper<List<GetClassAll>>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassAll");
-            var classAll = (from c in classRoomAll
-                            where c.CourseId == courseId && c.GradeId == gradeid
-                            select c).ToList();
+            var classRoomAll = new List<GetClassByCourseIdGradeId>();
+            classRoomAll = ApiHelper<List<GetClassByCourseIdGradeId>>.HttpGetAsync($"{Helper.ApiUrl}api/class/get/{gradeId}/{courseId}");
 
-            return Json(new { classAll });
+            return Json(new { classRoomAll });
         }
 
         [Route("/Student/ListStudent/{classId}")]

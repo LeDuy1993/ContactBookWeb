@@ -32,95 +32,26 @@
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <label>Select Class</label>
                 <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
-                        href="javascript:;" onchange="contactBook.showStudent()" id="classId">
+                        href="javascript:;" onchange="contactBook.showClassPoint()" id="classId">
                 </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
+         @*   <div class="col-lg-3 col-md-3 col-sm-3">
                 <label>Select Student</label>
                 <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;"
                         href="javascript:;" onchange="contactBook.showPoint()" id="studentId">
                 </select>
-            </div>
+            </div>*@
 
         </div>
     </div>
 
     <div class="pd-20 card-box mt-3" style="background-color:aliceblue">
-        <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:aliceblue">
-            <table class="table table-bordered text-center" id="tablePoint" style=" border-radius: 5px">
-                <thead class="text-center">
-                    <tr>
-                        <th colspan="13" style="font-size:25px" class="text-center">Contact Book</th>
-                    </tr>
-                    <tr>
-                        <th colspan="13" id="information">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="text-center" style="width:15%" rowspan="2">Subject</th>
-                        <th class="text-center" colspan="4">Điểm Miệng</th>
-                        <th class="text-center" colspan="4">Điểm 15 phút</th>
-                        <th class="text-center"  colspan="2">Điểm 1 tiết</th>
-                        <th class="text-center" rowspan="2">Point master</th>
-                        <th class="text-center" rowspan="2">Average</th>
-                    </tr>
-                    <tr >
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                        <th class="text-center" >3st</th>
-                        <th class="text-center" >4st</th>
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                        <th class="text-center" >3st</th>
-                        <th class="text-center" >4st</th>
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                    </tr>
-                </thead>
-                <tbody id="point1st">
-                </tbody>
-                <thead>
-                    <tr>
-                        <th class="text-center"  colspan="12">Semester 1</th class="text-center">
-                        <th class="text-center"  id="avg1"></th>
-                    </tr>
-                    <tr>
-                        <th class="text-center"  rowspan="2">Subject</th>
-                        <th class="text-center"  colspan="4">Điểm Miệng</th>
-                        <th class="text-center"  colspan="4">Điểm 15 phút</th>
-                        <th class="text-center"  colspan="2">Điểm 1 tiết</th>
-                        <th class="text-center"  rowspan="2">Point master</th>
-                        <th class="text-center"  rowspan="2">Average</th>
-                    </tr>
-                    <tr>
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                        <th class="text-center" >3st</th>
-                        <th class="text-center" >4st</th>
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                        <th class="text-center" >3st</th>
-                        <th class="text-center" >4st</th>
-                        <th class="text-center" >1st</th>
-                        <th class="text-center" >2st</th>
-                    </tr>
-                </thead>
-                <tbody id="point2st">
-                </tbody>
-                <thead>
-                    <tr>
-                        <th colspan="12"  class="text-center">Semester 2</th>
-                        <th id="avg2"  class="text-center"></th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th colspan="12"  class="text-center">Summarize the year</th>
-                        <th id="semesterAvg"  class="text-center" ></th>
-                    </tr>
-                </thead>
-            </table>
-            <button type="button" class="btn btn-dark" onclick="tableToExcel('tablePoint', 'W3C Example Table')" value="Export to Excel">Export to Excel</button>
+        <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:aliceblue" id="table">
+
+            @*Bang Class Point All*@
+        </div>
+        <div id="export">
+
         </div>
     </div>
 </div>
