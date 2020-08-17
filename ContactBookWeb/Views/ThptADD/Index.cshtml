@@ -55,32 +55,41 @@
         </div>
     </header>*@
 
-    <header>
+    <header style="background: #CC3333">
         <div class="menuu">
             <nav>
                 <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ABOUT WN SCHOOLS</a></li>
-                    <li><a href="#">STUDENTS</a></li>
-                    <li><a href="#">DEPARMENTS</a></li>
-                    <li><a href="#">COMMUNITY</a></li>
-                    <li><a href="#" class="login">Login</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="Index.cshtml">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">NEWS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">PLAN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">NOTIFICATION</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            RESOURCES
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="blog.html">Lecture material</a>
+                            <a class="dropdown-item" href="single-blog.html">Exam questions - Answers</a>
+                            <a class="dropdown-item" href="single-blog.html">Library</a>
+                            <a class="dropdown-item" href="single-blog.html">Literature</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a asp-controller="Account" asp-action="Login" class="nav-link"><i class="icon-copy fa fa-user-o" aria-hidden="true"></i> Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <!-- Header part end-->
     <!-- banner part start-->
-    <section class="banner_part">
+    <section class="banner_part" style="background-image: url(../img/qochoc3.jpg)">
         <div class="row">
-            <div class="col-md-2" style="padding-right:0px">
-                    <img src="img/logofix.jpg" alt="logo" style="width:212px;height:140px">
-
+            <div class="col-md-1" style="padding-right:0px">
+                    <img src="~/img/logo-quochoc_1.png" alt="logo" style="width:165px;height:133px">
             </div>
-            <div class="col-md-10" style="padding-right:0px">
+            <div class="col-md-11" style="padding-right:0px">
                 <br />
                 <br />
-                <h2>High School Watsonville</h2>
+                <h2>Quoc Hoc High School</h2>
                 <h6>Giving every student hope for a better tomorrow.</h6>
             </div>
         </div>
@@ -89,7 +98,7 @@
                 <div class="col-lg-7 col-xl-6">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h1>Stronger <br> Together <br>With Watsonville</h1>
+                            <h2 style="font-size:40px">Intelligence <br> Personality <br>Are the real goals of education</h2>
                             <p>
                                 To become the premier school district in VN
                             </p>
@@ -115,7 +124,7 @@
             <div class="row align-items-center justify-content-end">
                 <div class="col-md-6 col-lg-6 col-xl-5">
                     <div class="about_img">
-                        <img src="img/about_img_1.png" alt="">
+                        <img src="img/anhquochocfix.jpg" style="width:450px;height:300px" alt="">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 offset-xl-1 col-xl-6">
@@ -131,7 +140,7 @@
                             firmament appear whales them years. Lights fly above bearing brought bold abundantly whose
                             without one may i seed.
                         </p>
-                        <a href="#" class="btn_2">read more</a>
+                        <a href="#" class="btn_2"><i class="icon-copy fa fa-mortar-board" aria-hidden="true"></i>read more</a>
                     </div>
                 </div>
             </div>
@@ -289,7 +298,7 @@
                             </blockquote>
                         </div>
                         <div class="card">
-                            <img src="img/gallery/gallery_item.png" class="card-img-top" alt="...">
+                            <img src="img/tintuc4.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="project_details.html">
                                     <h5 class="card-title">Startup Project</h5>
@@ -298,7 +307,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img src="img/gallery/gallery_item_1.png" class="card-img-top" alt="...">
+                            <img src="img/tintuc5.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="project_details.html">
                                     <h5 class="card-title">Startup Project</h5>
@@ -307,7 +316,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img src="img/gallery/gallery_item_2.png" class="card-img-top" alt="...">
+                            <img src="img/tintuc6.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="project_details.html">
                                     <h5 class="card-title">Startup Project</h5>
@@ -316,7 +325,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img src="img/gallery/gallery_item_3.png" class="card-img-top" alt="...">
+                            <img src="img/tintuc10.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="project_details.html">
                                     <h5 class="card-title">Startup Project</h5>
@@ -457,7 +466,7 @@
                 <div class="col-sm-6 col-lg-4 col-xl-4 d-none d-sm-block d-lg-none">
                     <div class="single-home-blog">
                         <div class="card">
-                            <img src="img/blog/blog_3.png" class="card-img-top" alt="blog">
+                            <img src="img/tintuc1.jpg" class="card-img-top" alt="blog">
                             <div class="card-body">
                                 <a href="blog.html">Technology</a> | <span> March 30, 2019</span>
                                 <a href="blog.html">
@@ -474,7 +483,7 @@
                 <div class="col-sm-6 col-lg-4 col-xl-4">
                     <div class="single-home-blog">
                         <div class="card">
-                            <img src="img/blog/blog_1.png" class="card-img-top" alt="blog">
+                            <img src="img/tintuc2.jpg" class="card-img-top" alt="blog">
                             <div class="card-body">
                                 <a href="blog.html">Technology</a> | <span> March 30, 2019</span>
                                 <a href="blog.html">
@@ -491,7 +500,7 @@
                 <div class="col-sm-6 col-lg-4 col-xl-4">
                     <div class="single-home-blog">
                         <div class="card">
-                            <img src="img/blog/blog_2.png" class="card-img-top" alt="blog">
+                            <img src="img/tintuc3.jpg" class="card-img-top" alt="blog">
                             <div class="card-body">
                                 <a href="blog.html">Technology</a> | <span> March 30, 2019</span>
                                 <a href="blog.html">
@@ -508,7 +517,7 @@
                 <div class="col-sm-6 col-lg-4 col-xl-4">
                     <div class="single-home-blog">
                         <div class="card">
-                            <img src="img/blog/blog_3.png" class="card-img-top" alt="blog">
+                            <img src="img/tintuc1.jpg" class="card-img-top" alt="blog">
                             <div class="card-body">
                                 <a href="blog.html">Technology</a> | <span> March 30, 2019</span>
                                 <a href="blog.html">
