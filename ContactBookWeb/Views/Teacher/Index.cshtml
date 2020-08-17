@@ -82,9 +82,9 @@
 
 <div id="addEditTeacher" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
-        <form id="fromAddEditTeacher">
+        <form id="fromAddEditTeacher" enctype="multipart/form-data">
             @*Modal content*@
-            <input hidden id="TeacherId" value="0"/>
+            <input hidden id="TeacherId"/>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Teacher</h4>
@@ -99,8 +99,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>FullName :</label>
-                                <input type="text" class="form-control" id="TeacherName" name="FullName">
-                                @*<span asp-validation-for="TeacherName" class="text-danger"></span>*@
+                                <input type="text" class="form-control" id="TeacherName"  name="FullName">
+                               @* <span asp-validation-for="TeacherName" class="text-danger"></span>*@
 
                             </div>
                             <div class="form-group">
@@ -367,8 +367,8 @@
                                         <p  id="DayToWork"></p>
                                     </div>
                                     <div class="data">
-                                        <h4>Degree</h4>
-                                        <p id="DegreeId"></p>
+                                        <h4>Gender</h4>
+                                        <p ></p>
                                     </div>
                                 </div>
                             </div>
