@@ -73,7 +73,6 @@ student.uploadAvatar = function (input) {
             $('#AvatarPath').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
-        $('#FileUpload').hide();
     }
 }
 
@@ -155,7 +154,7 @@ student.save = function () {
         data: JSON.stringify(saveStudent),
         success: function (data) {
             $('#addEditStudent').modal('hide');
-            /* bootbox.alert(data.result.message);*/
+             bootbox.alert(data.result.message);
 
         }
     });
