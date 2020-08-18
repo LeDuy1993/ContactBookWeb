@@ -48,7 +48,7 @@ student.showStudent = function () {
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                         <a class="dropdown-item" href="javascript:;"  onclick="student.detailStudent(${v.studentId})"><i class="dw dw-eye"></i> View</a>
                                         <a class="dropdown-item"  href="javascript:;"  onclick="student.get(${v.studentId})"><i class="dw dw-edit2"></i> Edit</a>
-                                        <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                                        <a class="dropdown-item"href="javascript:;"  onclick="student.delete(${v.studentId})"><i class="dw dw-delete-3"></i> Delete</a>
                                      </div>
                                </div>
                          </td>
@@ -65,6 +65,34 @@ student.openAddEditStudent = function () {
     student.reset();
     $('#addEditStudent').modal('show');
 };
+
+
+student.delete = function (id) {
+    bootbox.confirm({
+        title: "Delete student?",
+        message: "Do you want to delete this student.",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> No'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Yes'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                $.ajax({
+                    url: `/Student/Delete/${id}`,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        bootbox.alert(data.result.message);
+                    }
+                });
+            }
+        }
+    });
+}
 
 student.uploadAvatar = function (input) {
     if (input.files && input.files[0]) {

@@ -88,5 +88,15 @@ namespace ContactBookWeb.Controllers
             return Json(new { students });
         }
 
+        [Route("/Student/Delete/{id}")]
+        public JsonResult Delete(int id)
+        {
+            var result = new DeleteStudentResult();
+            result = ApiHelper<DeleteStudentResult>.HttpGetAsync(
+                                                    $"{Helper.ApiUrl}api/student/delete/{id}",
+                                                    "DELETE"
+                                                );
+            return Json(new { result });
+        }
     }
 }
