@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactBookWeb.Models.ClassRoom;
+using ContactBookWeb.Models.ContactBook;
+using ContactBookWeb.Models.Student;
+using ContactBookWeb.Ultilities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,9 +20,52 @@ namespace ContactBookWeb.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View();
+            var classStudentID = new GetClassStudent();
+            classStudentID = ApiHelper<GetClassStudent>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassStudent/{id}");
+            var classRoom = new GetClassByClassId();
+            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classStudentID.ClassId}");
+            var student = new GetStudentDetail();
+            student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{classStudentID.StudentId}");
+            var points = new List<GetSubjectResultByClassIdStudentId>();
+            points = ApiHelper<List<GetSubjectResultByClassIdStudentId>>.HttpGetAsync($"{Helper.ApiUrl}api/subjectResutl/GetSubjectResultByCourseIdStudentId/{classStudentID.ClassId}/{classStudentID.StudentId}");
+
+            var tableContactBook = new TableContactBook();
+            tableContactBook.SubjectPoint1 = new List<SubjectPoint>();
+            tableContactBook.SubjectPoint2 = new List<SubjectPoint>();
+            tableContactBook.ClassName = classRoom.ClassName;
+            tableContactBook.CourseName = classRoom.CourseName;
+            tableContactBook.TeacherName = classRoom.TeacherName;
+            tableContactBook.FirstName = student.FirstName;
+            tableContactBook.LastName = student.LastName;
+            tableContactBook.Gender = student.Gender;
+            tableContactBook.DayOfBirth = student.DayOfBirth;
+            tableContactBook.PhoneNumber = student.PhoneNumber;
+            tableContactBook.Address = student.Address;
+            var point1 = (from po in points
+                          where po.SemesterId.Equals(1)
+                          select po).ToList();
+            foreach (var po in points)
+            {
+                var subjectPoint = new SubjectPoint();
+                subjectPoint.SubjectId = po.SubjectId;
+                subjectPoint.SubjectName = po.SubjectName;
+                subjectPoint.TeacherName = po.TeacherName;
+                subjectPoint.ListPoint = po.ListPoint.Split(',');
+
+                subjectPoint.ListDate = po.ListDate.Split(',');
+                if (po.SemesterId == 1)
+                {
+                    tableContactBook.SubjectPoint1.Add(subjectPoint);
+                }
+                else
+                {
+                    tableContactBook.SubjectPoint2.Add(subjectPoint);
+                }
+
+            }
+            return View(tableContactBook);
         }
         public IActionResult Blog()
         {
