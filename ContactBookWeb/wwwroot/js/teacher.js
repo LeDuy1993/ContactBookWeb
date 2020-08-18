@@ -2,7 +2,13 @@
 teacher.closemodal = function () {
     $("#profileTeacher").modal("hide");
 }
-
+teacher.validate = function () {
+    if ($('#TeacherName').val() == "") {
+        $('#valiName').removeClass("d-none");
+    } else {
+        document.getElementById('valiName').classList.add('d-none');
+    }
+}
 teacher.cardTeacher = function (id) {
     $.ajax({
         url: `/Teacher/Cards/${id}`,

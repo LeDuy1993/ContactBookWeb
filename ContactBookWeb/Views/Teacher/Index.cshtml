@@ -99,8 +99,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>FullName :</label>
-                                <input type="text" class="form-control" id="TeacherName" name="FullName">
-                                @* <span asp-validation-for="TeacherName" class="text-danger"></span>*@
+                                <input type="text" class="form-control" id="TeacherName" name="FullName" oninput="teacher.validate()">
+                                <p id="valiName" class="d-none">Required!</p>
 
                             </div>
                             <div class="form-group">
