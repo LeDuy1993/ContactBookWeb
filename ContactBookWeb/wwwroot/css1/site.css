@@ -1,0 +1,16 @@
+﻿
+
+.home_banner_area {
+    background: url(../img1/banner/home-banner.jpg) no-repeat center;
+}
+
+.section_gap{
+    padding:75px;
+}
+
+
+.register_form{
+    width:800px;
+    height:400px;
+    margin-left:100px;
+}

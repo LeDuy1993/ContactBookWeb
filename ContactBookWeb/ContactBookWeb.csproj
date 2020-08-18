@@ -16,6 +16,37 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\fonts\.DS_Store" />
+    <None Include="wwwroot\fonts\Flaticon.woff2" />
+    <None Include="wwwroot\fonts\themify.svg" />
+    <None Include="wwwroot\img1\banner\.DS_Store" />
+    <None Include="wwwroot\img1\courses\.DS_Store" />
+    <None Include="wwwroot\img1\elements\_DS_Store" />
+    <None Include="wwwroot\img1\event\.DS_Store" />
+    <None Include="wwwroot\img1\features\.DS_Store" />
+    <None Include="wwwroot\img1\testimonials\.DS_Store" />
+    <None Include="wwwroot\img1\trainer\.DS_Store" />
+    <None Include="wwwroot\scss\style.scss" />
+    <None Include="wwwroot\scss\_banner.scss" />
+    <None Include="wwwroot\scss\_blog.scss" />
+    <None Include="wwwroot\scss\_button.scss" />
+    <None Include="wwwroot\scss\_contact.scss" />
+    <None Include="wwwroot\scss\_elements.scss" />
+    <None Include="wwwroot\scss\_footer.scss" />
+    <None Include="wwwroot\scss\_header.scss" />
+    <None Include="wwwroot\scss\_home.scss" />
+    <None Include="wwwroot\scss\_mixins.scss" />
+    <None Include="wwwroot\scss\_predefine.scss" />
+    <None Include="wwwroot\scss\_reset.scss" />
+    <None Include="wwwroot\scss\_responsive.scss" />
+    <None Include="wwwroot\scss\_variables.scss" />
+    <None Include="wwwroot\vendors1\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
+    <None Include="wwwroot\vendors1\bootstrap-datepicker\bootstrap-select.js" />
+    <None Include="wwwroot\vendors1\flipclock\timer.js" />
+    <None Include="wwwroot\vendors1\jquery-ui\jquery-ui.js" />
+    <None Include="wwwroot\vendors1\nice-select\js\jquery.nice-select.js" />
+    <None Include="wwwroot\vendors1\nice-select\js\jquery.nice-select.min.js" />
+    <None Include="wwwroot\vendors1\owl-carousel\owl.carousel.min.js" />
   </ItemGroup>
 
   <ItemGroup>
