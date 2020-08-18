@@ -1,14 +1,6 @@
 ﻿using ContactBookWeb.Models.Account;
-using ContactBookWeb.Models.ClassRoom;
-using ContactBookWeb.Models.ContactBook;
-using ContactBookWeb.Models.Student;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ContactBookWeb.Controllers
 {
