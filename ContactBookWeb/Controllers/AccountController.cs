@@ -30,7 +30,7 @@ namespace ContactBookWeb.Controllers
 
                 if (result.Success)
                 {
-                    if (model.Options == "2" && result.Role==true)
+                    if (model.Options == "2" && result.Role==false)
                     {
                         return RedirectToAction("Index", "Edustage", new { id = result.CheckId });
                     }

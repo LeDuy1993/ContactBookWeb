@@ -19,9 +19,17 @@ namespace ContactBookWeb.Controllers
         }
 
         public IActionResult Index(int id)
-        { 
-            ViewBag.id = id;
-            return View(id);
+        {
+            if (id != 0)
+            {
+                ViewBag.id = id;
+                var classStudentID = new GetClassStudent();
+                classStudentID = ApiHelper<GetClassStudent>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassStudent/{id}");
+                var student = new GetStudentDetail();
+                student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{classStudentID.StudentId}");
+                return View(student);
+            }
+            return View();
         }
         public IActionResult ShowResult(int id)
         {
