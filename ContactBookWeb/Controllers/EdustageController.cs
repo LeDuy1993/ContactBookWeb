@@ -25,6 +25,30 @@ namespace ContactBookWeb.Controllers
             ViewBag.id = id;
             return View(id);
         }
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult Lecture()
+        {
+            return View();
+        }
+        public IActionResult Exam()
+        {
+            return View();
+        }
+        public IActionResult Library()
+        {
+            return View();
+        }
+        public IActionResult Notification()
+        {
+            return View();
+        }
+        public IActionResult News()
+        {
+            return View();
+        }
         public IActionResult ShowResult(int id)
         {
             var classStudentID = new GetClassStudent();
