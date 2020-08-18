@@ -39,7 +39,7 @@ namespace ContactBookWeb.Controllers
                 {
                     var classStudentID = new GetClassStudent();
                     classStudentID = ApiHelper<GetClassStudent>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassStudent/{result.CheckId}");
-                    var classRoom = new GetClassByClassId();
+                   /* var classRoom = new GetClassByClassId();
                     classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classStudentID.ClassId}");
                     var student = new GetStudentDetail();
                     student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{classStudentID.StudentId}");
@@ -79,8 +79,8 @@ namespace ContactBookWeb.Controllers
                             tableContactBook.SubjectPoint2.Add(subjectPoint);
                         }
 
-                    }
-                    return RedirectToAction("Index", "Home");
+                    }*/
+                    return RedirectToAction("Index", "Home", new { id = result.CheckId });
                 }
                 ModelState.AddModelError("", result.Message);
                 return View();
