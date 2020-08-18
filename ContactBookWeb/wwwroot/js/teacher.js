@@ -1,5 +1,7 @@
 ﻿var teacher = {} || teacher;
-
+teacher.closemodal = function () {
+    $("#profileTeacher").modal("hide");
+}
 
 teacher.cardTeacher = function (id) {
     $.ajax({
