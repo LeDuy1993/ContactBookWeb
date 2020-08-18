@@ -1,0 +1,172 @@
+﻿@model TableContactBook
+@{
+    Layout = "_LayoutEdustage";
+}
+
+
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="banner_content text-center">
+                        <h2>Blog Details</h2>
+                        <div class="page_link">
+                            <a href="index.html">Home</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="single-blog.html">Blog Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area section_gap">
+    <div class="container">
+        <table class="table table-bordered text-center" id="tablePoint" style=" border-radius: 5px">
+            <thead class="text-center">
+                <tr>
+                    <th colspan="13" style="font-size:25px" class="text-center">Contact Book</th>
+                </tr>
+                <tr>
+                    <th colspan="13" id="informationStudent">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:25%">Course: @Model.CourseName</td>
+                                <td>Class: @Model.ClassName</td>
+                                <td>Teacher master: @Model.TeacherName</td>
+                            </tr>
+                            <tr>
+                                <td style="width:25%">Full Name</td>
+                                <td colspan="2">@Model.LastName @Model.FirstName</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td colspan="2">@Model.Gender</td>
+                            </tr>
+                            <tr>
+                                <td>Day of birth</td>
+                                <td colspan="2">@Model.DayOfBirth</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td colspan="2">@Model.Address</td>
+                            </tr>
+                            <tr>
+                                <td>Father/Morther Phone</td>
+                                <td colspan="2">@Model.PhoneNumber</td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center" style="width:15%" rowspan="2">Subject</th>
+                    <th class="text-center" colspan="4">Điểm Miệng</th>
+                    <th class="text-center" colspan="4">Điểm 15 phút</th>
+                    <th class="text-center" colspan="2">Điểm 1 tiết</th>
+                    <th class="text-center" rowspan="2">Point master</th>
+                    <th class="text-center" rowspan="2">Average</th>
+                </tr>
+                <tr>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                    <th class="text-center">3st</th>
+                    <th class="text-center">4st</th>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                    <th class="text-center">3st</th>
+                    <th class="text-center">4st</th>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var point in Model.SubjectPoint1)
+                {
+                    <tr>
+                        <td title=""><b>@point.SubjectName</b></td>
+                        <td title="">@point.ListPoint[0]</td>
+                        <td title="">@point.ListPoint[1]</td>
+                        <td title="">@point.ListPoint[2]</td>
+                        <td title="">@point.ListPoint[3]</td>
+                        <td title="">@point.ListPoint[4]</td>
+                        <td title="">@point.ListPoint[5]</td>
+                        <td title="">@point.ListPoint[6]</td>
+                        <td title="">@point.ListPoint[7]</td>
+                        <td title="">@point.ListPoint[8]</td>
+                        <td title="">@point.ListPoint[9]</td>
+                        <td title="">@point.ListPoint[10]</td>
+                        <td>
+                            <b>@point.ListPoint[11]</b>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            <thead>
+                <tr>
+                    <th class="text-center" colspan="12">Semester 1</th>
+                    <th class="text-center" id="avg1"></th>
+                </tr>
+                <tr>
+                    <th class="text-center" rowspan="2">Subject</th>
+                    <th class="text-center" colspan="4">Điểm Miệng</th>
+                    <th class="text-center" colspan="4">Điểm 15 phút</th>
+                    <th class="text-center" colspan="2">Điểm 1 tiết</th>
+                    <th class="text-center" rowspan="2">Point master</th>
+                    <th class="text-center" rowspan="2">Average</th>
+                </tr>
+                <tr>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                    <th class="text-center">3st</th>
+                    <th class="text-center">4st</th>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                    <th class="text-center">3st</th>
+                    <th class="text-center">4st</th>
+                    <th class="text-center">1st</th>
+                    <th class="text-center">2st</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var point in Model.SubjectPoint2)
+                {
+                    <tr>
+                        <td title=""><b>@point.SubjectName</b></td>
+                        <td title="">@point.ListPoint[0]</td>
+                        <td title="">@point.ListPoint[1]</td>
+                        <td title="">@point.ListPoint[2]</td>
+                        <td title="">@point.ListPoint[3]</td>
+                        <td title="">@point.ListPoint[4]</td>
+                        <td title="">@point.ListPoint[5]</td>
+                        <td title="">@point.ListPoint[6]</td>
+                        <td title="">@point.ListPoint[7]</td>
+                        <td title="">@point.ListPoint[8]</td>
+                        <td title="">@point.ListPoint[9]</td>
+                        <td title="">@point.ListPoint[10]</td>
+                        <td>
+                            <b>@point.ListPoint[11]</b>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <thead>
+                <tr>
+                    <th colspan="12" class="text-center">Semester 2</th>
+                    <th id="avg2" class="text-center"></th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th colspan="12" class="text-center">Summarize the year</th>
+                    <th id="semesterAvg" class="text-center"></th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</section>

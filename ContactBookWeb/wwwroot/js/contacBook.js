@@ -247,7 +247,6 @@ contactBook.showClassPoint = function () {
     gradeId = $('#gradeId').val();
     classId = $('#classId').val();
     studentId = $('#studentId').val();
-00
     $.ajax({
         url: `/ContactBook/ShowClassPoint/${classId}`,
         method: "GET",
