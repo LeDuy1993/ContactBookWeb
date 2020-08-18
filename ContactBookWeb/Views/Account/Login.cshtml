@@ -3,6 +3,7 @@
     ViewData["Title"] = "Teacher Page";
     Layout = "_LayoutLogin";
 }
+
 <div class="login-header box-shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="brand-logo">
@@ -10,11 +11,6 @@
                 <img src="~/vendors/images/deskapp-logo.svg" alt="">
             </a>
         </div>
-        @*<div class="login-menu">
-            <ul>
-                <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-            </ul>
-        </div>*@
     </div>
 </div>
 <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
@@ -26,33 +22,33 @@
             <div class="col-md-6 col-lg-5">
                 <div class="login-box bg-white box-shadow border-radius-10">
                     <div class="login-title">
-                        <h2 class="text-center text-primary">Login</h2>
+                        <h2 class="text-center text-primary">Login Contact Book</h2>
                     </div>
-                    <form asp-controller="Account" asp-action="Login" method="post">
-                        @*<div class="select-role">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn active">
-                    <input type="radio" name="options" id="admin">
-                    <div class="icon"><img src="~/vendors/images/briefcase.svg" class="svg" alt=""></div>
-                    <span>I'm</span>
-                    Manager
-                </label>
-                <label class="btn">
-                    <input type="radio" name="options" id="user">
-                    <div class="icon"><img src="~/vendors/images/person.svg" class="svg" alt=""></div>
-                    <span>I'm</span>
-                    Employee
-                </label>
-            </div>
-        </div>*@
-                        <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-controller="Account" asp-action="Login" method="post" enctype="multipart/form-data">
+                        <div class="select-role">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+                                <label class="btn active" >
+                                    <input type="radio" name="options" id="admin" value="1">
+                                    <div class="icon" for="admin"><img src="~/vendors/images/briefcase.svg" class="svg" alt=""></div>
+                                    <span>I'm</span>
+                                    Teacher
+                                </label>
+                                <label class="btn" >
+                                    <input type="radio" name="options" id="user" value="2">
+                                    <div class="icon" for="user"><img src="~/vendors/images/person.svg" class="svg" alt=""></div>
+                                    <span>I'm</span>
+                                    Parents
+                                </label>
+                            </div>
+                        </div>
+              @*          <div asp-validation-summary="All" class="text-danger"></div>*@
                         <div class="input-group custom">
                             <input type="text" class="form-control form-control-lg" asp-for="Email" placeholder="Username">
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                             </div>
                         </div>
-                        @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                        <span asp-validation-for="Email" class="text-danger"></span>
 
                         <div class="input-group custom">
                             <input type="password" class="form-control form-control-lg" asp-for="Password" placeholder="**********">
@@ -60,7 +56,7 @@
                                 <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                             </div>
                         </div>
-                        @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                        <span asp-validation-for="Password" class="text-danger"></span>
                         <div class="row pb-30">
                             <div class="col-6">
                                 <div class="custom-control custom-checkbox">
@@ -69,8 +65,8 @@
                                 </div>
                             </div>
                             @*<div class="col-6">
-                                <div class="forgot-password"><a asp-controller="Account" asp-action="ForgotPass">Forgot Password</a></div>
-                            </div>*@
+                                    <div class="forgot-password"><a asp-controller="Account" asp-action="ForgotPass">Forgot Password</a></div>
+                                </div>*@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">

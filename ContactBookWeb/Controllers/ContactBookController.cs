@@ -54,7 +54,7 @@ namespace ContactBookWeb.Controllers
         public JsonResult ShowTablePoint(int studentId = 0, int classId = 0)
         {
             var classRoom = new GetClassByClassId();
-            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}"); ;
+            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}"); 
             var student = new GetStudentDetail();
             student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{studentId}");
             var points = new List<GetSubjectResultByClassIdStudentId>();

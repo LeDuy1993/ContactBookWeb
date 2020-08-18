@@ -1,4 +1,5 @@
 ﻿using ContactBookWeb.Models.Account;
+using ContactBookWeb.Models.ClassRoom;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,6 +35,9 @@ namespace ContactBookWeb.Controllers
                                                     );
                 if (result.Success)
                 {
+                    var classStudentID = new GetClassStudent();
+                    classStudentID = ApiHelper<GetClassStudent>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassStudent/{result.CheckId}");
+
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", result.Message);
