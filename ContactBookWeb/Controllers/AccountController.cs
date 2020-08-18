@@ -1,14 +1,6 @@
 ﻿using ContactBookWeb.Models.Account;
-using ContactBookWeb.Models.ClassRoom;
-using ContactBookWeb.Models.ContactBook;
-using ContactBookWeb.Models.Student;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ContactBookWeb.Controllers
 {
@@ -35,10 +27,23 @@ namespace ContactBookWeb.Controllers
                                                         $"{Helper.ApiUrl}api/account/login",
                                                         loginRequest
                                                     );
+
                 if (result.Success)
                 {
-                    return RedirectToAction("Index", "Edustage", new { id = result.CheckId });
+                    if (model.Options == "2" && result.Role==true)
+                    {
+                        return RedirectToAction("Index", "Edustage", new { id = result.CheckId });
+                    }
+                    else if (model.Options == "1" && result.Role ==true )
+                    {
+                        return RedirectToAction("Index", "SubjectResult");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Acount");
+                    }
                 }
+
                 ModelState.AddModelError("", result.Message);
                 return View();
             }

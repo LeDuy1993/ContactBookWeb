@@ -29,6 +29,7 @@ namespace ContactBookWeb.Controllers
             gradeAll = ApiHelper<List<GetGradeAll>>.HttpGetAsync($"{Helper.ApiUrl}api/grade/GetGradeAll");
             ViewBag.gradeAll = gradeAll;
             ViewBag.courseAll = courseAll;
+
             return View();
         }
 

@@ -9,7 +9,8 @@ namespace ContactBookWeb.Models.Account
     {
         public string UserId { get; set; }
         public string Message { get; set; }
-        public bool Success { get; set; }
         public int CheckId { get; set; }
+        public bool Role { get; set; }
+        public bool Success { get; set; }
     }
 }
