@@ -1,6 +1,8 @@
-﻿using ContactBookWeb.Models.Account;
+﻿using ContactBookWeb.Models;
+using ContactBookWeb.Models.Account;
 using ContactBookWeb.Ultilities;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ContactBookWeb.Controllers
 {
@@ -40,10 +42,9 @@ namespace ContactBookWeb.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Login", "Acount");
+                        return RedirectToAction("Login", "Account");
                     }
                 }
-
                 ModelState.AddModelError("", result.Message);
                 return View();
             }
@@ -84,6 +85,12 @@ namespace ContactBookWeb.Controllers
         {
             var result = true;
             return Json(new { result });
+        }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -82,15 +82,22 @@ namespace ContactBookWeb.Controllers
                 listDate = new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
                 listDate[index] = DateTime.Now.ToString("yyyy-MM-dd");
             }
-            float sum = 0; var count = 0;
+            float sum = 0; var count = 0; var countCheck1 = 0; var countCheck2 = 0;
             for (var i = 0; i <= 10; i++)
             {
                 if (listPoint[i] != " ")
                 {
-                    if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7)
+                    if (i == 0 || i == 1 || i == 2 || i == 3)
                     {
                         sum += float.Parse(listPoint[i]);
                         count += 1;
+                        countCheck1 += 1;
+                    }
+                    else if (i == 4 || i == 5 || i == 6 || i == 7)
+                    {
+                        sum += float.Parse(listPoint[i]);
+                        count += 1;
+                        countCheck2 += 1;
                     }
                     else if (i == 8 || i == 9)
                     {
@@ -104,7 +111,15 @@ namespace ContactBookWeb.Controllers
                     }
                 }
             }
-            listPoint[11] = ((float)Math.Round(sum / count, 2)).ToString();
+            if (listPoint[10] == " " || listPoint[9] == " " || listPoint[8] == " " || countCheck1 < 2 || countCheck2 < 2)
+            {
+                listPoint[11] = "---";
+            }
+            else
+            {
+                listPoint[11] = ((float)Math.Round(sum / count, 2)).ToString();
+            }
+
             saveResultPoint.ListPoint = string.Join(",", listPoint);
             saveResultPoint.ListDate = string.Join(",", listDate);
             var result = ApiHelper<SaveResult>.HttpPostAsync(

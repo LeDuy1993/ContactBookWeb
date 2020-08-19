@@ -229,9 +229,8 @@
 
     <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="index.html">
-                <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-                <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/img1/logo.png" alt="">
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
@@ -293,18 +292,6 @@
             @RenderBody()
         </main>
     </div>
-
-
-    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
-    <script src="~/lib/jquery-easing/jqBootstrapValidation.js"></script>-->
-    <!-- js -->
-    <!--<script src="~/vendors/scripts/core.js"></script>
-    <script src="~/vendors/scripts/script.min.js"></script>
-    <script src="~/vendors/scripts/process.js"></script>
-    <script src="~/vendors/scripts/layout-settings.js"></script>-->
-    <!-- Datatable Setting js -->
-    <!--<script src="~/vendors/scripts/datatable-setting.js"></script>-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
     <script src="~/lib/jquery-easing/jqBootstrapValidation.js"></script>

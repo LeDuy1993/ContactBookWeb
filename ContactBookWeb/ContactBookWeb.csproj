@@ -5,12 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Home\**" />
+    <Compile Remove="Models\Semester\**" />
+    <Content Remove="Models\Home\**" />
+    <Content Remove="Models\Semester\**" />
+    <EmbeddedResource Remove="Models\Home\**" />
+    <EmbeddedResource Remove="Models\Semester\**" />
+    <None Remove="Models\Home\**" />
+    <None Remove="Models\Semester\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Home\" />
-    <Folder Include="Models\Semester\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

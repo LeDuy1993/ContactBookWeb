@@ -1,6 +1,10 @@
 ﻿@model TableContactBook
 @{
     Layout = "_LayoutEdustage";
+    var studentId = ViewBag.id;
+    var avg1 = ViewBag.avg1;
+    var avg2 = ViewBag.avg2;
+    var avgSemester = ViewBag.avgSemester;
 }
 
 
@@ -23,8 +27,7 @@
 
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" asp-controller="Edustage" asp-action="Index" asp-route-id="@studentId">
                         <img class="logo-2" src="~/img1/logo2.png" alt="" />
                     </a>
                     <button class="navbar-toggler"
@@ -41,7 +44,7 @@
                     <div class="collapse navbar-collapse offset"
                          id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item">
+                          @*  <li class="nav-item">
                                 <a class="nav-link" asp-controller="Edustage" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
@@ -81,13 +84,23 @@
                                         <a class="nav-link" asp-controller="Edustage" asp-action="News">News</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
                             <li class="nav-item active">
                                 <a asp-controller="Edustage" asp-action="ShowResult" class="nav-link"><i class="icon-copy fa fa-user-o" aria-hidden="true"></i>ContactBook</a>
                             </li>
-                            <li class="nav-item">
-                                <a asp-controller="Account" asp-action="Login" class="nav-link"><i class="icon-copy fa fa-user-o" aria-hidden="true"></i> Login</a>
-                            </li>
+                            @if (Model != null)
+                            {
+                                <li class="nav-item">
+                                    <a asp-controller="Account" asp-action="Login" class="nav-link"><i class="icon-copy fa fa-user-o" aria-hidden="true"></i> @Model.FirstName @Model.LastName</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a asp-controller="Account" asp-action="Login" class="nav-link"><i class="icon-copy fa fa-user-o" aria-hidden="true"></i>Login</a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>
@@ -200,7 +213,7 @@
             <thead>
                 <tr>
                     <th class="text-center" colspan="12">Semester 1</th>
-                    <th class="text-center" id="avg1"></th>
+                    <th class="text-center">@avg1</th>
                 </tr>
                 <tr>
                     <th class="text-center" rowspan="2">Subject</th>
@@ -243,18 +256,20 @@
                             <b>@point.ListPoint[11]</b>
                         </td>
                     </tr>
+                    
+
                 }
             </tbody>
             <thead>
                 <tr>
                     <th colspan="12" class="text-center">Semester 2</th>
-                    <th id="avg2" class="text-center"></th>
+                    <th class="text-center">@avg2</th>
                 </tr>
             </thead>
             <thead>
                 <tr>
                     <th colspan="12" class="text-center">Summarize the year</th>
-                    <th id="semesterAvg" class="text-center"></th>
+                    <th id="semesterAvg" class="text-center">@avgSemester</th>
                 </tr>
             </thead>
 
