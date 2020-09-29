@@ -142,7 +142,7 @@ contactBook.showStudentPoint = function (Id) {
                     </thead>
                 </table>`
             )
-            var sum1 = 0;var sum2 = 0;
+            var sum1 = 0; var sum2 = 0;
             var count1 = 0; var count2 = 0;
             var semesterAvg1 = 0; var semesterAvg2 = 0;
             $(`#informationStudent`).append(
@@ -176,13 +176,15 @@ contactBook.showStudentPoint = function (Id) {
                  `
             )
             $.each(data.tableContactBook.subjectPoint1, function (i, v) {
-                if (v.subjectId == 1 || v.subjectId == 2) {
-                    sum1 += parseFloat(v.listPoint[11]) * 2;
-                    count1 += 2
-                }
-                else {
-                    sum1 += parseFloat(v.listPoint[11]);
-                    count1+=1
+                if (v.listPoint[11] != "---") {
+                    if (v.subjectId == 1 || v.subjectId == 2) {
+                        sum1 += parseFloat(v.listPoint[11]) * 2;
+                        count1 += 2;
+                    }
+                    else {
+                        sum1 += parseFloat(v.listPoint[11]);
+                        count1 += 1;
+                    }
                 }
                 $('#point1st').append(
                     `
@@ -205,15 +207,24 @@ contactBook.showStudentPoint = function (Id) {
                  `
                 )
             });
-            $(`#avg1`).append((sum1 / count1).toFixed(2));
+
+            if (count1 != 14) {
+                $(`#avg1`).append("---");
+            }
+            else {
+                var avg1 = (sum1 / count1);
+                $(`#avg1`).append(avg1.toFixed(2));
+            }
             $.each(data.tableContactBook.subjectPoint2, function (i, v) {
-                if (v.subjectId == 1 || v.subjectId == 2) {
-                    sum2 += parseFloat(v.listPoint[11]) * 2;
-                    count2 += 2
-                }
-                else {
-                    sum2 += parseFloat(v.listPoint[11]);
-                    count2 += 1
+                if (v.listPoint[11] != "---") {
+                    if (v.subjectId == 1 || v.subjectId == 2) {
+                        sum2 += parseFloat(v.listPoint[11]) * 2;
+                        count2 += 2;
+                    }
+                    else {
+                        sum2 += parseFloat(v.listPoint[11]);
+                        count2 += 1;
+                    }
                 }
                 $('#point2st').append(
                     `
@@ -236,8 +247,19 @@ contactBook.showStudentPoint = function (Id) {
                     `
                 )
             });
-            $(`#avg2`).append((sum2 / count2).toFixed(2));
-            $(`#semesterAvg`).append((((sum2 / count2) * 2 + (sum1 / count1)) / 3).toFixed(2));
+            if (count2 != 14) {
+                $(`#avg2`).append("---");
+            }
+            else {
+                var avg2 = (sum2 / count2);
+                $(`#avg2`).append(avg2.toFixed(2));
+            }
+            if (count1 == 14 && count2 == 14) {
+                $(`#semesterAvg`).append(((avg2 * 2 + avg1) / 3).toFixed(2));
+            }
+            else {
+                $(`#semesterAvg`).append("---");
+            }
             $(`#export`).append(`<button type="button" class="btn btn-dark" onclick="tableToExcel('table', 'W3C Example Table')" value="Export to Excel">Export to Excel</button>`)
         }
     });
@@ -255,7 +277,7 @@ contactBook.showClassPoint = function () {
             $('#table').empty();
             $(`#export`).empty();
             $('#table').append(
-               ` 
+                ` 
                 <table class="table table-bordered" id="classPoint" style=" border-radius: 5px">
                     <thead class="text-center">
                         <tr>

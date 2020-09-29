@@ -45,7 +45,7 @@ namespace ContactBookWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Edustage}/{action=Index}/{id?}");          
+                    pattern: "{controller=ContactBook}/{action=Index}/{id?}");          
 
             });
         }

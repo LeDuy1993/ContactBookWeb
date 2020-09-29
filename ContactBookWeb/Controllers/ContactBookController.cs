@@ -35,7 +35,7 @@ namespace ContactBookWeb.Controllers
         {
             var classAll = new List<GetClassByCourseIdGradeId>();
             classAll = ApiHelper<List<GetClassByCourseIdGradeId>>.HttpGetAsync($"{Helper.ApiUrl}api/class/get/{gradeId}/{courseId}");
-           
+
             return Json(new { classAll });
         }
 
@@ -52,7 +52,7 @@ namespace ContactBookWeb.Controllers
         public JsonResult ShowTablePoint(int studentId = 0, int classId = 0)
         {
             var classRoom = new GetClassByClassId();
-            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}"); 
+            classRoom = ApiHelper<GetClassByClassId>.HttpGetAsync($"{Helper.ApiUrl}api/class/GetClassByClassId/{classId}");
             var student = new GetStudentDetail();
             student = ApiHelper<GetStudentDetail>.HttpGetAsync($"{Helper.ApiUrl}api/student/GetStudentDetail/{studentId}");
             var points = new List<GetSubjectResultByClassIdStudentId>();
@@ -129,7 +129,7 @@ namespace ContactBookWeb.Controllers
                         var listPoints = point.ListPoint.Split(',');
                         if (point.SemesterId == 1)
                         {
-                            if (listPoints[11] != " ")
+                            if (listPoints[11] != " " && listPoints[11] != "---")
                             {
                                 switch (point.SubjectId)
                                 {
@@ -199,7 +199,7 @@ namespace ContactBookWeb.Controllers
                         }
                         else
                         {
-                            if (listPoints[11] != " ")
+                            if (listPoints[11] != " " && listPoints[11] != "---")
                             {
                                 switch (point.SubjectId)
                                 {
@@ -268,8 +268,24 @@ namespace ContactBookWeb.Controllers
                         }
                     }
                 }
-                student.ListPoint1[12] = (Math.Round(sum1 / count1, 2)).ToString();
-                student.ListPoint2[12] = (Math.Round(sum2 / count2, 2)).ToString();
+                if (count1 == 14)
+                {
+                   
+                    student.ListPoint1[12] = (Math.Round(sum1 / count1, 2)).ToString();
+                }
+                else
+                {
+                    student.ListPoint1[12] = "---";
+                }
+                if (count2 == 14)
+                {
+                    
+                    student.ListPoint2[12] = (Math.Round(sum2 / count2, 2)).ToString();
+                }
+                else
+                {
+                    student.ListPoint2[12] = "---";
+                }
             }
 
             return Json(new { tableClassPoint });
